@@ -51,13 +51,11 @@ Socio* existeSocio(string ci){
     }
     x++;
   }
-  if(encontre){
-    return socEncontrado;
-  }
-  else{
-    throw invalid_argument("Error");
-  }
 
+  if(encontre)
+    return socEncontrado;
+  else
+    throw invalid_argument("Error");
 }
 
 void agregarMascota(string ci, DtMascota& dtMascota){
@@ -94,7 +92,6 @@ void ingresarConsulta(string motivo, string ci){
   }
 
 }
-
 
 int main(){
   DtFecha fecha1 = DtFecha(10,10,10);
