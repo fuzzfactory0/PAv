@@ -1,5 +1,9 @@
 #ifndef DTCONSULTA
 #define DTCONSULTA
+#include <iostream>
+#include "DtFecha.h"
+
+using namespace std;
 
 class DtConsulta{
   private:

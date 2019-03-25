@@ -23,7 +23,7 @@ public:
   void setGenero(Genero genero);
   void setPeso(float peso);
   void setRacionDiaria(float racionDiaria);
-  ~Mascota();
+  virtual ~Mascota();
   virtual float obtenerRacionDiaria()=0;
 };
 
