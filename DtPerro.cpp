@@ -5,6 +5,12 @@ DtPerro::DtPerro(string nombre, Genero genero, float peso, RazaPerro raza, bool 
   this->raza=raza;
   this->vacunaCachorro=vacunaCachorro;
 }
+bool DtPerro::getVacunaCachorro(){
+  return this->vacunaCachorro;
+}
+
+RazaPerro DtPerro::getRaza(){
+  return this->raza;
+}
 
 DtPerro::~DtPerro(){}
-

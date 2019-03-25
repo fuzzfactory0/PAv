@@ -1,5 +1,5 @@
 #ifndef DTMASCOTA
-#define DTMASCOTAMASCOTA
+#define DTMASCOTA
 
 #include "Genero.h"
 
@@ -13,9 +13,13 @@ private:
   float peso;
   float racionDiaria;
 public:
-  DtMascotaMascota();
-  DtMascotaMascota(string nombre, Genero genero, float peso);
-  ~DtMascota();
+  DtMascota();
+  DtMascota(string nombre, Genero genero, float peso);
+  string getNombre();
+  Genero getGenero();
+  float getPeso();
+  float getRacionDiaria();
+  virtual ~DtMascota();
 };
 
 #endif

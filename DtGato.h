@@ -13,6 +13,7 @@ private:
 public:
   DtGato();
   DtGato(string nombre, Genero genero, float peso, TipoPelo tipoPelo);
+  TipoPelo getTipoPelo();
   ~DtGato();
 };
 
