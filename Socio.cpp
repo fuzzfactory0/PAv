@@ -39,4 +39,14 @@ string Socio::getMascota(int i){
   return this->mascotas[i]->getNombre();
 }
 
+int Socio::getTopeConsulta(){
+  return this->topeConsulta;
+}
+void Socio::setTopeconsulta(){
+  this->topeConsulta++;
+}
+int Socio::getTopeMascota(){
+  return this->topeMascota;
+}
+
 Socio::~Socio(){}
