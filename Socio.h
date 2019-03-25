@@ -33,7 +33,6 @@ public:
   int getTopeConsulta();
   void setTopeconsulta();
   int getTopeMascota();
-  void setTopeMascota();
   ~Socio();
 
   string getMascota(int i); //SOLO para prueba y debug, no es una funcion definitiva
