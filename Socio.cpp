@@ -35,8 +35,14 @@ void Socio::setMascota(Mascota* m){
   this->topeMascota++;
 }
 
-string Socio::getMascota(int i){
-  return this->mascotas[i]->getNombre();
+int Socio::getTopeConsulta(){
+  return this->topeConsulta;
+}
+void Socio::setTopeconsulta(){
+  this->topeConsulta++;
+}
+int Socio::getTopeMascota(){
+  return this->topeMascota;
 }
 
 int Socio::getTopeConsulta(){
@@ -50,3 +56,15 @@ int Socio::getTopeMascota(){
 }
 
 Socio::~Socio(){}
+
+void Socio::setConsulta(Consulta* consulta){
+  this->consultas[this->topeConsulta]=consulta;
+  this->topeConsulta++;
+}
+
+string Socio::getMascota(int i){
+  return this->mascotas[i]->getNombre();
+}
+string Socio::getConsulta(int i){
+  return this->consultas[i]->getMotivo();
+}

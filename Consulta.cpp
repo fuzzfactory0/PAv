@@ -1,6 +1,9 @@
 #include "Consulta.h"
 
 Consulta::Consulta(){}
+Consulta::Consulta(string motivo){
+    this->motivo=motivo;
+}
 Consulta::Consulta(DtFecha fecha, string motivo){
   this->fechaConsulta=fecha;
   this->motivo=motivo;

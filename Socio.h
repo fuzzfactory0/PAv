@@ -6,6 +6,7 @@
 #include "Perro.h"
 #include "Gato.h"
 
+
 #include <iostream>
 
 using namespace std;
@@ -34,8 +35,9 @@ public:
   void setTopeconsulta();
   int getTopeMascota();
   ~Socio();
-
+  void setConsulta(Consulta* consulta);
   string getMascota(int i); //SOLO para prueba y debug, no es una funcion definitiva
+  string getConsulta(int i);//SOLO para prueba y debug, no es una funcion definitiva
 };
 
 #endif

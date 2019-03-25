@@ -8,6 +8,8 @@
 #include "DtGato.h"
 #include "DtConsulta.h"
 #include <iostream>
+#include <string>
+
 #define MAX_MASCOTAS 10
 #define MAX_SOCIOS 100
 
@@ -43,16 +45,17 @@ Socio* existeSocio(string ci){
   bool encontre=false;
   int x=0;
   while(!encontre and x<=coleccionSocios.tope){
-    if(strcmp(ci, coleccionSocios.socios[x]->getCi())=0){
+    if(ci.compare(coleccionSocios.socios[x]->getCi())==0){
       encontre=true;
       socEncontrado = coleccionSocios.socios[x];
     }
     x++;
   }
+
   if(encontre)
     return socEncontrado;
   else
-    throw(invalid_argument)
+    throw invalid_argument("Error");
 }
 
 void agregarMascota(string ci, DtMascota& dtMascota){
@@ -62,25 +65,39 @@ void agregarMascota(string ci, DtMascota& dtMascota){
     try{
       DtPerro& perro = dynamic_cast<DtPerro&>(dtMascota);
       Perro* dog = new Perro(perro.getNombre(), perro.getGenero(), perro.getPeso(), perro.getRaza(), perro.getVacunaCachorro());
-      s.setMascota(dog);
+      s->setMascota(dog);
     }catch(std::bad_cast){
       try{
         DtGato& gato = dynamic_cast<DtGato&>(dtMascota);
         Gato* cat = new Gato(gato.getNombre(), gato.getGenero(), gato.getPeso(), gato.getTipoPelo());
-        s.setMascota(cat);
+        s->setMascota(cat);
       }catch(std::bad_cast){
         cout << "Error\n";
       }
     }
   }catch(invalid_argument){
-    cout << "Error al ingresar cedula" << endl;
+    cout << "Error, no existe socio" << endl;
   }
 }
+
+
+void ingresarConsulta(string motivo, string ci){
+  try{
+    Socio* s = existeSocio(ci);
+    Consulta* cons = new Consulta(motivo);
+    s->setConsulta(cons);
+
+  }catch(invalid_argument){
+    cout << "Error, no existe socio" << endl;
+  }
+
+}
+
 int main(){
   DtFecha fecha1 = DtFecha(10,10,10);
   Socio s1 = Socio("12345", "Pepe", fecha1);
 
-  Gato g1 = Gato("Gato1", Macho, 2.5, Largo);
+  DtGato g1 = DtGato("Gatete", Macho, 2.5, Largo);
   Gato g2 = Gato("Gato2", Hembra, 2.5, Corto);
 
   Perro p1 = Perro("Perro1", Macho, 6.0, Ovejero, false);
@@ -89,22 +106,21 @@ int main(){
   p1.setVacunaCachorro(true);
   cout << p1.getVacunaCachorro() << endl;
 
-  return 0;
-}
 
-int main(){
-  DtFecha fecha1 = DtFecha(10,10,10);
-  Socio s1 = Socio("12345", "Pepe", fecha1);
+  DtPerro p12 = DtPerro("Firulais", Macho, 6.0, Ovejero, false);
 
-  DtGato g1 = DtGato("Misifu", Macho, 2.5, Largo);
-  DtGato g2 = DtGato("Callejera", Hembra, 2.5, Corto);
+  registrarSocio("5.043.098-8", "Jose", p12);
 
-  DtPerro p1 = DtPerro("Firulais", Macho, 6.0, Ovejero, false);
-
-  registrarSocio("5.043.098-8", "Jose", p1);
+  agregarMascota("5.043.098-8", g1);
 
   cout << coleccionSocios.socios[0]->getNombre() << "\n";
-  cout << coleccionSocios.socios[0]->getMascota(0) << "\n";
+  cout << coleccionSocios.socios[0]->getMascota(1) << "\n";
+
+  ingresarConsulta("A mi perro le duele la muela, que hago?", "5.043.098-8" );
+
+  cout << coleccionSocios.socios[0]->getConsulta(0) << "\n";
+
+
 
   return 0;
 }
