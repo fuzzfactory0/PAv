@@ -3,8 +3,6 @@
 #include "Mascota.h"
 #include "DtFecha.h"
 #include "Consulta.h"
-#include "Perro.h"
-#include "Gato.h"
 
 #include <iostream>
 
@@ -22,17 +20,19 @@ private:
 public:
   Socio();
   Socio(string ci, string nom, DtFecha fi);
-  Socio(string ci, string nom);
   string getCi();
   void setCi(string);
   string getNombre();
   void setNombre(string);
   DtFecha getFechaIngreso();
   void setFechaIngreso(DtFecha);
-  void setMascota(Mascota* m);
+  int getTopeConsulta();
+  void setTopeconsulta();
+  int getTopeMascota();
+  void setTopeMascota();
   ~Socio();
-
-  string getMascota(int i); //SOLO para prueba y debug, no es una funcion definitiva
+  //void agregarConsulta(DtConsulta);
+  void setMascota(DtMascota);
 };
 
 #endif

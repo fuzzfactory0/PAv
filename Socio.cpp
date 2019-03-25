@@ -7,11 +7,6 @@ Socio::Socio(string ci, string n, DtFecha fi){
   this->nombre=n;
   this->fechaIngreso=fi;
 }
-Socio::Socio(string ci, string nom){
-  this->ci=ci;
-  this->nombre=nom;
-}
-
 string Socio::getCi(){
   return this->ci;
 }
@@ -30,13 +25,20 @@ DtFecha Socio::getFechaIngreso(){
 void Socio::setFechaIngreso(DtFecha fi){
   this->fechaIngreso=fi;
 }
-void Socio::setMascota(Mascota* m){
-  this->mascotas[this->topeMascota] = m;
+int getTopeConsulta(){
+  return this->topeConsulta;
+}
+void setTopeconsulta(){
+  this->topeConsulta++;
+}
+int getTopeMascota(){
+  return this->topeMascota;
+}
+void setTopeMascota(){
   this->topeMascota++;
 }
-
-string Socio::getMascota(int i){
-  return this->mascotas[i]->getNombre();
-}
-
 Socio::~Socio(){}
+//void agregarConsulta(DtConsulta);
+void setMascota(DtMascota*){
+
+}
