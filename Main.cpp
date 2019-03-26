@@ -40,7 +40,7 @@ void registrarSocio(string ci, string nombre, DtMascota& dtMascota){
   }
 }
 
-Socio* existeSocio(string ci){
+Socio* existeSocio(string ci){ // ¿Mientras encontré sea TRUE? O sea, si encontré se inicia en false su opuesto o contrario sería true.
   Socio* socEncontrado;
   bool encontre=false;
   int x=0;
@@ -88,6 +88,25 @@ void ingresarConsulta(string motivo, string ci){
   }catch(invalid_argument){
     cout << "Error, no existe socio" << endl;
   }
+}
+
+void eliminarSocio(string ci){
+  try{
+    Socio* s = existeSocio(ci);
+    int i = 0;
+    while(ci.compare(coleccionSocios.socios[i]->getCi() != 0){
+      i++;
+    }
+    if(i == coleccionSocios.tope){
+      delete coleccionSocios.socios[i];
+    }
+    else{
+      coleccionSocios.socios[i] = coleccionSocios.socios[i+1];
+    }
+  }catch(invalid_argument){
+    throw invalid_argument("No existe socio");
+  }
+
 }
 
 int main(){
