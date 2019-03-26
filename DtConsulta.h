@@ -13,8 +13,8 @@ class DtConsulta{
     DtConsulta();
     DtConsulta(DtFecha fechaConsulta, string motivo);
     DtFecha getFechaConsulta();
-    void setFechaConsulta(DtFecha);
     string getMotivo();
+    void setFechaConsulta(DtFecha);
     void setMotivo(string);
     ~DtConsulta();
 };

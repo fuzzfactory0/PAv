@@ -14,8 +14,8 @@ class Consulta{
     Consulta(string motivo);
     Consulta(DtFecha fecha, string motivo);
     DtFecha getFechaConsulta();
-    void setFechaConsulta(DtFecha fecha);
     string getMotivo();
+    void setFechaConsulta(DtFecha fecha);
     void setMotivo(string motivo);
     ~Consulta();
 };

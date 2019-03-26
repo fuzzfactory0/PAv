@@ -10,11 +10,11 @@ DtConsulta::DtConsulta(DtFecha fc, string m){
 DtFecha DtConsulta::getFechaConsulta(){
   return this->fechaConsulta;
 }
-void DtConsulta::setFechaConsulta(DtFecha fc){
-  this->fechaConsulta=fc;
-}
 string DtConsulta::getMotivo(){
   return this->motivo;
+}
+void DtConsulta::setFechaConsulta(DtFecha fc){
+  this->fechaConsulta=fc;
 }
 void DtConsulta::setMotivo(string m){
   this->motivo=m;
