@@ -23,18 +23,20 @@ struct socios{
 
 void registrarSocio(string ci, string nombre, DtMascota& dtMascota){
   Socio* socio = new Socio(ci,nombre);
-  if(coleccionSocios.tope < MAX_SOCIOS)
+  if(coleccionSocios.tope < MAX_SOCIOS){
     coleccionSocios.socios[coleccionSocios.tope] = socio;
-  try{
-    DtPerro& perro = dynamic_cast<DtPerro&>(dtMascota);
-    Perro* dog = new Perro(perro.getNombre(), perro.getGenero(), perro.getPeso(), perro.getRaza(), perro.getVacunaCachorro());
-    dog->setRacionDiaria(0);
-    coleccionSocios.socios[coleccionSocios.tope]->setMascota(dog);
-  }catch(std::bad_cast){
-    DtGato& gato = dynamic_cast<DtGato&>(dtMascota);
-    Gato* cat = new Gato(gato.getNombre(), gato.getGenero(), gato.getPeso(), gato.getTipoPelo());
-    cat->setRacionDiaria(0);
-    coleccionSocios.socios[coleccionSocios.tope]->setMascota(cat);
+    try{
+      DtPerro& perro = dynamic_cast<DtPerro&>(dtMascota);
+      Perro* dog = new Perro(perro.getNombre(), perro.getGenero(), perro.getPeso(), perro.getRaza(), perro.getVacunaCachorro());
+      dog->setRacionDiaria(0);
+      coleccionSocios.socios[coleccionSocios.tope]->setMascota(dog);
+    }catch(std::bad_cast){
+      DtGato& gato = dynamic_cast<DtGato&>(dtMascota);
+      Gato* cat = new Gato(gato.getNombre(), gato.getGenero(), gato.getPeso(), gato.getTipoPelo());
+      cat->setRacionDiaria(0);
+      coleccionSocios.socios[coleccionSocios.tope]->setMascota(cat);
+    }
+    coleccionSocios.tope++;
   }
 }
 
@@ -42,7 +44,7 @@ Socio* existeSocio(string ci){
   Socio* socEncontrado;
   bool encontre=false;
   int x=0;
-  while(!encontre and x<=coleccionSocios.tope){
+  while(!encontre and x<coleccionSocios.tope){
     if(ci.compare(coleccionSocios.socios[x]->getCi())==0){
       encontre=true;
       socEncontrado = coleccionSocios.socios[x];
@@ -73,7 +75,7 @@ void agregarMascota(string ci, DtMascota& dtMascota){
       }
     }
   }catch(invalid_argument){
-    cout << "Error, no existe socio" << endl;
+    throw invalid_argument("No existe socio");
   }
 }
 
@@ -92,7 +94,7 @@ int main(){
   int option;
   bool quit = false;
   while(!quit){
-    cout << "Ingrese 1 para registrar socio, \n2 para ingresar una mascota, \n3 para ingresar una consulta.\n" << endl;
+    cout << "\nIngrese 1 para registrar socio, \n2 para ingresar una mascota, \n3 para ingresar una consulta, \n4 para salir.\n";
     cin >> option;
 
     switch(option){
@@ -104,38 +106,38 @@ int main(){
         string gen;
         Genero petgender;
         float petweight;
-        cout << "Ingrese el nombre del socio:\n" << endl;
+        cout << "\nIngrese el nombre del socio: " << endl;
         cin >> name;
-        cout << "Ingrese la cedula del socio:\n" << endl;
+        cout << "\nIngrese la cedula del socio: " << endl;
         cin >> ci;
-        cout << "Ingrese el tipo de mascota (1 para gato, 2 para perro):\n" << endl;
+        cout << "\nIngrese el tipo de mascota (1 para gato, 2 para perro): " << endl;
         cin >> pettype;
-        cout << "Ingrese el nombre de la mascota:\n" << endl;
+        cout << "\nIngrese el nombre de la mascota: " << endl;
         cin >> petname;
-        cout << "Ingrese el genero de la mascota (Macho o Hembra):\n" << endl;
+        cout << "\nIngrese el genero de la mascota (Macho o Hembra): " << endl;
         cin >> gen;
         if(gen == "Macho") petgender = Macho;
         else if(gen == "Hembra") petgender = Hembra;
-        cout << "Ingrese el peso de la mascota:\n" << endl;
+        cout << "\nIngrese el peso de la mascota: " << endl;
         cin >> petweight;
 
         if(pettype == 1){
           string peloin;
           TipoPelo pelo;
-          cout << "Ingrese el tipo de pelo (Corto, Mediano o Largo):\n" << endl;
+          cout << "\nIngrese el tipo de pelo (Corto, Mediano o Largo): " << endl;
           cin >> peloin;
           if(peloin == "Corto") pelo = Corto;
           else if (peloin == "Mediano") pelo = Mediano;
           else if (peloin == "Largo") pelo = Largo;
           DtGato g = DtGato(petname, petgender, petweight, pelo);
           registrarSocio(ci, name, g);
-          cout << "Socio registrado.\n" << endl;
+          cout << "\nSocio registrado.\n" << endl;
         }
         else{
           string razain;
           RazaPerro raza;
           bool vaxx;
-          cout << "Ingrese la raza del perro:\n" << endl;
+          cout << "\nIngrese la raza del perro: " << endl;
           cin >> razain;
           if(razain == "Labrador") raza = Labrador;
           else if (razain == "Ovejero") raza = Ovejero;
@@ -144,11 +146,11 @@ int main(){
           else if (razain == "Collie") raza = Collie;
           else if (razain == "Pekines") raza = Pekines;
           else if (razain == "Otro") raza = Otro;
-          cout << "Su perro fue vacunado? (Ingrese 1 para Si, 0 para No)}\n" << endl;
+          cout << "\nSu perro fue vacunado? (Ingrese 1 para Si, 0 para No): " << endl;
           cin >> vaxx;
           DtPerro p = DtPerro(petname, petgender, petweight, raza, vaxx);
           registrarSocio(ci, name, p);
-          cout << "Socio registrado.\n" << endl;
+          cout << "\nSocio registrado.\n" << endl;
         }
       }
       break;
@@ -159,35 +161,40 @@ int main(){
         string gen;
         Genero petgender;
         float petweight;
-        cout << "Ingrese la cedula del socio:\n" << endl;
+        cout << "\nIngrese la cedula del socio: " << endl;
         cin >> ci;
-        cout << "Ingrese el tipo de mascota (1 para gato, 2 para perro):\n" << endl;
+        cout << "\nIngrese el tipo de mascota (1 para gato, 2 para perro): " << endl;
         cin >> pettype;
-        cout << "Ingrese el nombre de la mascota:\n" << endl;
+        cout << "\nIngrese el nombre de la mascota: " << endl;
         cin >> petname;
-        cout << "Ingrese el genero de la mascota (Macho o Hembra):\n" << endl;
+        cout << "\nIngrese el genero de la mascota (Macho o Hembra): " << endl;
         cin >> gen;
         if(gen == "Macho") petgender = Macho;
         else if(gen == "Hembra") petgender = Hembra;
-        cout << "Ingrese el peso de la mascota:\n" << endl;
+        cout << "\nIngrese el peso de la mascota: " << endl;
         cin >> petweight;
 
         if(pettype == 1){
           string peloin;
           TipoPelo pelo;
-          cout << "Ingrese el tipo de pelo (Corto, Mediano o Largo):\n" << endl;
+          cout << "\nIngrese el tipo de pelo (Corto, Mediano o Largo): " << endl;
           cin >> peloin;
           if(peloin == "Corto") pelo = Corto;
           else if (peloin == "Mediano") pelo = Mediano;
           else if (peloin == "Largo") pelo = Largo;
           DtGato g = DtGato(petname, petgender, petweight, pelo);
-          agregarMascota(ci, g);
+          try{
+            agregarMascota(ci, g);
+            cout << "\nMascota agregada.\n" << endl;
+          }catch(invalid_argument){
+            cout << "Error, no existe socio." << endl;
+          }
         }
         else{
           string razain;
           RazaPerro raza;
           bool vaxx;
-          cout << "Ingrese la raza del perro:\n" << endl;
+          cout << "\nIngrese la raza del perro: " << endl;
           cin >> razain;
           if(razain == "Labrador") raza = Labrador;
           else if (razain == "Ovejero") raza = Ovejero;
@@ -196,28 +203,32 @@ int main(){
           else if (razain == "Collie") raza = Collie;
           else if (razain == "Pekines") raza = Pekines;
           else if (razain == "Otro") raza = Otro;
-          cout << "Su perro fue vacunado? (Ingrese 1 para Si, 0 para No)\n" << endl;
+          cout << "\nSu perro fue vacunado? (Ingrese 1 para Si, 0 para No): " << endl;
           cin >> vaxx;
           DtPerro p = DtPerro(petname, petgender, petweight, raza, vaxx);
-          agregarMascota(ci, p);
-          cout << "Mascota agregada.\n" << endl;
+          try{
+            agregarMascota(ci, p);
+            cout << "\nMascota agregada.\n" << endl;
+          }catch(invalid_argument){
+            cout << "Error, no existe el socio" << endl;
+          }
         }
       }
       break;
       case 3:{
         string id;
         string reason;
-        cout << "Ingrese la cedula del socio:\n" << endl;
+        cout << "\nIngrese la cedula del socio: " << endl;
         cin >> id;
-        cout << "Ingrese el motivo de consulta:\n" << endl;
+        cout << "\nIngrese el motivo de consulta: " << endl;
         cin >> reason;
         ingresarConsulta(reason, id);
-        cout << "Consulta agregada.\n" << endl;
+        cout << "\nConsulta agregada.\n" << endl;
       }
       break;
       case 4: quit = true; break;
       default:
-        cout << "La opción ingresada no es correcta.\n" << endl;
+        cout << "\nLa opción ingresada no es correcta.\n" << endl;
     }
   }
   return 0;
