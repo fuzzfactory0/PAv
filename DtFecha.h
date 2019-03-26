@@ -10,10 +10,10 @@ class DtFecha{
     DtFecha();
     DtFecha(int, int, int);
     int getDia();
-    void setDia(int);
     int getMes();
-    void setMes(int);
     int getAnio();
+    void setDia(int);
+    void setMes(int);
     void setAnio(int);
     ~DtFecha();
 };
