@@ -3,6 +3,9 @@
 
 #include "RazaPerro.h"
 #include "DtMascota.h"
+#include <iostream>
+
+using namespace std;
 
 class DtPerro : public DtMascota{
   private:
@@ -14,6 +17,8 @@ class DtPerro : public DtMascota{
     RazaPerro getRaza();
     bool getVacunaCachorro();
     ~DtPerro();
+
+    friend ostream& operator<<(ostream& os, const DtPerro& perro);
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include "DtMascota.h"
+#include <iostream>
 
 DtMascota::DtMascota(){}
 DtMascota::DtMascota(string nombre, Genero genero, float peso){
@@ -20,4 +21,12 @@ float DtMascota::getPeso(){
 float DtMascota::getRacionDiaria(){
   return this->racionDiaria;
 }
+
+ostream& operator<<(ostream& os, const DtMascota& pet){
+  string genero;
+  if(pet.genero == 0) genero = "Macho"; else genero = "Hembra";
+  os << "-Datos de mascota-\nNombre: " << pet.nombre << "\nGenero: " << genero << "\nPeso: " << pet.peso;
+  return os;
+}
+
 DtMascota::~DtMascota(){}

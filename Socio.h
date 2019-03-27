@@ -23,7 +23,7 @@ private:
 public:
   Socio();
   Socio(string ci, string nom, DtFecha fi);
-  Socio(string ci, string nom);
+  Socio(string ci, string nom); //PRUEBAS
   string getCi();
   void setCi(string);
   string getNombre();

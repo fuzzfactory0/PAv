@@ -30,28 +30,33 @@ DtFecha Socio::getFechaIngreso(){
 void Socio::setFechaIngreso(DtFecha fi){
   this->fechaIngreso=fi;
 }
+void Socio::setMascota(Mascota* m){
+  this->mascotas[this->topeMascota] = m;
+  this->topeMascota++;
+}
+
 int Socio::getTopeConsulta(){
   return this->topeConsulta;
 }
-void Socio::setTopeconsulta(){
-  this->topeConsulta++;
-}
+
 int Socio::getTopeMascota(){
   return this->topeMascota;
 }
-string Socio::getConsulta(int i){
-  return this->consultas[i]->getMotivo();
+
+void Socio::setTopeconsulta(){
+  this->topeConsulta++;
 }
+
 void Socio::setConsulta(Consulta* consulta){
   this->consultas[this->topeConsulta]=consulta;
   this->topeConsulta++;
 }
+
 string Socio::getMascota(int i){
   return this->mascotas[i]->getNombre();
 }
-void Socio::setMascota(Mascota* m){
-  this->mascotas[this->topeMascota] = m;
-  this->topeMascota++;
+string Socio::getConsulta(int i){
+  return this->consultas[i]->getMotivo();
 }
 
 Socio::~Socio(){}
