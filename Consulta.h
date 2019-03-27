@@ -11,7 +11,6 @@ class Consulta{
     string motivo;
   public:
     Consulta();
-    Consulta(string motivo);//PRUEBA
     Consulta(DtFecha fecha, string motivo);
     DtFecha getFechaConsulta();
     string getMotivo();

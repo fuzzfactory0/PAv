@@ -30,5 +30,8 @@ ostream& operator<<(ostream& os, const DtPerro& perro){
   os << (DtMascota) perro << "\nRaza: " << raza << "\nVacuna: " << vacuna << endl;
   return os;
 }
+void DtPerro::setRacionDiaria(){
+  this->racionDiaria = this->getPeso() * 0.025;
+}
 
 DtPerro::~DtPerro(){}

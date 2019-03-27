@@ -19,5 +19,8 @@ ostream& operator<<(ostream& os, const DtGato& gato){
   os << (DtMascota) gato << "\nPelo: " << tipoPelo << endl;
   return os;
 }
+void DtGato::setRacionDiaria(){
+  this->racionDiaria = this->getPeso() * 0.015;
+}
 
 DtGato::~DtGato(){}
