@@ -52,9 +52,13 @@ void Socio::setConsulta(Consulta* consulta){
   this->topeConsulta++;
 }
 
-string Socio::getMascota(int i){
+/*string Socio::getMascota(int i){
   return this->mascotas[i]->getNombre();
+}*/
+Mascota* Socio::getMascota(int i){
+  return this->mascotas[i];
 }
+
 string Socio::getConsulta(int i){
   return this->consultas[i]->getMotivo();
 }

@@ -4,6 +4,7 @@
 DtGato::DtGato(){}
 DtGato::DtGato(string nombre, Genero genero, float peso, TipoPelo tipoPelo):DtMascota(nombre,genero,peso){
   this->tipoPelo=tipoPelo;
+  this->racionDiaria = this->getPeso() * 0.015;
 }
 TipoPelo DtGato::getTipoPelo(){
   return this->tipoPelo;
@@ -16,7 +17,7 @@ ostream& operator<<(ostream& os, const DtGato& gato){
     case 1: tipoPelo = "Mediano"; break;
     case 2: tipoPelo = "Largo"; break;
   }
-  os << (DtMascota) gato << "\nPelo: " << tipoPelo << endl;
+  os << (DtMascota) gato << "\n- Racion Diaria: " << gato.racionDiaria << " gramos" << "\n- Pelo: " << tipoPelo << endl;
   return os;
 }
 void DtGato::setRacionDiaria(){

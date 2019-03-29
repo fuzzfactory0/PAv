@@ -36,7 +36,7 @@ public:
   int getTopeMascota();
   ~Socio();
   void setConsulta(Consulta* consulta);
-  string getMascota(int i); //SOLO para prueba y debug, no es una funcion definitiva
+  Mascota* getMascota(int i); //SOLO para prueba y debug, no es una funcion definitiva
   string getConsulta(int i);//SOLO para prueba y debug, no es una funcion definitiva
 };
 
