@@ -118,6 +118,31 @@ void eliminarSocio(string ci){
   }
 
 }
+
+DtMascota** obtenerMascotas(string ci, int& cantMascota){
+	Socio* s = existeSocio(ci);
+
+	DtMascota** mascotas= new DtMascota*[cantMascota];
+	int i = 0;
+	while ( i < cantMascota && i<=s->getTopeMascota()) {
+		      Perro* perro = dynamic_cast<Perro*>(s->getMascota(i));
+		      if (perro!=NULL){
+		      DtPerro* dog = new DtPerro(perro->getNombre(), perro->getGenero(), perro->getPeso(), perro->getRaza(), perro->getVacunaCachorro());
+		      mascotas[i]=dog;
+		      }
+		      Gato* gato = dynamic_cast<Gato*>(s->getMascota(i));
+		      if (gato!=NULL){
+
+		      DtGato* cat = new DtGato(gato->getNombre(), gato->getGenero(), gato->getPeso(), gato->getTipoPelo());
+		       mascotas[i]=cat;
+
+		    }
+		      i++;
+	}
+
+	return mascotas;
+}
+
 int main(){
   int option;
   bool quit = false;
