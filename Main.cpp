@@ -42,7 +42,7 @@ int main(){
         string petname;
         int pettype;
         int gen;
-        float petweight; 
+        float petweight;
         Genero petgender;
 
         cout << "\nIngrese el nombre del socio: "; cin >> name;
@@ -74,9 +74,9 @@ int main(){
         else if (pettype == 2){
           int razain;
           RazaPerro raza;
-          string vacuna;
+          int vacuna;
           bool vaxx;
-          cout << "\nIngrese la raza del perro\n\t1) Labrador\n\t2)Ovejero\n\t3)Bulldog\n\t4)Pitbull\n\t5)Collie\n\t6)Pekines\n\t6)Otro\n\t";
+          cout << "\nIngrese la raza del perro\n\t1) Labrador\n\t2) Ovejero\n\t3) Bulldog\n\t4) Pitbull\n\t5) Collie\n\t6) Pekines\n\t6) Otro\n\t";
           cin >> razain;
           switch(razain){
             case 1: raza = Labrador;  break;
@@ -115,7 +115,7 @@ int main(){
         cout << "\nIngrese el peso de la mascota: "; cin >> petweight;
 
         if(pettype == 1){
-          string peloin;
+          int peloin;
           TipoPelo pelo;
           cout << "\nIngrese el tipo de pelo\n\t1) Corto\n\t2) Mediano\n\t3) Largo\n\t"; cin >> peloin;
           switch(peloin){
@@ -136,8 +136,8 @@ int main(){
           int razain;
           RazaPerro raza;
           bool vaxx;
-          string vacuna;
-          cout << "\nIngrese la raza del perro\n\t1) Labrador\n\t2)Ovejero\n\t3)Bulldog\n\t4)Pitbull\n\t5)Collie\n\t6)Pekines\n\t6)Otro\n\t";
+          int vacuna;
+          cout << "\nIngrese la raza del perro\n\t1) Labrador\n\t2) Ovejero\n\t3) Bulldog\n\t4) Pitbull\n\t5) Collie\n\t6) Pekines\n\t6) Otro\n\t";
           cin >> razain;
           switch(razain){
             case 1: raza = Labrador;  break;
@@ -273,11 +273,37 @@ void ingresarConsulta(string motivo, string ci, DtFecha fecha){
   }
 }
 
+int obtenerPosicionSocio(string ci){
+  int i = 0;
+  while(ci.compare(coleccionSocios.socios[i]->getCi()) != 0 && i <= coleccionSocios.tope)
+    i++;
+  if (i > coleccionSocios.tope)
+    return -1;
+  return i;
+}
+
+void eliminarSocio(string ci){
+  try{
+    Socio* s = existeSocio(ci);
+    int i = obtenerPosicionSocio(ci);
+    if(i == coleccionSocios.tope)
+      delete coleccionSocios.socios[i];
+    else{
+      delete coleccionSocios.socios[i];
+      coleccionSocios.socios[i] = coleccionSocios.socios[coleccionSocios.tope];
+      coleccionSocios.tope--;
+    }
+  }catch(invalid_argument){
+    throw invalid_argument("No existe socio");
+  }
+
+}
+
 DtMascota** obtenerMascotas(string ci, int& cantMascota){
 	Socio* s = existeSocio(ci);
-  DtMascota** mascotas= new DtMascota*[cantMascota];
-  int i = 0;
-	while ( i < cantMascota && i<=s->getTopeMascota()){
+	DtMascota** mascotas= new DtMascota*[cantMascota];
+	int i = 0;
+	while ( i < cantMascota && i<=s->getTopeMascota()) {
     Perro* perro = dynamic_cast<Perro*>(s->getMascota(i));
     if (perro!=NULL){
       DtPerro* dog = new DtPerro(perro->getNombre(), perro->getGenero(), perro->getPeso(), perro->getRaza(), perro->getVacunaCachorro());
@@ -289,25 +315,6 @@ DtMascota** obtenerMascotas(string ci, int& cantMascota){
       mascotas[i]=cat;
     }
     i++;
-}
+	}
 	return mascotas;
-}
-
-void eliminarSocio(string ci){
-  try{
-    Socio* s = existeSocio(ci);
-    int i = 0;
-    while(ci.compare(coleccionSocios.socios[i]->getCi()) != 0)
-      i++;
-    if(i == coleccionSocios.tope){
-      delete coleccionSocios.socios[i];
-      coleccionSocios.tope--;
-    }
-    else{
-      coleccionSocios.socios[i] = coleccionSocios.socios[coleccionSocios.tope];
-      coleccionSocios.tope--;
-    }
-  }catch(invalid_argument){
-    throw invalid_argument("\nNo existe socio");
-  }
 }

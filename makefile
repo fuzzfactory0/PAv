@@ -15,4 +15,4 @@ DtGato.o: DtGato.cpp
 
 clean:
 	rm -rf *.o
-	rm p
+	rm -rf p
