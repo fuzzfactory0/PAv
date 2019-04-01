@@ -59,8 +59,8 @@ Mascota* Socio::getMascota(int i){
   return this->mascotas[i];
 }
 
-string Socio::getConsulta(int i){
-  return this->consultas[i]->getMotivo();
+Consulta* Socio::getConsulta(int i){
+  return this->consultas[i];
 }
 
 Socio::~Socio(){}

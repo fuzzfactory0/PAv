@@ -17,7 +17,7 @@ class DtFecha{
     void setAnio(int);
     ~DtFecha();
 
-    friend bool operator<=(const DtFecha& date1, const DtFecha& date2);
+    friend bool operator<(const DtFecha& date1, const DtFecha& date2);
 };
 
 #endif

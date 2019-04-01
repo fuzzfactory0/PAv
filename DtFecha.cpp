@@ -27,7 +27,7 @@ void DtFecha::setAnio(int a){
   this->anio=a;
 }
 
-bool operator<=(const DtFecha& date1, const DtFecha& date2){
+bool operator<(const DtFecha& date1, const DtFecha& date2){
   if(date1.dia <= date2.dia && date1.mes <= date2.mes && date1.anio <= date2.anio) return true;
   else return false;
 }
