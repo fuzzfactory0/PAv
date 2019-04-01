@@ -90,25 +90,34 @@ void ingresarConsulta(string motivo, string ci){
   }
 }
 
+int obtenerPosicionSocio(string ci){
+  int i = 0;
+  while(ci.compare(coleccionSocios.socios[i]->getCi()) != 0 && i <= coleccionSocios.tope){
+    i++;
+  }
+  if (i > coleccionSocios.tope){
+    return -1;
+  }
+  return i;
+}
+
 void eliminarSocio(string ci){
   try{
     Socio* s = existeSocio(ci);
-    int i = 0;
-    while(ci.compare(coleccionSocios.socios[i]->getCi() != 0){
-      i++;
-    }
+    int i = obtenerPosicionSocio(ci);
     if(i == coleccionSocios.tope){
       delete coleccionSocios.socios[i];
     }
     else{
-      coleccionSocios.socios[i] = coleccionSocios.socios[i+1];
+      delete coleccionSocios.socios[i];
+      coleccionSocios.socios[i] = coleccionSocios.socios[coleccionSocios.tope];
+      coleccionSocios.tope--;
     }
   }catch(invalid_argument){
     throw invalid_argument("No existe socio");
   }
 
 }
-
 int main(){
   int option;
   bool quit = false;
