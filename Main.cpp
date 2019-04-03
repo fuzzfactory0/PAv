@@ -63,11 +63,15 @@ int main(){
         cout << "Ingrese la cedula del socio: "; cin >> ci;
         cout << "Ingrese el tipo de mascota\n\t1) Gato\n\t2) Perro\n\tOpcion: "; cin >> pettype;
         while (pettype != 1 and pettype != 2) {
-          cout << "\n - Error, seleccione opcion correcta - \n" << "\nIngrese nuevamente tipo de mascota: ";
+          cout << "\n - Error, seleccione opcion correcta - \n" << "\nIngrese nuevamente el tipo de mascota: ";
           cin >> pettype;
         }
         cout << "Ingrese el nombre de la mascota: "; getline(cin, limpiarBuffer,'\n'); getline(cin, petname,'\n');
         cout << "Ingrese el genero de la mascota\n\t1) Macho\n\t2) Hembra\n\tOpcion: "; cin >> gen;
+        while (gen != 1 and gen != 2) {
+          cout << "\n - Error, seleccione opcion correcta - \n" << "\nIngrese nuevamente el genero de la mascota: ";
+          cin >> gen;
+        }
         cout << "Ingrese el peso de la mascota: "; cin >> petweight;
         switch(gen){
           case 1: petgender = Macho;  break;
@@ -78,6 +82,10 @@ int main(){
           int peloin;
           TipoPelo pelo;
           cout << "Ingrese el tipo de pelo\n\t1) Corto\n\t2) Mediano\n\t3) Largo\n\tOpcion: "; cin >> peloin;
+          while (peloin < 1 or peloin > 3){
+            cout << "\n - Error, seleccione opcion correcta - \n" << "\nIngrese nuevamente tipo de pelo: ";
+            cin >> peloin;
+          }
           switch(peloin){
             case 1: pelo = Corto;   break;
             case 2: pelo = Mediano; break;
@@ -96,6 +104,10 @@ int main(){
           bool vaxx;
           cout << "Ingrese la raza del perro\n\t1) Labrador\n\t2) Ovejero\n\t3) Bulldog\n\t4) Pitbull\n\t5) Collie\n\t6) Pekines\n\t7) Otro\n\tOpcion: ";
           cin >> razain;
+          while (razain < 1 or razain > 7) {
+            cout << "\n - Error, seleccione opcion correcta - \n" << "\nIngrese nuevamente la raza del perro: ";
+            cin >> razain;
+          }
           switch(razain){
             case 1: raza = Labrador;  break;
             case 2: raza = Ovejero;   break;
@@ -106,6 +118,10 @@ int main(){
             case 7: raza = Otro;      break;
           }
           cout << "Su perro fue vacunado?\n\t1) Si\n\t2) No\nOpcion: "; cin >> vacuna;
+          while (vacuna != 1 and vacuna != 2) {
+            cout << "\n - Error, seleccione opcion correcta - \n" << "\nIngrese nuevamente: ";
+            cin >> vacuna;
+          }
           if(vacuna == 1) vaxx = true; else vaxx = false;
           DtPerro p = DtPerro(petname, petgender, petweight, raza, vaxx);
           registrarSocio(ci, name, p);
@@ -123,8 +139,16 @@ int main(){
         float petweight;
         cout << "\nIngrese la cedula del socio: "; cin >> ci;
         cout << "\nIngrese el tipo de mascota\n\t1) Gato\n\t2) Perro\n\t Opcion: "; cin >> pettype;
+        while (pettype != 1 and pettype != 2) {
+          cout << "\n - Error, seleccione opcion correcta - \n" << "\nIngrese nuevamente el tipo de mascota: ";
+          cin >> pettype;
+        }
         cout << "\nIngrese el nombre de la mascota: "; getline(cin, limpiarBuffer,'\n'); getline(cin, petname,'\n');
         cout << "\nIngrese el genero de la mascota\n\t1) Macho\n\t2) Hembra\n\t Opcion: "; cin >> gen;
+        while (gen != 1 and gen != 2) {
+          cout << "\n - Error, seleccione opcion correcta - \n" << "\nIngrese nuevamente el genero de la mascota: ";
+          cin >> gen;
+        }
         switch(gen){
           case 1: petgender = Macho;  break;
           case 2: petgender = Hembra; break;
@@ -135,6 +159,10 @@ int main(){
           int peloin;
           TipoPelo pelo;
           cout << "\nIngrese el tipo de pelo\n\t1) Corto\n\t2) Mediano\n\t3) Largo\n\t Opcion: "; cin >> peloin;
+          while (peloin < 1 or peloin > 3){
+            cout << "\n - Error, seleccione opcion correcta - \n" << "\nIngrese nuevamente tipo de pelo: ";
+            cin >> peloin;
+          }
           switch(peloin){
             case 1: pelo = Corto;   break;
             case 2: pelo = Mediano; break;
@@ -156,6 +184,10 @@ int main(){
           int vacuna;
           cout << "\nIngrese la raza del perro\n\t1) Labrador\n\t2) Ovejero\n\t3) Bulldog\n\t4) Pitbull\n\t5) Collie\n\t6) Pekines\n\t7) Otro\n\tOpcion: ";
           cin >> razain;
+          while (razain < 1 or razain > 7) {
+            cout << "\n - Error, seleccione opcion correcta - \n" << "\nIngrese nuevamente la raza del perro: ";
+            cin >> razain;
+          }
           switch(razain){
             case 1: raza = Labrador;  break;
             case 2: raza = Ovejero;   break;
@@ -166,6 +198,10 @@ int main(){
             case 7: raza = Otro;      break;
           }
           cout << "\nSu perro fue vacunado?\n\t1) Si\n\t2) No\n\tOpcion: "; cin >> vacuna;
+          while (vacuna != 1 and vacuna != 2) {
+            cout << "\n - Error, seleccione opcion correcta - \n" << "\nIngrese nuevamente: ";
+            cin >> vacuna;
+          }
           if(vacuna == 1) vaxx = true; else vaxx = false;
           DtPerro p = DtPerro(petname, petgender, petweight, raza, vaxx);
           try{
