@@ -25,7 +25,7 @@ float DtMascota::getRacionDiaria(){
 ostream& operator<<(ostream& os, const DtMascota& pet){
   string genero;
   if(pet.genero == 0) genero = "Macho"; else genero = "Hembra";
-  os << "- Datos de mascota -\n- Nombre: " << pet.nombre << "\n- Genero: " << genero << "\n- Peso: " << pet.peso << " gramos";
+  os << "- Datos de mascota -\n\tNombre: " << pet.nombre << "\n\tGenero: " << genero << "\n\tPeso: " << pet.peso << " gramos";
   return os;
 }
 

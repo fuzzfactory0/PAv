@@ -28,7 +28,7 @@ ostream& operator<<(ostream& os, const DtPerro& perro){
     case 6: raza = "Otro"; break;
   }
   if(perro.vacunaCachorro) vacuna = "Si"; else vacuna = "No";
-  os << (DtMascota) perro << "\n- Racion Diaria: " << perro.racionDiaria << " gramos" << "\n- Raza: " << raza << "\n- Vacuna: " << vacuna << endl;
+  os << (DtMascota) perro << "\n\tRacion Diaria: " << perro.racionDiaria << " gramos" << "\n\tRaza: " << raza << "\n\tVacuna: " << vacuna << endl;
   return os;
 }
 void DtPerro::setRacionDiaria(){

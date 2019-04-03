@@ -1,5 +1,6 @@
 #include "DtConsulta.h"
 #include "DtFecha.h"
+#include <iostream>
 
 DtConsulta::DtConsulta(){}
 
@@ -18,6 +19,11 @@ void DtConsulta::setFechaConsulta(DtFecha fc){
 }
 void DtConsulta::setMotivo(string m){
   this->motivo=m;
+}
+
+ostream& operator<<(ostream& os, const DtConsulta& cons){
+  os << "\n\tFecha: " << cons.fechaConsulta << "\n\tMotivo: " << cons.motivo << endl;
+  return os;
 }
 
 DtConsulta::~DtConsulta(){}

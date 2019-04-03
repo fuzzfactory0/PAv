@@ -17,7 +17,7 @@ ostream& operator<<(ostream& os, const DtGato& gato){
     case 1: tipoPelo = "Mediano"; break;
     case 2: tipoPelo = "Largo"; break;
   }
-  os << (DtMascota) gato << "\n- Racion Diaria: " << gato.racionDiaria << " gramos" << "\n- Pelo: " << tipoPelo << endl;
+  os << (DtMascota) gato << "\n\tRacion Diaria: " << gato.racionDiaria << " gramos" << "\n\tPelo: " << tipoPelo << endl;
   return os;
 }
 void DtGato::setRacionDiaria(){

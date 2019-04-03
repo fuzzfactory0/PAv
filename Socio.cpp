@@ -51,6 +51,7 @@ void Socio::setConsulta(Consulta* consulta){
   this->consultas[this->topeConsulta]=consulta;
   this->topeConsulta++;
 }
+
 Mascota* Socio::getMascota(int i){
   return this->mascotas[i];
 }

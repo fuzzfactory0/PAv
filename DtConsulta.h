@@ -17,6 +17,7 @@ class DtConsulta{
     void setFechaConsulta(DtFecha);
     void setMotivo(string);
     ~DtConsulta();
+    friend ostream& operator<<(ostream& os, const DtConsulta& cons);
 };
 
 #endif

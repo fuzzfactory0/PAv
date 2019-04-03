@@ -1,4 +1,6 @@
 #include "DtFecha.h"
+#include <iostream>
+using namespace std;
 
 DtFecha::DtFecha(){}
 
@@ -28,8 +30,24 @@ void DtFecha::setAnio(int a){
 }
 
 bool operator<(const DtFecha& date1, const DtFecha& date2){
-  if(date1.dia <= date2.dia && date1.mes <= date2.mes && date1.anio <= date2.anio) return true;
-  else return false;
+    bool esMenor=false;
+    if(date1.anio < date2.anio){
+        esMenor=true;
+    }else if (date1.anio == date2.anio){
+        if (date1.mes < date2.mes){
+            esMenor=true;
+        }else if(date1.mes == date2.mes){
+            if(date1.dia < date2.dia){
+                esMenor=true;
+            }
+        }
+    }
+    return esMenor;
+}
+
+ostream& operator<<(ostream& os, const DtFecha& fecha){
+  os << fecha.dia << "/" << fecha.mes << "/" << fecha.anio;
+  return os;
 }
 
 DtFecha::~DtFecha(){}
