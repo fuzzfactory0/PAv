@@ -16,6 +16,8 @@ class DtFecha{
     void setMes(int);
     void setAnio(int);
     ~DtFecha();
+
+    friend bool operator<(const DtFecha& date1, const DtFecha& date2);
 };
 
 #endif

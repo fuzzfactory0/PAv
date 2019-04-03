@@ -23,7 +23,7 @@ private:
 public:
   Socio();
   Socio(string ci, string nom, DtFecha fi);
-  Socio(string ci, string nom);
+  Socio(string ci, string nom); //PRUEBAS
   string getCi();
   void setCi(string);
   string getNombre();
@@ -37,7 +37,7 @@ public:
   ~Socio();
   void setConsulta(Consulta* consulta);
   Mascota* getMascota(int i);
-  string getConsulta(int i);//SOLO para prueba y debug, no es una funcion definitiva
+  Consulta* getConsulta(int i);
 };
 
 #endif

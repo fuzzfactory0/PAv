@@ -2,8 +2,8 @@
 #define DTMASCOTA
 
 #include "Genero.h"
-
 #include <iostream>
+
 using namespace std;
 
 class DtMascota{
@@ -20,6 +20,8 @@ public:
   float getPeso();
   float getRacionDiaria();
   virtual ~DtMascota();
+
+  friend ostream& operator<<(ostream&, const DtMascota&);
 };
 
 #endif

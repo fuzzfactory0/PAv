@@ -56,7 +56,7 @@ int main(){
         int gen;
         float petweight;
         Genero petgender;
-
+        
         cout << "\nIngrese el nombre del socio: "; getline(cin, limpiarbuffer, '\n'); getline(cin, name, '\n');
         cout << "\nIngrese la cedula del socio: "; cin >> ci;
         cout << "\nIngrese el tipo de mascota\n\t1) Gato\n\t2) Perro\n\t"; cin >> pettype;
@@ -118,6 +118,7 @@ int main(){
         cout << "\nIngrese la cedula del socio: "; cin >> ci;
         cout << "\nIngrese el tipo de mascota\n\t1) Gato\n\t2) Perro\n\t"; cin >> pettype;
         cout << "\nIngrese el nombre de la mascota: "; getline(cin, limpiarbuffer, '\n'); getline(cin, petname, '\n');
+
         cout << "\nIngrese el genero de la mascota\n\t1) Macho\n\t2) Hembra\n\t"; cin >> gen;
         switch(gen){
           case 1: petgender = Macho;  break;

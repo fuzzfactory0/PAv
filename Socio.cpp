@@ -47,16 +47,16 @@ void Socio::setTopeconsulta(){
   this->topeConsulta++;
 }
 
-Socio::~Socio(){}
-
 void Socio::setConsulta(Consulta* consulta){
   this->consultas[this->topeConsulta]=consulta;
   this->topeConsulta++;
 }
-
 Mascota* Socio::getMascota(int i){
   return this->mascotas[i];
 }
-string Socio::getConsulta(int i){
-  return this->consultas[i]->getMotivo();
+
+Consulta* Socio::getConsulta(int i){
+  return this->consultas[i];
 }
+
+Socio::~Socio(){}
