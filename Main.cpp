@@ -40,6 +40,7 @@ DtMascota** obtenerMascotas(string ci, int& cantMascota);
 int main(){
   int option;
   bool quit = false;
+  string limpiarbuffer;
   while(!quit){
     cout << "\nBienvenido. Elija la opción";
     cout << "\n\t1) Registrar socio \n\t2) Ingresar una mascota \n\t3) Ingresar una consulta \n\t4) Ver Consultas Anteriores \n\t5) Eliminar Socio \n\t6) Obtener Mascota \n\t0) Salir\n\t";
@@ -47,6 +48,7 @@ int main(){
 
     switch(option){
       case 1:{
+
         string name;
         string ci;
         string petname;
@@ -54,8 +56,8 @@ int main(){
         int gen;
         float petweight;
         Genero petgender;
-
-        cout << "\nIngrese el nombre del socio: "; cin >> name;
+        
+        cout << "\nIngrese el nombre del socio: "; getline(cin, limpiarbuffer, '\n'); getline(cin, name, '\n');
         cout << "\nIngrese la cedula del socio: "; cin >> ci;
         cout << "\nIngrese el tipo de mascota\n\t1) Gato\n\t2) Perro\n\t"; cin >> pettype;
         cout << "\nIngrese el nombre de la mascota: "; cin >> petname;
@@ -115,7 +117,8 @@ int main(){
         float petweight;
         cout << "\nIngrese la cedula del socio: "; cin >> ci;
         cout << "\nIngrese el tipo de mascota\n\t1) Gato\n\t2) Perro\n\t"; cin >> pettype;
-        cout << "\nIngrese el nombre de la mascota: "; cin >> petname;
+        cout << "\nIngrese el nombre de la mascota: "; getline(cin, limpiarbuffer, '\n'); getline(cin, petname, '\n');
+
         cout << "\nIngrese el genero de la mascota\n\t1) Macho\n\t2) Hembra\n\t"; cin >> gen;
         switch(gen){
           case 1: petgender = Macho;  break;
@@ -178,7 +181,7 @@ int main(){
         int mes;
         int anio;
         cout << "\nIngrese la cedula del socio: "; cin >> id;
-        cout << "\nIngrese el motivo de consulta: "; cin >> reason;
+        cout << "\nIngrese el motivo de consulta: "; getline(cin, limpiarbuffer, '\n'); getline(cin, reason, '\n');
         cout << "\nIngrese el día: "; cin >> dia;
         cout << "\nIngrese el mes: "; cin >> mes;
         cout << "\nIngrese el año: "; cin >> anio;
