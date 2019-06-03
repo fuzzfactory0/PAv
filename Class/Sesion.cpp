@@ -8,8 +8,8 @@ Sesion* Sesion::instancia = NULL;
 
 Sesion::Sesion(){}
 
-Sesion* Sesion::getInstacia(){
-  if (instanca == NULL) instancia = new Sesion();
+Sesion* Sesion::getInstancia(){
+  if (instancia == NULL) instancia = new Sesion();
   return instancia;
 }
 
