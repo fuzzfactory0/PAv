@@ -2,8 +2,8 @@
 #define CINE
 
 #include "Sala.h"
-#include "Direccion.h"
-#include "dtSala.h"
+#include "../DT/Direccion.h"
+#include "../DT/DtSala.h"
 
 class Cine{
   private:
