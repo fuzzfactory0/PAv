@@ -5,7 +5,7 @@ HandlerUsuario* HandlerUsuario::instancia = NULL;
 HandlerUsuario::HandlerUsuario(){}
 
 HandlerUsuario* HandlerUsuario::getInstancia(){
-  if (instancia == NULL) intancia = new HandlerUsuario();
+  if (instancia == NULL) instancia = new HandlerUsuario();
   return instancia;
 }
 
