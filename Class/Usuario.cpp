@@ -17,7 +17,7 @@ void Usuario::setAvatarURL(string avatarURL){
   this->avatarURL = avatarURL;
 }
 
-string Usuario::getNickname(){
+string Usuario::getAvatarURL(){
   return this->avatarURL;
 }
 void Usuario::setPassword(string password){
