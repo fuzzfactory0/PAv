@@ -8,7 +8,7 @@ void CtrlUsuario::ingresarNickname(string nickname){
 }
 
 bool CtrlUsuario::verificarPassword(string password){
-  HanlderUsuario* hU = HandlerUsuario::getInstancia();
+  HandlerUsuario* hU = HandlerUsuario::getInstancia();
   Usuario* usr = hU->buscarUsuario(this->nickname);
   if(usr != NULL && usr->getPassword() == password){
     return true;
@@ -18,7 +18,7 @@ bool CtrlUsuario::verificarPassword(string password){
 }
 
 void CtrlUsuario::iniciarSesion(){
-  HanlderUsuario* hU = HandlerUsuario::getInstancia();
+  HandlerUsuario* hU = HandlerUsuario::getInstancia();
   Usuario* usr = hU->buscarUsuario(this->nickname);
   Sesion* s = Sesion::getInstancia();
   s->setUsuario(usr);
