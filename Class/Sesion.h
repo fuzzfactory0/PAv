@@ -10,7 +10,7 @@ class Sesion{
     static Sesion* instancia;
   public:
     static Sesion* getInstancia();
-    void setUsuario(Usuario);
+    void setUsuario(Usuario*);
     Usuario* getUsuario();
     ~Sesion();
 };
