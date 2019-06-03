@@ -35,4 +35,4 @@ void HandlerUsuario::eliminarUsuario(string usr){
   this->usuarios.erase(it);
 }
 
-HandlerUsuario::~HandlerUsuario();
+HandlerUsuario::~HandlerUsuario(){}
