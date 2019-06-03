@@ -1,5 +1,5 @@
 #ifndef FABRICA
-#define FABRICA
+#define FABRIRCA
 
 #include "ICtrlUsuario.h"
 
@@ -9,7 +9,7 @@ class Fabrica{
     Fabrica();
   public:
     static Fabrica* getInstancia();
-    static ICtrlUsuario* getCtrlUsuario();
+    static ICtrlUsuario* getICtrlUsuario();
     ~Fabrica();
 
 };
