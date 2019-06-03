@@ -1,19 +1,27 @@
-#ifndef CTRLUSUARIO
-#define CTRLUSUARIO
+#include "CtrlUsuario.h"
+#include "HandlerUsuario.h"
+#include "Sesion.h"
 
-#include "../Interfaz/ICtrlUsuario.h"
-#include <string>
+CtrlUsuario::CtrlUsuario(){}
 
-class CtrlUsuario : public ICtrlUsuario{
-  private:
-    string nickname;
-  public:
-    void ingresarNickname(string);
-    bool verificarPassword(string);
-    void iniciarSesion();
-    void cargarUsuarios();
-    CtrlUsuario();
-    ~CtrlUsuario();
-};
-#endif
+void CtrlUsuario::ingresarNickname(string nickname){
+  this->nickname = nickname;
+}
+
+bool CtrlUsuario::verificarPassword(string password){
+  HanlderUsuario* hU = HandlerUsuario::getInstancia();
+  Usuario* usr = hU->buscarUsuario(this->nickname);
+  if(usr != NULL && usr->getPassword() == password){
+    return true;
+  }
+  else
+    return false;
+}
+
+void CtrlUsuario::iniciarSesion(){
+  HanlderUsuario* hU = HandlerUsuario::getInstancia();
+  Usuario* usr = hU->buscarUsuario(this->nickname);
+  Sesion* s = Sesion::getInstancia();
+  s->setUsuario(usr);
+}
 
