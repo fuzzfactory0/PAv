@@ -1,5 +1,5 @@
 #ifndef FABRICA
-#define FABRIRCA
+#define FABRICA
 
 #include "ICtrlUsuario.h"
 
