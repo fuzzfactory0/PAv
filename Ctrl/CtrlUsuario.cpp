@@ -1,5 +1,6 @@
 #include "CtrlUsuario.h"
-#include "../Handler/HandlerUsuario.h"
+#include "HandlerUsuario.h"
+#include "Usuario.h"
 
 CtrlUsuario::CtrlUsuario(){}
 
@@ -22,4 +23,7 @@ void CtrlUsuario::iniciarSesion(){
   Usuario* usr = hU->buscarUsuario(this->nickname);
   Sesion* s = Sesion::getInstancia();
   s->setUsuario(usr);
+}
+void cargarUsuaros(){
+  Usuario("bukowski","1111","password");
 }
