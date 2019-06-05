@@ -1,7 +1,7 @@
 #ifndef CTRLUSUARIO
 #define CTRLUSUARIO
 
-#include "ICtrlUsuario.h"
+#include "../Interfaz/ICtrlUsuario.h"
 #include <string>
 
 class CtrlUsuario : public ICtrlUsuario{

@@ -1,6 +1,7 @@
 #include "CtrlUsuario.h"
-#include "HandlerUsuario.h"
-#include "Usuario.h"
+#include "../Handler/HandlerUsuario.h"
+#include "../Class/Usuario.h"
+#include "../Class/Sesion.h"
 
 CtrlUsuario::CtrlUsuario(){}
 
