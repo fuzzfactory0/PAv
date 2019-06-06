@@ -3,19 +3,21 @@
 
 #include "ICtrlCine.h"
 #include "Cine.h"
-#include "HandlerCine"
+#include "Sala.h"
+#include "HandlerCine.h"
 #include <string>
 
 using namespace std;
 
 class CtrlCine: public ICtrlCine{
   private:
-    string direccion;
+    Direccion direccion;
     int capacidad;
   public:
-    void ingresarDireccion(string);
+    CtrlCine();
+    void ingresarDireccion(Direccion);
     void ingresarCapacidad(int);
-    void AltaCine();
+    void altaCine();
 };
 
 #endif
