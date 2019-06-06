@@ -1,27 +1,28 @@
 #include "CtrlCine.h"
 
- void CtrlCine::ingresarDireccion(string dir){
+CtrlCine::CtrlCine(){}
+
+ void CtrlCine::ingresarDireccion(Direccion dir){
    this->direccion = dir;
  }
 
- void CtrlCine::IngresarCapacidad(int cap){
-
+ void CtrlCine::ingresarCapacidad(int cap){
    this->capacidad = cap;
  }
 
- void altaCine(){
+ void CtrlCine::altaCine(){
    int cantidadSalas = 0, capacidad = 0;
    HandlerCine* hC = HandlerCine::getInstancia();
    Cine* c = new Cine(Cine::getIDA(),this->direccion);
-   hC->addCine(c);
+   //hC->addCine(c);
    cout << "Ingrese la cantidad de salas del cine: ";
    cin >> cantidadSalas;
-   for(int i; i < cantidadSalas; i++){
-     cout >> "\n Ingrese la capacidad de la sala: ";
-     cin << capacidad;
-     ingresarCapacidad(capacidad);
+   for(int i = 0; i < cantidadSalas; i++){
+     cout << "\n Ingrese la capacidad de la sala: ";
+     cin >> this->capacidad;
      Sala* s = new Sala(Sala::getIDA(), this->capacidad);
-     hC->addSalaCine(c->getId(), s)
+     //ESTÁ PA ARREGLAR!!!!!!!!!
+     hC->addSalaCine(c->getId(), s);
    }
 
  }
