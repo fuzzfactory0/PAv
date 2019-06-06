@@ -13,11 +13,12 @@ class HandlerCine{
     HandlerCine();
   public:
     static HandlerCine* getInstancia();
-    list<Cine*> getCine();
+    list<Cine*> getCines();
     Cine* buscarCine(int);
     void addCine(Cine*);
-    bool existeCine(string);
+    bool existeCine(int);
     void eliminarCine(string);
+    void addSalaCine(int, Sala*);
     virtual ~HandlerCine();
 };
 #endif
