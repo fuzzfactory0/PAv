@@ -1,5 +1,7 @@
 #include "Cine.h"
 
+int Cine::IDA = 0;
+
 Cine::Cine(){}
 Cine::Cine(int id,Direccion direccion){
   this->id = id;
@@ -7,6 +9,9 @@ Cine::Cine(int id,Direccion direccion){
 }
 void Cine::setId(int id){
   this->id = id
+}
+int Cine::getIDA(){
+    return IDA++;
 }
 int Cine::getId(){
   return this->id;

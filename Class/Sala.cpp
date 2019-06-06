@@ -1,5 +1,7 @@
 #include "Sala.h"
 
+int Sala::IDA = 0;
+
 Sala::Sala(){}
 Sala::Sala(int id,int capacidad){
   this->id = id;
@@ -7,6 +9,9 @@ Sala::Sala(int id,int capacidad){
 }
 void Sala::setId(int id){
   this->id = id;
+}
+int Sala:getIDA(){
+  return this->IDA++;
 }
 int Sala::getId(){
   return this->id;
