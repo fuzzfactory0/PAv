@@ -1,6 +1,6 @@
 #include "HandlerCine.h"
 
-HanlderCine* HandlerCine::instancia = NULL;
+HandlerCine* HandlerCine::instancia = NULL;
 
 HandlerCine::HandlerCine(){}
 
@@ -17,20 +17,16 @@ Cine* HandlerCine::buscarCine(int id){
   }
 
 list<Cine*> HandlerCine::getCines(){
-  list<cine*> cines;
+  list<Cine*> cines;
   for (map<int,Cine*>::iterator it = this->cines.begin(); it != this->cines.end(); ++it)
-    cine.push_back(it->second);
+    cines.push_back(it->second);
   return cines;
 }
 
-void HandlerCine::AddCine(Cine* cine){
-  cines.insert(std::pair<int,Usuario*>(cine->getId(), cine));
+void HandlerCine::addCine(Cine* cine){
+  cines.insert(std::pair<int,Cine*>(cine->getId(), cine));
 }
 bool HandlerCine::existeCine(int id){
   map<int,Cine*>::iterator it = this->cines.find(id);
-  return (it != this->usuarios.end());
-}
-void HandlerCine::addSalaCine(idCine, Sala* s){
-  Cine* c = buscarCine(idCine);
-  c.salas.insert(std::pair<int,Sala*>(s.getId(), s)); 
+  return (it != this->cines.end());
 }
