@@ -3,7 +3,7 @@
 
 #include "Sala.h"
 #include "../DT/Direccion.h"
-#include "DtSala.h"
+#include "../DT/DtSala.h"
 
 class Cine{
   private:

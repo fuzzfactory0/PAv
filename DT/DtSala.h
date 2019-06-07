@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "DtFuncion"
+#include "DtFuncion.h"
 
 using namespace std;
 
