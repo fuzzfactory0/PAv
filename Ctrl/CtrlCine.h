@@ -1,10 +1,10 @@
 #ifndef CTRLCINE
 #define CTRLCINE
 
-#include "ICtrlCine.h"
-#include "Cine.h"
-#include "Sala.h"
-#include "HandlerCine.h"
+#include "../Interfaz/ICtrlCine.h"
+#include "../Class/Cine.h"
+#include "../Class/Sala.h"
+#include "../Handler/HandlerCine.h"
 #include <string>
 
 using namespace std;

@@ -2,7 +2,7 @@
 #define CINE
 
 #include "Sala.h"
-#include "Direccion.h"
+#include "../DT/Direccion.h"
 #include "DtSala.h"
 
 class Cine{
