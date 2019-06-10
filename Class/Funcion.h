@@ -17,6 +17,7 @@ class Funcion{
     Pelicula* pelicula;
   public:
     Funcion();
+    Funcion(int,Fecha,Horario);
     Funcion(int,Fecha,Horario,Pelicula*);
     void setId(int);
     int getId();
