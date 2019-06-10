@@ -3,7 +3,6 @@
 
 #include <map>
 #include "Funcion.h"
-#include "../DT/DtSala.h"
 
 using namespace std;
 

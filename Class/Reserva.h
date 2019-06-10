@@ -1,11 +1,7 @@
 #ifndef RESERVA
 #define RESERVA
 
-#include <iostream>
-
 #include "Usuario.h"
-
-using namespace std;
 
 class Reserva{
   private:

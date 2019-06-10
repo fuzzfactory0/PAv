@@ -12,11 +12,10 @@ private:
 public:
   Horario();
   Horario(string, string);
-  void setComienzo(string);
-  void setFin(string);
-  string getComienzo();
-  string getFin();
+  void setHoraComienzo(string);
+  string getHoraComienzo();
+  void setHoraFin(string);
+  string getHoraFin();
   ~Horario();
 };
-
 #endif

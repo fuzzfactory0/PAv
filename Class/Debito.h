@@ -1,8 +1,6 @@
 #ifndef DEBITO
 #define DEBITO
 
-#include <iostream>
-
 #include "Reserva.h"
 
 using namespace std;
@@ -18,4 +16,4 @@ class Debito: public Reserva{
     ~Debito();
 };
 
-#endif;
+#endif

@@ -1,16 +1,27 @@
 #ifndef CTRLUSUARIO
 #define CTRLUSUARIO
 
-#include "../Interfaz/ICtrlUsuario.h"
+#include <list>
 #include <string>
 
-class CtrlUsuario : public ICtrlUsuario{
+#include "../Interfaz/ICtrlUsuario.h"
+#include "../Class/Usuario.h"
+#include "../Class/Sesion.h"
+#include "../Class/Puntaje.h"
+#include "../Class/Comentario.h"
+#include "../DT/DtPelicula.h"
+
+class CtrlUsuario: public ICtrlUsuario{
   private:
     string nickname;
+    string pelicula;
   public:
+    //Iniciar sesion
     void ingresarNickname(string);
     bool verificarPassword(string);
     void iniciarSesion();
+    list<string> listarTitulosPeliculas(){
+    DtPelicula* seleccionarPelicula(string pelicula){
     void cargarUsuarios();
     CtrlUsuario();
     ~CtrlUsuario();

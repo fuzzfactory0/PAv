@@ -1,8 +1,6 @@
 #ifndef CREDITO
 #define CREDITO
 
-#include <string>
-
 #include "Reserva.h"
 
 using namespace std;
@@ -21,4 +19,4 @@ class Credito: public Reserva{
     ~Credito();
 };
 
-#endif;
+#endif

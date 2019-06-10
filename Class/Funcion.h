@@ -5,7 +5,6 @@
 #include "Reserva.h"
 #include "../DT/Fecha.h"
 #include "../DT/Horario.h"
-#include "../DT/DtPelicula.h"
 
 using namespace std;
 
@@ -18,7 +17,6 @@ class Funcion{
     Pelicula* pelicula;
   public:
     Funcion();
-    Funcion(int,Fecha,Horario);
     Funcion(int,Fecha,Horario,Pelicula*);
     void setId(int);
     int getId();

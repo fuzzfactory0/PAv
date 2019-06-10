@@ -1,7 +1,8 @@
 #ifndef USUARIO
 #define USUARIO
 
-#include <iostream>
+#include <string>
+
 using namespace std;
 
 class Usuario{
@@ -18,9 +19,6 @@ class Usuario{
     string getAvatarURL();
     void setPassword(string);
     string getPassword();
-    void nombreBanco(Usuario,string, int);
-    void nombreFinanciera(Usuario, string, int);
-    float precioTotal ();
     ~Usuario();
 };
 

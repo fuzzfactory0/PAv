@@ -1,18 +1,20 @@
-/*
- * DtSala.cpp
- *
- *  Created on: 10 jun. 2019
- *      Author: russo
- */
-
 #include "DtSala.h"
 
-DtSala::DtSala() {
-	// TODO Auto-generated constructor stub
-
+DtSala::Dtsala(){}
+DtSala::Dtsala(int id,int capacidad){
+  this->id = id;
+  this->capacidad = capacidad;
 }
-
-DtSala::~DtSala() {
-	// TODO Auto-generated destructor stub
+void DtSala::setId(int id){
+  this->id = id;
 }
-
+int DtSala::getId(){
+  return this->id;
+}
+void DtSala::setCapacidad(int capacidad){
+  this->capacidad = capacidad;
+}
+int DtSala::getCapacidad(){
+  return this->capacidad;
+}
+DtSala::~DtSala(){}

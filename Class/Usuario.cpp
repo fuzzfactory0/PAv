@@ -27,13 +27,5 @@ void Usuario::setPassword(string password){
 string Usuario::getPassword(){
   return this->password;
 }
-void Usuario::nombreBanco(Usuario u, string nomBanco, int cantAsientos){
-  //jeje
-}
-void Usuario::nombreFinanciera(Usuario u, string nomFinanciera, int cantAsientos){
-  //jeje
-}
-float Usuario::precioTotal(){
-  //jeje
-}
+
 Usuario::~Usuario(){}

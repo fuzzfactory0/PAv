@@ -1,7 +1,6 @@
 #ifndef PUNTAJE
 #define PUNTAJE
 
-#include <iostream>
 #include "Usuario.h"
 
 using namespace std;

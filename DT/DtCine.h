@@ -1,26 +1,23 @@
-#ifndef CINE
-#define CINE
+#ifndef DTCINE
+#define DTCINE
 
-#include <map>
-#include "Sala.h"
 #include "../DT/Direccion.h"
 #include "../DT/DtSala.h"
 
-class Cine{
+using namespace std;
+
+class DtCine{
   private:
-    static int IDA;
     int id;
     Direccion direccion;
-    map<int,Sala*> salas;
   public:
-    Cine();
-    Cine(int,Direccion);
+    DtCine();
+    DtCine(int,Direccion);
     void setId(int);
-    static int getIDA();
     int getId();
     void setDireccion(Direccion);
     Direccion getDireccion();
-    ~Cine();
+    ~DtCine();
 };
 
 #endif

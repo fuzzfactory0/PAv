@@ -1,17 +1,20 @@
-/*
- * DtSala.h
- *
- *  Created on: 10 jun. 2019
- *      Author: russo
- */
+#ifndef DTSALA
+#define DTSALA
 
-#ifndef DT_DTSALA_H_
-#define DT_DTSALA_H_
+#include "DtFuncion"
 
-class DtSala {
-public:
-	DtSala();
-	virtual ~DtSala();
+class DtSala{
+  private:
+    int id;
+    int capacidad;
+  public:
+    DtSala();
+    DtSala(int,int);
+    void setId(int);
+    int getId();
+    void setCapacidad(int);
+    int getCapacidad();
+    ~DtSala();
 };
 
-#endif /* DT_DTSALA_H_ */
+#endif

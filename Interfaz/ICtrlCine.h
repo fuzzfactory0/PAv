@@ -1,7 +1,6 @@
 #ifndef ICTRLCINE
 #define ICTRLCINE
 
-
 #include <string>
 #include <iostream>
 #include "../DT/Direccion.h"

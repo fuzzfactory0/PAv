@@ -9,7 +9,12 @@ Cine::Cine(int id,Direccion direccion){
 }
 
 void Cine::setId(int id){
-  this->id = id;
+  this->id = id
+}
+
+int Cine::getIDA(){
+  IDA++;
+  return IDA;
 }
 
 int Cine::getId(){
@@ -22,23 +27,6 @@ void Cine::setDireccion(Direccion direccion){
 
 Direccion Cine::getDireccion(){
   return this->direccion;
-}
-
-DtSala Cine::getDtSala(){
-
-}
-
-Sala Cine::getSalaPelicula(){
-
-}
-
-int Cine::getIdA(){
-  idA++;
-  return idA;
-}
-
-void Cine::eliminarPelicula(Cine cine, Sala sala){
-
 }
 
 Cine::~Cine(){}

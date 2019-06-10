@@ -23,7 +23,7 @@ DtFuncion* Sala::getFuncionesPelicula(){
 DtFuncion Sala::getFuncion(){
 
 }
-void Sala::EliminarFuncion(DtSala sala){
+void Sala::EliminarFuncion(){
 
 }
 Sala::~Sala(){}

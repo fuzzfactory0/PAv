@@ -24,10 +24,17 @@ list<Cine*> HandlerCine::getCines(){
 }
 
 void HandlerCine::addCine(Cine* cine){
-  cines.insert(std::pair<int,Cine*>(cine->getId(), cine));
+  this->cines.insert(std::pair<int,Cine*>(cine->getId(), cine));
 }
+
 bool HandlerCine::existeCine(int id){
   map<int,Cine*>::iterator it = this->cines.find(id);
   return (it != this->cines.end());
 }
-HandlerCine::~HandlerCine(){}
+
+void eliminarCine(int id){
+  map<string,Cine*>::iterator it = this->cines.find(id);
+  this->cines.erase(it);
+}
+
+virtual ~HandlerCine(){}
