@@ -13,7 +13,7 @@ public:
   Direccion();
   Direccion(string, int);
   void setCalle(string);
-  void setNumero(int):
+  void setNumero(int);
   string getCalle();
   int getNumero();
   ~Direccion();

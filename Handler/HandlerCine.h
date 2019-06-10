@@ -1,7 +1,7 @@
 #ifndef HANDLERCINE
 #define HANDLERCNE
 
-#include "Cine.h"
+#include "../Class/Cine.h"
 #include <map>
 #include <string>
 #include <list>

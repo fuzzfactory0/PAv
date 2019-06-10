@@ -1,7 +1,7 @@
 #ifndef FABRICA
 #define FABRIRCA
 
-#include "ICtrlUsuario.h"
+#include "./Interfaz/ICtrlUsuario.h"
 
 class Fabrica{
   private:

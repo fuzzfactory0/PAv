@@ -1,5 +1,5 @@
 #include "Fabrica.h"
-#include "CtrlUsuario.h"
+#include "./Ctrl/CtrlUsuario.h"
 Fabrica* Fabrica::instancia = NULL;
 
 Fabrica::Fabrica(){}
@@ -15,4 +15,4 @@ ICtrlUsuario* Fabrica::getICtrlUsuario(){
   return new CtrlUsuario;
 }
 
-Fabrica :: ~Fabrica();
+Fabrica::~Fabrica(){}

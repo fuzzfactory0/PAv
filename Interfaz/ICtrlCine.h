@@ -4,7 +4,7 @@
 
 #include <string>
 #include <iostream>
-#include "Direccion.h"
+#include "../DT/Direccion.h"
 
 using namespace std;
 
