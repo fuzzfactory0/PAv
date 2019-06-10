@@ -30,3 +30,4 @@ bool HandlerCine::existeCine(int id){
   map<int,Cine*>::iterator it = this->cines.find(id);
   return (it != this->cines.end());
 }
+HandlerCine::~HandlerCine(){}
