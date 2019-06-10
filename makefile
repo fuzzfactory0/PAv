@@ -4,6 +4,8 @@
 OBJ=Main.o Cine.o Comentario.o Credito.o Debito.o Funcion.o Pelicula.o Puntaje.o Reserva.o Sala.o Sesion.o Usuario.o CtrlCine.o CtrlUsuario.o Direccion.o DtCine.o DtSala.o DtFuncion.o DtPelicula.o Fecha.o Horario.o HandlerCine.o HandlerPelicula.o HandlerUsuario.o Fabrica.o
 EXEC=c 
 
+#Falta añadir clases que aún no están definidas, como el resto de los handlers, controllers e interfaces.
+
 main: $(OBJ)
 	g++ $(OBJ) -o $(EXEC)
 
