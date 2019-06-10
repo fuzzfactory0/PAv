@@ -9,7 +9,7 @@ Cine::Cine(int id,Direccion direccion){
 }
 
 void Cine::setId(int id){
-  this->id = id
+  this->id = id;
 }
 
 int Cine::getIDA(){

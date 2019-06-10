@@ -36,7 +36,7 @@ void Funcion::setPelicula(Pelicula* pel){
   this->pelicula = pel;
 }
 
-static int Funcion::getIdA(){
+int Funcion::getIdA(){
   idA++;
   return idA;
 }
@@ -45,4 +45,4 @@ DtPelicula Funcion::getPelicula(){
 
 }
 
-Funcion::~Funcion();
+Funcion::~Funcion(){}

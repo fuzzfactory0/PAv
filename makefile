@@ -36,3 +36,4 @@ Main.o: main.cpp
 clean:
 	rm -rf *.o
 	rm -rf $(EXEC)
+	
