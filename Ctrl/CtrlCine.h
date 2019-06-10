@@ -6,13 +6,14 @@
 #include "Sala.h"
 #include "HandlerCine.h"
 #include <string>
+#include <list>
 
 using namespace std;
 
 class CtrlCine: public ICtrlCine{
   private:
     Direccion direccion;
-    int capacidad;
+    list<int> capacidades;
   public:
     CtrlCine();
     void ingresarDireccion(Direccion);
