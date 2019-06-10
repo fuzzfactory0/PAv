@@ -1,10 +1,21 @@
 #ifndef DEBITO
 #define DEBITO
 
+#include <iostream>
+
 #include "Reserva.h"
 
-class Debito: public Reserva{
+using namespace std;
 
+class Debito: public Reserva{
+  private:
+    string banco;
+  public:
+    Debito();
+    Debito(string);
+    void setBanco(string);
+    string getBanco();
+    ~Debito();
 };
 
 #endif;

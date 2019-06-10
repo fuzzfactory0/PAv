@@ -1,7 +1,7 @@
 #ifndef USUARIO
 #define USUARIO
 
-#include <string>
+#include <iostream>
 using namespace std;
 
 class Usuario{
@@ -24,4 +24,4 @@ class Usuario{
     ~Usuario();
 };
 
-#endif;
+#endif
