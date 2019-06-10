@@ -7,6 +7,7 @@
 #include "Puntaje.h"
 #include "Comentario.h"
 #include "../DT/DtFuncion.h"
+#include "../DT/DtPelicula.h"
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 #ifndef CREDITO
 #define CREDITO
 
-#include <iostream.h>
+#include <string>
 
 #include "Reserva.h"
 

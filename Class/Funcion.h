@@ -5,6 +5,7 @@
 #include "Reserva.h"
 #include "../DT/Fecha.h"
 #include "../DT/Horario.h"
+#include "../DT/DtPelicula.h"
 
 using namespace std;
 

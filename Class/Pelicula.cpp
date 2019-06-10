@@ -1,11 +1,13 @@
 #include "Pelicula.h"
 
+#include <string>
+
 Pelicula::Pelicula(){}
 
 Pelicula::Pelicula(string titulo, string sinopsis, string poster){
   this->titulo = titulo;
   this->sinopsis = sinopsis;
-  this->poster = poster;
+  this->posterURL = poster;
 }
 void Pelicula::setTitulo(string titulo){
   this->titulo = titulo;
@@ -20,11 +22,11 @@ string Pelicula::getSinopsis(){
   return this->sinopsis;
 }
 void addPuntaje(Puntaje* pnt){
-  this->puntajes.push_back(pnt);
+//  this->puntajes.push_back(pnt);
 }
 
 void addComentario(Comentario* cmt){
-  this->comentarios.push_back(cmt);
+//  this->comentarios.push_back(cmt);
 }
 
 /*

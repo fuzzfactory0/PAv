@@ -4,7 +4,7 @@
 #include "Sala.h"
 #include "../DT/Direccion.h"
 #include "../DT/DtSala.h"
-
+\
 class Cine{
   private:
     int id;
@@ -12,15 +12,15 @@ class Cine{
     Direccion direccion;
   public:
     Cine();
-    Cine(int,direccion);
+    Cine(int,Direccion);
     void setId(int);
     int getId();
-    void setDireccion(direccion);
+    void setDireccion(Direccion);
     Direccion getDireccion();
     DtSala getDtSala();
     Sala getSalaPelicula();
     static int getIdA();
-    void eliminarPelicula(cine,sala);
+    void eliminarPelicula(Cine,Sala);
     ~Cine();
 };
 

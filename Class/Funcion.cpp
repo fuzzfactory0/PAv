@@ -5,7 +5,7 @@ int Funcion::idA = 0;
 Funcion::Funcion(){}
 Funcion::Funcion(int id, Fecha dia, Horario horario){
   this->id = id;
-  this->dia = dia;
+  this->fecha = fecha;
   this->horario = horario;
 }
 void Funcion::setId(int id){
@@ -36,7 +36,7 @@ void Funcion::setPelicula(Pelicula* pel){
   this->pelicula = pel;
 }
 
-static int Funcion::getIdA(){
+int Funcion::getIdA(){
   idA++;
   return idA;
 }
@@ -45,4 +45,4 @@ DtPelicula Funcion::getPelicula(){
 
 }
 
-Funcion::~Funcion();
+Funcion::~Funcion(){}
