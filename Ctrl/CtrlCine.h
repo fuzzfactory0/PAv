@@ -15,6 +15,7 @@
 #include "../Handler/HandlerCine.h"
 #include "../Handler/HandlerPelicula.h"
 #include "../DT/DtCine.h"
+#include "../DT/DtSala.h"
 #include "../DT/TipoPago.h"
 #include "../DT/DtPelicula.h"
 
@@ -37,10 +38,10 @@ class CtrlCine: public ICtrlCine{
     CtrlCine();
     //Funciones Multiuso
     list<string> listarTitulosPeliculas();
-    DtPelicula* seleccionarPelicula(string);
-    map<int,DtCine*> listarCines();
+    DtPelicula seleccionarPelicula(string);
+    map<int,DtCine> listarCines();
     //Funciones Crear Reserva
-    list<DtFuncion*> seleccionarCineReserva(int);
+    list<DtFuncion> seleccionarCineReserva(int);
     void seleccionarFuncion(int);
     void ingresarCantidadAsientos(int);
     void ingresarModoPago(TipoPago);
@@ -52,10 +53,9 @@ class CtrlCine: public ICtrlCine{
     void ingresarDireccion(Direccion);
     void ingresarCapacidad(int);
     void altaCine();
-    void cancelAltaCine();
     //Funciones Alta Funcion
     list<DtCine> listarIdCines();
-    void seleccionarCineFuncion(int);
+    list<DtSala> seleccionarCineFuncion(int);
     void seleccionarSalaFuncion(int);
     void ingresarHorario(Fecha,Horario);
     void altaFuncion();

@@ -24,7 +24,7 @@ Direccion DtCine::getDireccion(){
 }
 
 ostream& operator <<(ostream& salida,const DtCine& dtc){
-	salida << "ID: " << dtc.id << " Direccion: " << dtc.direccion<<endl;
+	salida << "ID: " << dtc.id << "| Direccion: " << dtc.direccion;
 	return salida;
 }
 

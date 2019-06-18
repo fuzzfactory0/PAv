@@ -17,17 +17,17 @@ list<string> CtrlCine::listarTitulosPeliculas(){
   return titulos;
 }
 
-DtPelicula* CtrlCine::seleccionarPelicula(string ttl){
+DtPelicula CtrlCine::seleccionarPelicula(string ttl){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
   Pelicula* peli = hP->buscarPelicula(ttl);
   this->pelicula = peli->getTitulo();
-  DtPelicula* dtPelicula = new DtPelicula(peli->getTitulo(), peli->getSinopsis(), peli->getPuntajePromedio(), peli->getPoster());
+  DtPelicula dtPelicula = DtPelicula(peli->getTitulo(), peli->getSinopsis(), peli->getPuntajePromedio(), peli->getPoster());
   return dtPelicula;
 }
 
-map<int,DtCine*> CtrlCine::listarCines(){
+map<int,DtCine> CtrlCine::listarCines(){
   HandlerCine* hC = HandlerCine::getInstancia();
-  map<int,DtCine*> cinesPelicula;
+  map<int,DtCine> cinesPelicula;
   list<Cine*> cines = hC->getCines();
   for (list<Cine*>::iterator itC=cines.begin(); itC!=cines.end(); ++itC){
     list<Sala*> salas = (*itC)->getSalas();
@@ -36,8 +36,8 @@ map<int,DtCine*> CtrlCine::listarCines(){
       for (list<Funcion*>::iterator itF=funciones.begin(); itF!=funciones.end(); ++itF){
         Pelicula* peli = (*itF)->getPelicula();
         if (this->pelicula == peli->getTitulo() && cinesPelicula.find((*itC)->getId()) == cinesPelicula.end()){
-          DtCine* dtcine = new DtCine((*itC)->getId(), (*itC)->getDireccion());
-          cinesPelicula.insert(std::pair<int,DtCine*>(dtcine->getId(), dtcine));
+          DtCine dtcine = DtCine((*itC)->getId(), (*itC)->getDireccion());
+          cinesPelicula.insert(std::pair<int,DtCine>(dtcine.getId(), dtcine));
         }
       }
     }
@@ -45,16 +45,16 @@ map<int,DtCine*> CtrlCine::listarCines(){
   return cinesPelicula;
 }
 
-list<DtFuncion*> CtrlCine::seleccionarCineReserva(int idC){
+list<DtFuncion> CtrlCine::seleccionarCineReserva(int idC){
   HandlerCine* hC = HandlerCine::getInstancia();
   Cine* cine = hC->buscarCine(idC);
-  list<DtFuncion*> funcionesPeli;
+  list<DtFuncion> funcionesPeli;
   list<Sala*> salas = cine->getSalas();
   for (list<Sala*>::iterator itS=salas.begin(); itS!=salas.end(); ++itS){
     list<Funcion*> funciones = (*itS)->getFunciones();
     for (list<Funcion*>::iterator itF=funciones.begin(); itF!=funciones.end(); ++itF){
       if ((*itF)->getPelicula()->getTitulo() == this->pelicula){
-        DtFuncion* funcion = new DtFuncion((*itF)->getId(), (*itF)->getFecha(), (*itF)->getHorario());
+        DtFuncion funcion = DtFuncion((*itF)->getId(), (*itF)->getFecha(), (*itF)->getHorario());
         funcionesPeli.push_back(funcion);
       }
     }
@@ -145,10 +145,6 @@ void CtrlCine::altaCine(){
   this->capacidades.clear();
 }
 
-void CtrlCine::cancelAltaCine(){
-  this->capacidades.clear();
-}
-
 //Alta Funcion
 list<DtCine> CtrlCine::listarIdCines(){
   HandlerCine* hC = HandlerCine::getInstancia();
@@ -162,8 +158,17 @@ list<DtCine> CtrlCine::listarIdCines(){
   return dtcines;
 }
 
-void CtrlCine::seleccionarCineFuncion(int idCine){
+list<DtSala> CtrlCine::seleccionarCineFuncion(int idCine){
     this->idCine = idCine;
+    list<DtSala> dtsalas;
+    HandlerCine* hC = HandlerCine::getInstancia(); 
+    Cine* cine = hC->buscarCine(idCine);
+    list<Sala*> salas = cine->getSalas();
+    for(list<Sala*>::iterator it = salas.begin(); it != salas.end; ++it){
+      DtSala dts = DtSala((*it)->getId, (*it)->getCapacidad);
+      dtsalas.push_back(dts);
+    }
+    return dtsalas;
 }
 
 void CtrlCine::seleccionarSalaFuncion(int idSala){

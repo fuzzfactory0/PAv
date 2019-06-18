@@ -18,4 +18,10 @@ void DtSala::setCapacidad(int capacidad){
 int DtSala::getCapacidad(){
   return this->capacidad;
 }
+
+ostream& operator <<(ostream& salida,const DtSala& dts){
+	salida << "ID: " << dts.id << "| Capacidad: " << dts.capacidad;
+	return salida;
+}
+
 DtSala::~DtSala(){}

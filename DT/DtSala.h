@@ -1,6 +1,10 @@
 #ifndef DTSALA
 #define DTSALA
 
+#include <iostream>
+
+using namespace std;
+
 class DtSala{
   private:
     int id;
@@ -13,6 +17,6 @@ class DtSala{
     void setCapacidad(int);
     int getCapacidad();
     ~DtSala();
+    friend ostream& operator <<(ostream&, const DtSala&);
 };
-
 #endif
