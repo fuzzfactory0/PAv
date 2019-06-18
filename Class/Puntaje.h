@@ -8,12 +8,17 @@ using namespace std;
 class Puntaje{
   private:
     int puntos;
+    int id;
+    static int IDA;
     Usuario* usr;
   public:
     Puntaje();
-    Puntaje(int, Usuario*);
+    Puntaje(int, int, Usuario*);
     void setUsuario(Usuario*);
-    Usuario* getUsuario();
+    string getUsuario();
+    void setId(int);
+    int getId();
+    static int getIDA();
     void setPuntos(int);
     int getPuntos();
     ~Puntaje();

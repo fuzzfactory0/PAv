@@ -1,7 +1,7 @@
 #include "DtFuncion.h"
 
 DtFuncion::DtFuncion(){}
-DtFuncion::DtFuncion(int id,Fecha dia,Horario horario){
+DtFuncion::DtFuncion(int id,Fecha fecha,Horario horario){
   this->id = id;
   this->fecha = fecha;
   this->horario = horario;
@@ -12,11 +12,11 @@ void DtFuncion::setId(int id){
 int DtFuncion::getId(){
   return this->id;
 }
-void DtFuncion::setDia(Fecha dia){
-  this->dia = dia;
+void DtFuncion::setFecha(Fecha fecha){
+  this->fecha = fecha;
 }
-Fecha DtFuncion::getDia(){
-  return this->dia;
+Fecha DtFuncion::getFecha(){
+  return this->fecha;
 }
 void DtFuncion::setHorario(Horario horario){
   this->horario = horario;

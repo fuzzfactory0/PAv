@@ -1,6 +1,6 @@
 #include "Cine.h"
 
-int Cine::idA = 0;
+int Cine::IDA = 0;
 
 Cine::Cine(){}
 Cine::Cine(int id,Direccion direccion){
@@ -23,6 +23,17 @@ int Cine::getId(){
 
 void Cine::setDireccion(Direccion direccion){
   this->direccion = direccion;
+}
+
+list<Sala*> Cine::getSalas(){
+  list<Sala*> salas;
+  for (map<int,Sala*>::iterator it = this->salas.begin(); it != this->salas.end(); ++it)
+    salas.push_back(it->second);
+  return salas;
+}
+
+void Cine::addSala(Sala* s){
+  this->salas.insert(std::pair<int,Sala*>(s->getId(), s));
 }
 
 Direccion Cine::getDireccion(){

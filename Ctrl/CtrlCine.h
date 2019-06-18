@@ -1,6 +1,7 @@
 #ifndef CTRLCINE
 #define CTRLCINE
-#define PRECIO_ENTRADA = 30
+#define PRECIO_ENTRADA 30
+#define PORCENTAJE_DESCUENTO 22
 
 #include <map>
 #include <list>
@@ -12,8 +13,6 @@
 #include "../Class/Funcion.h"
 #include "../Class/Pelicula.h"
 #include "../Handler/HandlerCine.h"
-#include "../Handler/HandlerSala.h"
-#include "../Handler/HandlerFuncion.h"
 #include "../Handler/HandlerPelicula.h"
 #include "../DT/DtCine.h"
 #include "../DT/TipoPago.h"
@@ -38,10 +37,10 @@ class CtrlCine: public ICtrlCine{
     CtrlCine();
     //Funciones Multiuso
     list<string> listarTitulosPeliculas();
-    DtPelicula* seleccionarPelicula(string):
+    DtPelicula* seleccionarPelicula(string);
     map<int,DtCine*> listarCines();
     //Funciones Crear Reserva
-    list<DtFuncion*> seleccionarCineReserva(int); 
+    list<DtFuncion*> seleccionarCineReserva(int);
     void seleccionarFuncion(int);
     void ingresarCantidadAsientos(int);
     void ingresarModoPago(TipoPago);
@@ -53,12 +52,14 @@ class CtrlCine: public ICtrlCine{
     void ingresarDireccion(Direccion);
     void ingresarCapacidad(int);
     void altaCine();
+    void cancelAltaCine();
     //Funciones Alta Funcion
-    void ListarPeliculas();
+    list<DtCine> listarIdCines();
     void seleccionarCineFuncion(int);
     void seleccionarSalaFuncion(int);
     void ingresarHorario(Fecha,Horario);
     void altaFuncion();
+    ~CtrlCine();
 };
 
 #endif

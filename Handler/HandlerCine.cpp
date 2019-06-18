@@ -17,10 +17,11 @@ Cine* HandlerCine::buscarCine(int id){
   }
 
 list<Cine*> HandlerCine::getCines(){
-  list<Cine*> cines;
-  for (map<int,Cine*>::iterator it = this->cines.begin(); it != this->cines.end(); ++it)
-    cines.push_back(it->second);
-  return cines;
+  list<Cine*> listacines;
+  for (map<int,Cine*>::iterator it = this->cines.begin(); it != cines.end(); ++it){
+    listacines.push_back(it->second);
+  }
+  return listacines;
 }
 
 void HandlerCine::addCine(Cine* cine){
@@ -32,9 +33,9 @@ bool HandlerCine::existeCine(int id){
   return (it != this->cines.end());
 }
 
-void eliminarCine(int id){
-  map<string,Cine*>::iterator it = this->cines.find(id);
+void HandlerCine::eliminarCine(int id){
+  map<int,Cine*>::iterator it = this->cines.find(id);
   this->cines.erase(it);
 }
 
-virtual ~HandlerCine(){}
+HandlerCine::~HandlerCine(){}

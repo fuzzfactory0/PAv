@@ -9,15 +9,15 @@ using namespace std;
 class DtFuncion{
   private:
     int id;
-    Fecha dia;
+    Fecha fecha;
     Horario horario;
   public:
     DtFuncion();
     DtFuncion(int,Fecha,Horario);
     void setId(int);
     int getId();
-    void setDia(Fecha);
-    Fecha getDia();
+    void setFecha(Fecha);
+    Fecha getFecha();
     void setHorario(Horario);
     Horario getHorario();
     ~DtFuncion();

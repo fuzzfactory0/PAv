@@ -3,6 +3,7 @@
 
 #include "../DT/Direccion.h"
 #include "../DT/DtSala.h"
+#include <iostream>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ class DtCine{
     void setDireccion(Direccion);
     Direccion getDireccion();
     ~DtCine();
+    friend ostream& operator <<(ostream&, const DtCine&);
 };
 
 #endif

@@ -2,9 +2,12 @@
 #include <list>
 #include <map>
 
+
 using namespace std;
 
 Sesion* Sesion::instancia = NULL;
+
+bool Sesion::iniciada = false;
 
 Sesion::Sesion(){}
 
@@ -13,12 +16,24 @@ Sesion* Sesion::getInstancia(){
   return instancia;
 }
 
+void Sesion::setLogin(){
+  iniciada = true;
+}
+
+void Sesion::setLogout(){
+  iniciada = false;
+}
+
+bool Sesion::checkIniciada(){
+  return iniciada;
+}
+
 void Sesion::setUsuario(Usuario* usr){
   this->usuario = usr;
 }
 
-Usuario* Sesion::getUsuario(){
-  return usuario;
+string Sesion::getUsuario(){
+  return this->usuario->getNickname();
 }
 
 Sesion::~Sesion(){}

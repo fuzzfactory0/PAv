@@ -18,7 +18,7 @@ class HandlerPelicula{
     void addPelicula(Pelicula*);
     bool existePelicula(string);
     void eliminarPelicula(string);
-    virtual ~HandlerPelicula();
+    ~HandlerPelicula();
 };
 
 #endif

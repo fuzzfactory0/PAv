@@ -2,6 +2,7 @@
 #define CINE
 
 #include <map>
+#include <list>
 #include "Sala.h"
 #include "../DT/Direccion.h"
 #include "../DT/DtSala.h"
@@ -20,6 +21,9 @@ class Cine{
     int getId();
     void setDireccion(Direccion);
     Direccion getDireccion();
+    list<Sala*> getSalas();
+    void addSala(Sala*);
+
     ~Cine();
 };
 

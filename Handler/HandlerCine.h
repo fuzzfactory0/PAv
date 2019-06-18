@@ -1,5 +1,5 @@
 #ifndef HANDLERCINE
-#define HANDLERCNE
+#define HANDLERCINE
 
 #include "../Class/Cine.h"
 #include <map>
@@ -17,8 +17,8 @@ class HandlerCine{
     Cine* buscarCine(int);
     void addCine(Cine*);
     bool existeCine(int);
-    void eliminarCine(string);
+    void eliminarCine(int);
     void addSalaCine(int, Sala*);
-    virtual ~HandlerCine();
+    ~HandlerCine();
 };
 #endif

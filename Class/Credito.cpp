@@ -2,7 +2,7 @@
 
 Credito::Credito(){}
 
-Credito::Credito(float porcentajeDescuento, string financiera){
+Credito::Credito(int id, float costo, int cantAsientos,float porcentajeDescuento, string financiera):Reserva(id,costo,cantAsientos){
   this->porcentajeDescuento = porcentajeDescuento;
   this->financiera = financiera;
 }

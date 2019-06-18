@@ -2,6 +2,7 @@
 #define FABRICA
 
 #include "Interfaz/ICtrlUsuario.h"
+#include "Interfaz/ICtrlCine.h"
 
 class Fabrica{
   private:
@@ -10,6 +11,7 @@ class Fabrica{
   public:
     static Fabrica* getInstancia();
     static ICtrlUsuario* getICtrlUsuario();
+    static ICtrlCine* getICtrlCine();
     ~Fabrica();
 
 };

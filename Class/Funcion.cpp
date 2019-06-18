@@ -1,13 +1,15 @@
 #include "Funcion.h"
 
-int Funcion::idA = 0;
+int Funcion::IDA = 0;
 
 Funcion::Funcion(){}
-Funcion::Funcion(int id, Fecha dia, Horario horario){
+Funcion::Funcion(int id, Fecha fecha, Horario horario, Pelicula* peli){
   this->id = id;
-  this->dia = dia;
+  this->fecha = fecha;
   this->horario = horario;
+  this->pelicula = peli;
 }
+
 void Funcion::setId(int id){
   this->id = id;
 }
@@ -36,13 +38,24 @@ void Funcion::setPelicula(Pelicula* pel){
   this->pelicula = pel;
 }
 
-int Funcion::getIdA(){
-  idA++;
-  return idA;
+int Funcion::getIDA(){
+  IDA++;
+  return IDA;
 }
 
-DtPelicula Funcion::getPelicula(){
+Pelicula* Funcion::getPelicula(){
+  return this->pelicula;
+}
 
+list<Reserva*> Funcion::getReservas(){
+  list<Reserva*> reservas;
+  for (map<int,Reserva*>::iterator it = this->reservas.begin(); it != this->reservas.end(); ++it)
+    reservas.push_back(it->second);
+  return reservas;
+}
+
+void Funcion::addReserva(Reserva* r){
+  this->reservas.insert(std::pair<int,Reserva*>(r->getId(), r));
 }
 
 Funcion::~Funcion(){}

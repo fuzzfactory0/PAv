@@ -1,8 +1,6 @@
 #ifndef DTSALA
 #define DTSALA
 
-#include "DtFuncion"
-
 class DtSala{
   private:
     int id;

@@ -1,7 +1,19 @@
 #include "CtrlUsuario.h"
+#include "../Class/Sesion.h"
+#include "../Class/Pelicula.h"
 #include "../Handler/HandlerUsuario.h"
+#include "../Handler/HandlerPelicula.h"
 
 CtrlUsuario::CtrlUsuario(){}
+
+bool CtrlUsuario::checkSesion(){
+  return Sesion::checkIniciada();
+}
+
+string CtrlUsuario::getUsuarioSesion(){
+  Sesion* ses = Sesion::getInstancia();
+  return ses->getUsuario();
+}
 
 //Iniciar Sesión
 
@@ -28,6 +40,7 @@ void CtrlUsuario::iniciarSesion(){
   Usuario* usr = hU->buscarUsuario(this->nickname);
   Sesion* s = Sesion::getInstancia();
   s->setUsuario(usr);
+  Sesion::setLogin();
 }
 
 //Puntuar Película
@@ -35,8 +48,8 @@ void CtrlUsuario::iniciarSesion(){
 list<string> CtrlUsuario::listarTitulosPeliculas(){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
   list<string> titulos;
-  for (map<int,Pelicula*>::iterator it=hP->peliculas.begin(); it!=peliculas.end(); ++it)
-    titulos.push_back(it->second);
+  for (list<Pelicula*>::iterator it=hP->getPeliculas().begin(); it!=hP->getPeliculas().end(); ++it)
+    titulos.push_back((*it)->getTitulo());
   return titulos;
 }
 
@@ -55,6 +68,17 @@ DtPelicula* CtrlUsuario::seleccionarPelicula(string ttl){
 //Pruebas
 void CtrlUsuario::cargarUsuarios(){
   HandlerUsuario* hU = HandlerUsuario::getInstancia();
-  Usuario* u = new Usuario("bukowski","imgur.com/e4i5n3.png","password");
-  hU-> addUsuario(u);
+  Usuario* u1 = new Usuario("bukowski","imgur.com/e4i5n3.png","password", false);
+  hU-> addUsuario(u1);
+  Usuario* u2 = new Usuario("fuzzfact","imgur.com/e4i5n3.png","fuzzword", false);
+  hU-> addUsuario(u2);
+  Usuario* u3 = new Usuario("lancelot","imgur.com/e4i5n3.png","lancepass", true);
+  hU-> addUsuario(u3);
+  Usuario* u4 = new Usuario("fliteless","imgur.com/e4i5n3.png","flitepass", false);
+  hU-> addUsuario(u4);
+  Usuario* u5 = new Usuario("nith_HG","imgur.com/e4i5n3.png","nithpass", false);
+  hU-> addUsuario(u5);
+  Usuario* u6 = new Usuario("hashime","imgur.com/e4i5n3.png","hashpass", false);
+  hU-> addUsuario(u6);
+
 }

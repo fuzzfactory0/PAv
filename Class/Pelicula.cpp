@@ -19,27 +19,30 @@ void Pelicula::setSinopsis(string sinopsis){
 string Pelicula::getSinopsis(){
   return this->sinopsis;
 }
-void addPuntaje(Puntaje* pnt){
+void Pelicula::addPuntaje(Puntaje* pnt){
   this->puntajes.push_back(pnt);
 }
 
-void addComentario(Comentario* cmt){
+void Pelicula::addComentario(Comentario* cmt){
   this->comentarios.push_back(cmt);
 }
 
-/*
-list<Puntaje*> getPuntajes(){
-  return this->puntajes;
+list<Puntaje*> Pelicula::getPuntajes(){
+  list<Puntaje*> puntajes;
+  for(list<Puntaje*>::iterator it =this->puntajes.begin(); it != this->puntajes.end(); ++it){
+    puntajes.push_back(*it);
+  }
+  return puntajes;
 }
-
+/*
 list<Comentario*> getComentarios(){
   return this->comentarios;
 }*/
 
 float Pelicula::getPuntajePromedio(){
   int total;
-  for (list<int>::iterator it=this->puntajes.begin(); it != this->puntajes.end(); ++it)
-    average += it->puntos;
+  for (list<Puntaje*>::iterator it=this->puntajes.begin(); it != this->puntajes.end(); ++it)
+    total += (*it)->getPuntos();
   return total / this->puntajes.size();
 }
 

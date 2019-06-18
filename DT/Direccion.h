@@ -2,6 +2,7 @@
 #define DIRECCION
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -13,10 +14,11 @@ public:
   Direccion();
   Direccion(string, int);
   void setCalle(string);
-  void setNumero(int):
+  void setNumero(int);
   string getCalle();
   int getNumero();
   ~Direccion();
+  friend ostream& operator <<(ostream&, const Direccion&);
 };
 
 #endif

@@ -4,7 +4,7 @@
 
 HandlerPelicula* HandlerPelicula::instancia = NULL;
 
-HandlerPelicula(){}
+HandlerPelicula::HandlerPelicula(){}
 
 HandlerPelicula* HandlerPelicula::getInstancia(){
   if(instancia == NULL){
@@ -29,7 +29,7 @@ void HandlerPelicula::addPelicula(Pelicula* peli){
 }
 
 bool HandlerPelicula::existePelicula(string ttl){
-  map<string,Pelicula*>::iterator it = this->cines.find(ttl);
+  map<string,Pelicula*>::iterator it = this->peliculas.find(ttl);
   return (it != this->peliculas.end());
 }
 
@@ -38,4 +38,4 @@ void HandlerPelicula::eliminarPelicula(string ttl){
   this->peliculas.erase(it);
 }
 
-virtual HandlerPelicula::~HandlerPelicula(){}
+HandlerPelicula::~HandlerPelicula(){}

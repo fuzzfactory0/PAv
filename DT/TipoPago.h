@@ -1,6 +1,6 @@
 #ifndef TIPOPAGO
 #define TIPOPAGO
 
-enum Tipopago{Debito,Credito};
+enum TipoPago{Deb,Cred};
 
 #endif

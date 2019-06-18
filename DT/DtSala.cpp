@@ -1,7 +1,8 @@
 #include "DtSala.h"
 
-DtSala::Dtsala(){}
-DtSala::Dtsala(int id,int capacidad){
+DtSala::DtSala(){}
+
+DtSala::DtSala(int id,int capacidad){
   this->id = id;
   this->capacidad = capacidad;
 }

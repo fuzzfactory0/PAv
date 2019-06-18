@@ -26,9 +26,9 @@ float DtPelicula::getPuntajePromedio(){
   return this->puntajePromedio;
 }
 void DtPelicula::setPoster(string poster){
-  this->posterURL = poster;
+  this->poster = poster;
 }
 string DtPelicula::getPoster(){
-  return this->posterURL;
+  return this->poster;
 }
-DtPeliula::~DtPelicula(){}
+DtPelicula::~DtPelicula(){}

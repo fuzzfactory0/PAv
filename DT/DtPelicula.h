@@ -10,10 +10,10 @@ private:
   string titulo;
   string sinopsis;
   float puntajePromedio;
-  string posterURL;
+  string poster;
 public:
   DtPelicula();
-  DtPeliula(string,string,float,string);
+  DtPelicula(string,string,float,string);
   void setTitulo(string);
   string getTitulo();
   void setSinopsis(string);
@@ -22,6 +22,7 @@ public:
   float getPuntajePromedio();
   void setPoster(string);
   string getPoster();
+  ~DtPelicula();
 };
 
 #endif

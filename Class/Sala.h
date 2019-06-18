@@ -9,7 +9,7 @@ using namespace std;
 class Sala{
   private:
     int id;
-    static int idA;
+    static int IDA;
     int capacidad;
     map<int,Funcion*> funciones;
   public:
@@ -19,12 +19,11 @@ class Sala{
     int getId();
     void setCapacidad(int);
     int getCapacidad();
-    static int getIdA();
+    static int getIDA();
     void addFuncion(Funcion*);
-
     DtFuncion* getFuncionesPelicula();
-    DtFuncion getFuncion();
-    void EliminarFuncion(DtSala);
+    list<Funcion*> getFunciones();
+    void EliminarFuncion(int);
     ~Sala();
 };
 

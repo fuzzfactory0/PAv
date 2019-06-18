@@ -5,6 +5,7 @@
 #include "Puntaje.h"
 #include "Comentario.h"
 #include "../DT/DtFuncion.h"
+#include "../DT/DtPelicula.h"
 
 using namespace std;
 
@@ -12,7 +13,7 @@ class Pelicula{
   private:
     string titulo;
     string sinopsis;
-    string posterURL;
+    string poster;
     list<Puntaje*> puntajes;
     list<Comentario*> comentarios;
   public:
