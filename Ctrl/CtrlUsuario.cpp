@@ -15,6 +15,12 @@ string CtrlUsuario::getUsuarioSesion(){
   return ses->getUsuario();
 }
 
+bool checkSesionAdmin(){
+  Sesion* ses = Sesion::getInstancia();
+  Usuario* usr = ses->getUsuario();
+  return usr->getAdmin();
+}
+
 //Iniciar Sesión
 
 void CtrlUsuario::ingresarNickname(string nickname){
@@ -80,5 +86,4 @@ void CtrlUsuario::cargarUsuarios(){
   hU-> addUsuario(u5);
   Usuario* u6 = new Usuario("hashime","imgur.com/e4i5n3.png","hashpass", false);
   hU-> addUsuario(u6);
-
 }

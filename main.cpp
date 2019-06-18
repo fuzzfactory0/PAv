@@ -83,20 +83,24 @@ void menu(){
   Color::Modifier b(Color::FG_BLUE);
   Color::Modifier y(Color::FG_YELLOW);
   Color::Modifier d(Color::FG_DEFAULT);
+
+  if (iuser->checkSesionAdmin()) Color::Modifier x(Color::FG_DEFAULT);
+  else Color::Modifier x(FG_RED);
+
   cout <<b<<"    ╔═════════════════════════════════════════════════════╗"<<endl;
   cout <<"    ║"<<y<<"    ▂▂▃▃▅▅▇▇██▓▓▒▒░░  MENU CINE  ░░▒▒▓▓██▇▇▅▅▃▃▂▂    "<<b<<"║    "<<endl;
   if (iuser->checkSesion()){
   cout <<"╔═══╩═════════════════════════════════════════════════════╩═══╗"<<endl;
-  cout <<"║"<<d<<"     Sesion inciada como:     "<<b<<" "<<d<<"\t"<<user<<" "<<"\t      "<<b<<"║"<<endl;
+  cout <<"║"<<d<<"      Sesion inciada como:    "<<b<<" "<<d<<"\t"<<user<<" "<<"\t      "<<b<<"║"<<endl;
   cout <<"╠══════════════════════════════╦══════════════════════════════╣"<<endl;}
   else cout <<"╔═══╩══════════════════════════╦══════════════════════════╩═══╗"<<endl;
-  cout <<"║"<<d<<"       1. Iniciar Sesión      "<<b<<"║"<<d<<"         2. Alta Cine         "<<b<<"║"<<endl;
+  cout <<"║"<<d<<"       1. Iniciar Sesión      "<<b<<"║"<<x<<"         2. Alta Cine         "<<b<<"║"<<endl;
   cout <<"╠══════════════════════════════╬══════════════════════════════╣"<<endl;
-  cout <<"║"<<d<<"        3. Alta Función       "<<b<<"║"<<d<<"        4. Crear Reserva      "<<b<<"║"<<endl;
+  cout <<"║"<<x<<"        3. Alta Función       "<<b<<"║"<<d<<"        4. Crear Reserva      "<<b<<"║"<<endl;
   cout <<"╠══════════════════════════════╬══════════════════════════════╣"<<endl;
   cout <<"║"<<d<<"       5. Puntuar Película    "<<b<<"║"<<d<<"     6. Comentar Película     "<<b<<"║"<<endl;
   cout <<"╠══════════════════════════════╬══════════════════════════════╣"<<endl;
-  cout <<"║"<<d<<"      7. Eliminar Película    "<<b<<"║"<<d<<"    8. Ver Info de Película   "<<b<<"║"<<endl;
+  cout <<"║"<<x<<"      7. Eliminar Película    "<<b<<"║"<<d<<"    8. Ver Info de Película   "<<b<<"║"<<endl;
   cout <<"╠══════════════════════════════╩══════════════════════════════╣"<<endl;
   cout <<"║"<<d<<"           9. Ver Comentarios y Puntajes de Película         "<<b<<"║"<<endl;
   cout <<"╠═════════════════════════════════════════════════════════════╣"<<endl;

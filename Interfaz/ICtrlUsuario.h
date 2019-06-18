@@ -18,5 +18,6 @@ class ICtrlUsuario{
     virtual DtPelicula* seleccionarPelicula(string pelicula) = 0;
     virtual string getUsuarioSesion() = 0;
     virtual bool checkSesion() = 0;
+    virtual bool checkSesionAdmin() = 0;
 };
 #endif

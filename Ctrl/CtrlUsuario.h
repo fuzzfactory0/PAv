@@ -15,16 +15,18 @@ class CtrlUsuario: public ICtrlUsuario{
     string nickname;
     string pelicula;
   public:
+    CtrlUsuario();
+    void cargarUsuarios();
+    string getUsuarioSesion();
+    bool checkSesion();
+    bool checkSesionAdmin();
     //Iniciar sesion
     void ingresarNickname(string);
     bool verificarPassword(string);
     void iniciarSesion();
+    //Puntuar pelicula
     list<string> listarTitulosPeliculas();
     DtPelicula* seleccionarPelicula(string pelicula);
-    void cargarUsuarios();
-    string getUsuarioSesion();
-    bool checkSesion();
-    CtrlUsuario();
     ~CtrlUsuario();
 };
 #endif
