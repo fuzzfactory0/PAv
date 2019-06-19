@@ -21,6 +21,7 @@ class DtFuncion{
     void setHorario(Horario);
     Horario getHorario();
     ~DtFuncion();
+    friend ostream& operator <<(ostream&, const DtFuncion&);
 };
 
 #endif

@@ -16,6 +16,7 @@ public:
   int getMes();
   int getAnio();
   ~Fecha();
+  friend ostream& operator <<(ostream&, const Fecha&);
 };
 
 #endif

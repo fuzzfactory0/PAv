@@ -2,6 +2,9 @@
 #include "Fabrica.h"
 #include "DT/Direccion.h"
 #include "DT/DtCine.h"
+#include "DT/DtFuncion.h"
+#include "DT/DtSala.h"
+#include "DT/TipoPago.h"
 #include <iostream>
 #include <list>
 #include <string>
@@ -210,6 +213,7 @@ void altaFuncion(){
   else{
     int cineid, funcid, dia, mes, anio;
     string pelicula, horainicio, horafin, buff;
+    bool confirmacion;
 
     list<string> titulos = icine->listarTitulosPeliculas();
     cout << "-Listado de películas del sistema-";
@@ -248,7 +252,6 @@ void altaFuncion(){
     icine->ingresarHorario(fecha, hora);
 
     cout << "¿Desea confirmar el alta de la función? 1: Si, 0: No"<<endl;
-    bool confirmacion;
     cin >> confirmacion;
     if (confirmacion){
       icine->altaFuncion();
@@ -264,7 +267,81 @@ void altaFuncion(){
   }
 }
 
-void crearReserva(){}
+void crearReserva(){
+  Fabrica* fab = Fabrica::getInstancia();
+  ICtrlCine* icine = fab->getICtrlCine();
+  ICtrlUsuario* iuser = fab->getICtrlUsuario();
+  if (!iuser->checkSesion()){
+    cout << "Debe iniciar sesión primero." << endl;
+    return;
+  }
+  else{
+    string pelicula, buff, entepago;
+    int cineid, funcid, cantAsientos;
+    TipoPago modopago;
+    bool verprecio, confirmacion;
+
+    list<string> titulos = icine->listarTitulosPeliculas();
+    cout << "-Listado de películas del sistema-";
+    for(list<string>::iterator it = titulos.begin(); it!=titulos.end(); ++it){
+      cout << (*it) << endl;
+    }
+    cout << endl;
+    cout << "Seleccione la película para la que desea crear una reserva: ";
+    cin >> pelicula;
+    list<DtCine> cines = icine->listarCines();
+    cout << "La película se proyecta en los siguientes cines:" << endl;
+    for(list<DtCine>::iterator it=cines.begin(); it!=cines.end(); ++it){
+      cout << "\t" << (*it) << endl;
+    }
+    cout << "Seleccione el cine en el que desea crear la reserva: ";
+    cin >> cineid;
+    list<DtFuncion> funciones = icine->seleccionarCineReserva(cineid);
+    for(list<DtFuncion>::iterator it=cines.begin(); it!=cines.end(); ++it){
+      cout << "\t" << (*it) << endl;
+    }
+    cout << "Seleccione la función deseada: ";
+    cin >> funcid;
+    icine->seleccionarFuncion(funcid);
+
+    cout << "Ingrese la cantidad de entradas que desea reservar: ";
+    cin >> cantAsientos;
+    icine->ingresarCantidadAsientos(cantAsientos);
+
+    cout << "¿Qué metodo de pago desea utilizar? (1: Debito 2: Credito) ";
+    cin >> modopago;
+    icine->ingresarModoPago(modopago);
+
+    if (modopago == Deb){
+      cout << "Ingrese el nombre del banco de su tarjeta: ";
+      cin >> entepago;
+      icine->ingresarNombreBanco(entepago);
+    }
+    else if (modopago == Cred){
+      cout << "Ingrese la financiera de su tarjeta: ";
+      cin >> entepago;
+      icine->ingresarFinanciera(entepago);
+    }
+    
+    cout << "¿Desea ver el precio total de su reserva antes de confirmarla? 1: Si 0: No ";
+    cin >> verprecio;
+    if (verprecio) cout << "El precio total de su reserva es de $" << icine->verPrecioTotal() << endl;
+
+    cout << "¿Desea confirmar su reserva? 1: Si, 0: No"<<endl;
+    cin >> confirmacion;
+    if (confirmacion){
+      icine->confirmarReserva();
+      delete icine;
+      cout << "Reserva realizada. Ingrese cualquier caracter para continuar..."<<endl;
+      cin >> buff;
+    }
+    else{
+      delete icine;
+      cout << "Se ha cancelado la reserva. Ingrese cualquier caracter para continuar..."<<endl;
+      cin >> buff;
+    }
+  }
+}
 
 void puntuarPelicula(){}
 

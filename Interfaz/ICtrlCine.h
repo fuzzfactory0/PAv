@@ -16,7 +16,7 @@ class ICtrlCine{
   public:
     virtual list<string> listarTitulosPeliculas() = 0;
     virtual DtPelicula seleccionarPelicula(string) = 0;
-    virtual map<int,DtCine> listarCines() = 0;
+    virtual list<DtCine> listarCines() = 0;
     //Funciones Crear Reserva
     virtual list<DtFuncion> seleccionarCineReserva(int) = 0;
     virtual void seleccionarFuncion(int) = 0;

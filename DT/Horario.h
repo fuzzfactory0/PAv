@@ -17,5 +17,6 @@ public:
   void setHoraFin(string);
   string getHoraFin();
   ~Horario();
+  friend ostream& operator <<(ostream&, const Horario&);
 };
 #endif

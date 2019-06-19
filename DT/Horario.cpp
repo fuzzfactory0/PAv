@@ -18,4 +18,8 @@ void Horario::setHoraFin(string horaFin){
 string Horario::getHoraFin(){
   return this->horaFin;
 }
+ostream& operator <<(ostream& salida,const Horario& hor){
+	salida << "Hora inicio: " << hor.horaComienzo << "| Hora fin: " << hor.horaFin;
+	return salida;
+}
 Horario::~Horario(){}

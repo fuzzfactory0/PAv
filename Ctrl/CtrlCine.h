@@ -39,8 +39,8 @@ class CtrlCine: public ICtrlCine{
     //Funciones Multiuso
     list<string> listarTitulosPeliculas();
     DtPelicula seleccionarPelicula(string);
-    map<int,DtCine> listarCines();
     //Funciones Crear Reserva
+    list<DtCine> listarCines();
     list<DtFuncion> seleccionarCineReserva(int);
     void seleccionarFuncion(int);
     void ingresarCantidadAsientos(int);

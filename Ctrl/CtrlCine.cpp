@@ -25,9 +25,9 @@ DtPelicula CtrlCine::seleccionarPelicula(string ttl){
   return dtPelicula;
 }
 
-map<int,DtCine> CtrlCine::listarCines(){
+list<DtCine> CtrlCine::listarCines(){
   HandlerCine* hC = HandlerCine::getInstancia();
-  map<int,DtCine> cinesPelicula;
+  list<DtCine> cinesPelicula;
   list<Cine*> cines = hC->getCines();
   for (list<Cine*>::iterator itC=cines.begin(); itC!=cines.end(); ++itC){
     list<Sala*> salas = (*itC)->getSalas();
@@ -35,9 +35,9 @@ map<int,DtCine> CtrlCine::listarCines(){
       list<Funcion*> funciones = (*itS)->getFunciones();
       for (list<Funcion*>::iterator itF=funciones.begin(); itF!=funciones.end(); ++itF){
         Pelicula* peli = (*itF)->getPelicula();
-        if (this->pelicula == peli->getTitulo() && cinesPelicula.find((*itC)->getId()) == cinesPelicula.end()){
+        if (this->pelicula == peli->getTitulo()){
           DtCine dtcine = DtCine((*itC)->getId(), (*itC)->getDireccion());
-          cinesPelicula.insert(std::pair<int,DtCine>(dtcine.getId(), dtcine));
+          cinesPelicula.push_back(dtcine);
         }
       }
     }

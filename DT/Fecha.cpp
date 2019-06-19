@@ -26,4 +26,8 @@ void Fecha::setAnio(int anio){
 int Fecha::getAnio(){
   return this->anio;
 }
+ostream& operator <<(ostream& salida,const Fecha& fec){
+	salida << fec.dia << "/" << fec.mes << "/" << fec.anio;
+	return salida;
+}
 Fecha::~Fecha(){}
