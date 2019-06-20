@@ -3,6 +3,8 @@
 
 #include "Interfaz/ICtrlUsuario.h"
 #include "Interfaz/ICtrlCine.h"
+#include "Interfaz/ICtrlResenia.h"
+#include "Interfaz/ICtrlPelicula.h"
 
 class Fabrica{
   private:

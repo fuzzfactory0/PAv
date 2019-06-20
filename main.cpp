@@ -27,8 +27,10 @@ int main(){
   //creación de fabrica e icontroladores
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlUsuario* iuser = fab->getICtrlUsuario();
+  ICtrlPelicula* ipeli = fab->getICtrlPelicula();
   //Cargar usuarios al sistema
   iuser->cargarUsuarios();
+  ipeli->cargarPeliculas();
 
   int opcion;
   while(1){
@@ -152,7 +154,7 @@ void altaCine(){
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlCine* icine = fab->getICtrlCine();
   ICtrlUsuario* iuser = fab->getICtrlUsuario();
-  
+
   if (!iuser->checkSesion()){
     cout << "Debe iniciar sesión primero." << endl;
     return;
@@ -222,7 +224,7 @@ void altaFuncion(){
     cout << endl;
     cout << "Seleccione la película para la que desea crear una función: ";
     cin >> pelicula;
-    
+
     list<DtCine> cines = icine->listarIdCines();
     for(list<DtCine>::iterator it = cines.begin(); it != cines.end(); ++it){
       cout << (*it) << endl;
@@ -321,7 +323,7 @@ void crearReserva(){
       cin >> entepago;
       icine->ingresarFinanciera(entepago);
     }
-    
+
     cout << "¿Desea ver el precio total de su reserva antes de confirmarla? 1: Si 0: No ";
     cin >> verprecio;
     if (verprecio) cout << "El precio total de su reserva es de $" << icine->verPrecioTotal() << endl;
@@ -342,7 +344,50 @@ void crearReserva(){
   }
 }
 
-void puntuarPelicula(){}
+void puntuarPelicula(){
+  float puntaje = 0;
+  int opc;
+  string tituloPel;
+  Fabrica* fab = Fabrica::getInstancia();
+  ICtrlResenia* irese = fab->getICtrlResenia();
+  if (!iuser->checkSesion()){
+    cout << "Debe iniciar sesión primero." << endl;
+    return;
+  }
+  list<string> peliculas = irese->listarTitulosPeliculas();
+  cout << "-Listado de películas del sistema-";
+  for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
+    cout << (*it)->getTitulo() << endl;
+  }
+  cout << endl;
+  cout << "\nSeleccione la pelicula que desea puntuar: ";
+  getline(cin >> ws, tituloPel);
+  irese->seleccionarPelicula(tituloPel);
+  cout << "1. Ver el puntaje" << endl;
+  cout << "2. Ingresar puntaje" <<endl;
+  cout << "Opcion: ";
+  cin >> opc;
+  switch(opc){
+    case 1:
+        puntaje = irese->verPuntaje();
+        if (puntaje == 0){
+          cout << "Aún no has puntuado la pelicula  " << tituloPel <<". ¿Qué estás esperando?";
+        }
+        else{
+          cout <<"Tu puntaje para la pelicula " <<tituloPel << "es: " <<puntaje;
+        }
+      break;
+    case 2:
+        cout <<"Ingresa el puntaje para la pelicula "<<tituloPel << ": ";
+        cin >> puntaje;
+        irese->ingresarPuntaje(puntaje);
+      break;
+    default:
+      cout << "La opción ingresada no es correcta";
+}
+  break;
+
+}
 
 void comentarPelicula(){}
 

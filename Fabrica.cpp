@@ -1,6 +1,8 @@
 #include "Fabrica.h"
 #include "Ctrl/CtrlUsuario.h"
 #include "Ctrl/CtrlCine.h"
+#include "Ctrl/CtrlResenia.h"
+#include "Ctrl/CtrlPelicula.h"
 
 Fabrica* Fabrica::instancia = NULL;
 
