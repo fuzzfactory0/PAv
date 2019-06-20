@@ -21,7 +21,8 @@ list<Pelicula*> HandlerPelicula::getPeliculas(){
 }
 
 Pelicula* HandlerPelicula::buscarPelicula(string ttl){
-
+  map<string,Pelicula*>::iterator it = this->peliculas.find(ttl);
+  return it->second;
 }
 
 void HandlerPelicula::addPelicula(Pelicula* peli){

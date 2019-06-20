@@ -161,11 +161,11 @@ list<DtCine> CtrlCine::listarIdCines(){
 list<DtSala> CtrlCine::seleccionarCineFuncion(int idCine){
     this->idCine = idCine;
     list<DtSala> dtsalas;
-    HandlerCine* hC = HandlerCine::getInstancia(); 
+    HandlerCine* hC = HandlerCine::getInstancia();
     Cine* cine = hC->buscarCine(idCine);
     list<Sala*> salas = cine->getSalas();
-    for(list<Sala*>::iterator it = salas.begin(); it != salas.end; ++it){
-      DtSala dts = DtSala((*it)->getId, (*it)->getCapacidad);
+    for(list<Sala*>::iterator it = salas.begin(); it != salas.end(); ++it){
+      DtSala dts = DtSala((*it)->getId(), (*it)->getCapacidad());
       dtsalas.push_back(dts);
     }
     return dtsalas;

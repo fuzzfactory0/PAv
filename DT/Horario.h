@@ -1,6 +1,7 @@
 #ifndef HORARIO
 #define HORARIO
 
+#include <iostream>
 #include <string>
 
 using namespace std;

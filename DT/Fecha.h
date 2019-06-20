@@ -1,6 +1,10 @@
 #ifndef FECHA
 #define FECHA
 
+#include <iostream>
+
+using namespace std;
+
 class Fecha{
 private:
   int dia;

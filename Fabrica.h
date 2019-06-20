@@ -14,6 +14,8 @@ class Fabrica{
     static Fabrica* getInstancia();
     static ICtrlUsuario* getICtrlUsuario();
     static ICtrlCine* getICtrlCine();
+    static ICtrlResenia* getICtrlResenia();
+    static ICtrlPelicula* getICtrlPelicula();
     ~Fabrica();
 
 };

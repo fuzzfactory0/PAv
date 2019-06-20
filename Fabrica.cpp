@@ -22,5 +22,10 @@ ICtrlUsuario* Fabrica::getICtrlUsuario(){
 ICtrlCine* Fabrica::getICtrlCine(){
   return new CtrlCine;
 }
-
+ICtrlResenia* Fabrica::getICtrlResenia(){
+  return new CtrlResenia;
+}
+ICtrlPelicula* Fabrica::getICtrlPelicula(){
+  return new CtrlPelicula;
+}
 Fabrica :: ~Fabrica(){}

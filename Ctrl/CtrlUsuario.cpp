@@ -15,9 +15,11 @@ string CtrlUsuario::getUsuarioSesion(){
   return ses->getUsuario();
 }
 
-bool checkSesionAdmin(){
+bool CtrlUsuario::checkSesionAdmin(){
   Sesion* ses = Sesion::getInstancia();
-  Usuario* usr = ses->getUsuario();
+  string usuario = ses->getUsuario();
+  HandlerUsuario* hU = HandlerUsuario::getInstancia();
+  Usuario* usr = hU->buscarUsuario(usuario);
   return usr->getAdmin();
 }
 

@@ -10,18 +10,15 @@ CtrlResenia::CtrlResenia(){}
 
 list<string> CtrlResenia::listarTitulosPeliculas(){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
+  list<Pelicula*> peliculas = hP->getPeliculas();
   list<string> titulos;
-  for (list<Pelicula*>::iterator it=hP->getPeliculas().begin(); it!=hP->getPeliculas().end(); ++it)
+  for (list<Pelicula*>::iterator it=peliculas.begin(); it!=peliculas.end(); ++it)
     titulos.push_back((*it)->getTitulo());
   return titulos;
 }
 
-DtPelicula* CtrlResenia::seleccionarPelicula(string ttl){
-  HandlerPelicula* hP = HandlerPelicula::getInstancia();
-  Pelicula* peli = hP->buscarPelicula(ttl);
-  this->pelicula = peli->getTitulo();
-  DtPelicula* dtPelicula = new DtPelicula(peli->getTitulo(), peli->getSinopsis(), peli->getPuntajePromedio(), peli->getPoster());
-  return dtPelicula;
+void CtrlResenia::seleccionarPelicula(string ttl){
+  this->pelicula = ttl;
 }
 float CtrlResenia::verPuntaje(){
     Sesion* s = Sesion::getInstancia();

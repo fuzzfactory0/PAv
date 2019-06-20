@@ -17,7 +17,7 @@ class CtrlResenia: public ICtrlResenia{
   public:
     CtrlResenia();
     list<string> listarTitulosPeliculas();
-    DtPelicula* seleccionarPelicula(string pelicula);
+    void seleccionarPelicula(string);
     float verPuntaje();
     void ingresarPuntaje(float);
     ~CtrlResenia();

@@ -89,10 +89,8 @@ void menu(){
   Color::Modifier y(Color::FG_YELLOW);
   Color::Modifier d(Color::FG_DEFAULT);
   Color::Modifier g(Color::FG_LIGHT_GREEN);
-
-  if (iuser->checkSesionAdmin()) Color::Modifier x(Color::FG_DEFAULT);
-  else Color::Modifier x(FG_RED);
-
+  bool admin = iuser->checkSesionAdmin();
+  
   cout <<b<<"    ╔═════════════════════════════════════════════════════╗"<<endl;
   cout <<"    ║"<<y<<"    ▂▂▃▃▅▅▇▇██▓▓▒▒░░  MENU CINE  ░░▒▒▓▓██▇▇▅▅▃▃▂▂    "<<b<<"║    "<<endl;
   if (iuser->checkSesion()){
@@ -100,13 +98,22 @@ void menu(){
   cout <<"║"<<d<<"      Sesion inciada como:    "<<b<<" "<<d<<"\t"<<user<<" "<<"\t      "<<b<<"║"<<endl;
   cout <<"╠══════════════════════════════╦══════════════════════════════╣"<<endl;}
   else cout <<"╔═══╩══════════════════════════╦══════════════════════════╩═══╗"<<endl;
-  cout <<"║"<<d<<"       1. Iniciar Sesión      "<<b<<"║"<<x<<"         2. Alta Cine         "<<b<<"║"<<endl;
+  if (admin){
+  cout <<"║"<<d<<"       1. Iniciar Sesión      "<<b<<"║"<<d<<"         2. Alta Cine         "<<b<<"║"<<endl;}
+  else{
+  cout <<"║"<<d<<"       1. Iniciar Sesión      "<<b<<"║"<<r<<"         2. Alta Cine         "<<b<<"║"<<endl;}
   cout <<"╠══════════════════════════════╬══════════════════════════════╣"<<endl;
-  cout <<"║"<<x<<"        3. Alta Función       "<<b<<"║"<<d<<"        4. Crear Reserva      "<<b<<"║"<<endl;
+  if (admin){
+  cout <<"║"<<d<<"        3. Alta Función       "<<b<<"║"<<d<<"        4. Crear Reserva      "<<b<<"║"<<endl;}
+  else{
+  cout <<"║"<<r<<"        3. Alta Función       "<<b<<"║"<<d<<"        4. Crear Reserva      "<<b<<"║"<<endl;}
   cout <<"╠══════════════════════════════╬══════════════════════════════╣"<<endl;
   cout <<"║"<<d<<"       5. Puntuar Película    "<<b<<"║"<<d<<"     6. Comentar Película     "<<b<<"║"<<endl;
   cout <<"╠══════════════════════════════╬══════════════════════════════╣"<<endl;
-  cout <<"║"<<x<<"      7. Eliminar Película    "<<b<<"║"<<d<<"    8. Ver Info de Película   "<<b<<"║"<<endl;
+  if (admin){
+  cout <<"║"<<d<<"      7. Eliminar Película    "<<b<<"║"<<d<<"    8. Ver Info de Película   "<<b<<"║"<<endl;}
+  else{
+  cout <<"║"<<r<<"      7. Eliminar Película    "<<b<<"║"<<d<<"    8. Ver Info de Película   "<<b<<"║"<<endl;}
   cout <<"╠══════════════════════════════╩══════════════════════════════╣"<<endl;
   cout <<"║"<<d<<"           9. Ver Comentarios y Puntajes de Película         "<<b<<"║"<<endl;
   cout <<"╠═════════════════════════════════════════════════════════════╣"<<endl;
@@ -278,7 +285,7 @@ void crearReserva(){
   }
   else{
     string pelicula, buff, entepago;
-    int cineid, funcid, cantAsientos;
+    int cineid, funcid, cantAsientos, pago;
     TipoPago modopago;
     bool verprecio, confirmacion;
 
@@ -298,7 +305,7 @@ void crearReserva(){
     cout << "Seleccione el cine en el que desea crear la reserva: ";
     cin >> cineid;
     list<DtFuncion> funciones = icine->seleccionarCineReserva(cineid);
-    for(list<DtFuncion>::iterator it=cines.begin(); it!=cines.end(); ++it){
+    for(list<DtFuncion>::iterator it=funciones.begin(); it!=funciones.end(); ++it){
       cout << "\t" << (*it) << endl;
     }
     cout << "Seleccione la función deseada: ";
@@ -310,7 +317,10 @@ void crearReserva(){
     icine->ingresarCantidadAsientos(cantAsientos);
 
     cout << "¿Qué metodo de pago desea utilizar? (1: Debito 2: Credito) ";
-    cin >> modopago;
+    cin >> pago;
+    if (pago == 1) modopago = Deb;
+    else if (pago == 2) modopago = Cred;
+
     icine->ingresarModoPago(modopago);
 
     if (modopago == Deb){
@@ -346,47 +356,54 @@ void crearReserva(){
 
 void puntuarPelicula(){
   float puntaje = 0;
-  int opc;
-  string tituloPel;
+  int opc = 0;
+  string tituloPel, buff;
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlResenia* irese = fab->getICtrlResenia();
-  if (!iuser->checkSesion()){
+  ICtrlUsuario* iuser = fab->getICtrlUsuario();
+  ICtrlPelicula* ipeli = fab->getICtrlPelicula();
+  ipeli->cargarPeliculas();
+  /*if (!iuser->checkSesion()){
     cout << "Debe iniciar sesión primero." << endl;
     return;
-  }
+  }*/
   list<string> peliculas = irese->listarTitulosPeliculas();
-  cout << "-Listado de películas del sistema-";
+  cout << "-Listado de películas del sistema-"<<endl;
   for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
-    cout << (*it)->getTitulo() << endl;
+    cout << (*it) << endl;
   }
   cout << endl;
-  cout << "\nSeleccione la pelicula que desea puntuar: ";
+  cout << "Seleccione la pelicula que desea puntuar: ";
   getline(cin >> ws, tituloPel);
   irese->seleccionarPelicula(tituloPel);
-  cout << "1. Ver el puntaje" << endl;
-  cout << "2. Ingresar puntaje" <<endl;
-  cout << "Opcion: ";
+  cout << "Ingrese 1 para ver su puntaje, o ingrese 2 para ingresar un puntaje: " << endl;
   cin >> opc;
   switch(opc){
     case 1:
-        puntaje = irese->verPuntaje();
-        if (puntaje == 0){
-          cout << "Aún no has puntuado la pelicula  " << tituloPel <<". ¿Qué estás esperando?";
-        }
-        else{
-          cout <<"Tu puntaje para la pelicula " <<tituloPel << "es: " <<puntaje;
-        }
+      puntaje = irese->verPuntaje();
+      if (puntaje == 0){
+        cout << "Aún no has puntuado la pelicula  " << tituloPel <<". ¿Qué estás esperando?"<<endl;
+        cout << "Presiona cualquier tecla para continuar...";
+        cin >> buff;
+      }
+      else{
+        cout <<"Tu puntaje para la pelicula " <<tituloPel << "es: " <<puntaje << endl;
+        cin >> buff;
+      }
       break;
     case 2:
-        cout <<"Ingresa el puntaje para la pelicula "<<tituloPel << ": ";
+      cout <<"Ingresa el puntaje del 1 al 10 para la pelicula "<<tituloPel << ": ";
+      cin >> puntaje;
+      while (puntaje < 1 || puntaje > 10){
+        cout << "Por favor ingrese un puntaje en el rango del 1 al 10: ";
         cin >> puntaje;
-        irese->ingresarPuntaje(puntaje);
+      }
+      irese->ingresarPuntaje(puntaje);
       break;
     default:
       cout << "La opción ingresada no es correcta";
-}
-  break;
-
+      cin >> buff;
+  }
 }
 
 void comentarPelicula(){}
