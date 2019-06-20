@@ -116,7 +116,6 @@ void menu(){
 //USAR CIN.IGNORE???
 //USAR CIN.IGNORE???
 //USAR CIN.IGNORE???
-//USAR CIN.IGNORE???
 //USAR CIN.IGNORE??? <- no le den bola, nota personal xD
 
 void iniciarSesion(){
