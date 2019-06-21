@@ -450,7 +450,7 @@ void comentarPelicula(){
         cout << "Su comentario se ha agregado correctamente.\n ¿Desea seguir comentando? 1: Si, 0: No: ";
         cin >> ex;
       }
-    }while(!ex)
+    }while(!ex);
     cout << "Operación terminada. Ingrese cualquier caracter para continuar..." << endl;
   }
 }
