@@ -39,5 +39,12 @@ void Cine::addSala(Sala* s){
 Direccion Cine::getDireccion(){
   return this->direccion;
 }
+bool Cine::hasPelicula(string ttl){
+  bool has = false;
+  for (map<int,Sala*>::iterator it = this->salas.begin(); it != salas.end(); ++it){
+    has = (has || it->second->hasPelicula(ttl));
+  }
+  return has;
+}
 
 Cine::~Cine(){}

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <list>
 #include <string>
+#include <limits>
 #include "colormod.h"
 
 using namespace std;
@@ -22,6 +23,7 @@ void comentarPelicula();
 void eliminarPelicula();
 void verInfoPelicula();
 void verComentariosPelicula();
+int comprobarSesion();
 
 int main(){
   //creación de fabrica e icontroladores
@@ -37,8 +39,11 @@ int main(){
   int opcion;
   while(1){
     menu();
-    cout << "Menu impreso(?)"<<endl;
-    cin >> opcion;
+    while (!(cin >> opcion)){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese una opción válida: ";
+    }
     switch(opcion){
       case 1:
         iniciarSesion();
@@ -122,13 +127,8 @@ void menu(){
   cout <<"╠═════════════════════════════════════════════════════════════╣"<<endl;
   cout <<"║"<<y<<"█▄█▀█▄█▀█▄█▀█▄█▀█▄█▀█▄    0. Salir     ▄█▀█▄█▀█▄█▀█▄█▀█▄█▀█▄█"<<b<<"║"<<endl;
   cout <<"╚═════════════════════════════════════════════════════════════╝"<<d<<endl;
-  cout <<"Seleccione una opcion: "<<g;
+  cout <<"Seleccione una opcion: ";
 }
-//USAR CIN.IGNORE???
-//USAR CIN.IGNORE???
-//USAR CIN.IGNORE???
-//USAR CIN.IGNORE???
-//USAR CIN.IGNORE??? <- no le den bola, nota personal xD
 
 void iniciarSesion(){
   Fabrica* fab = Fabrica::getInstancia();
@@ -163,14 +163,14 @@ void iniciarSesion(){
 void altaCine(){
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlCine* icine = fab->getICtrlCine();
-  ICtrlUsuario* iuser = fab->getICtrlUsuario();
+
   string buff;
-  if (!iuser->checkSesion()){
+  if (comprobarSesion() < 1){
     cout << "Debe iniciar sesión primero. Ingrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
   }
-  else if (!iuser->checkSesionAdmin()){
+  else if (comprobarSesion() < 2){
     cout << "Debe ser administrador para poder realizar esta operación. Ingrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
@@ -214,14 +214,13 @@ void altaCine(){
 void altaFuncion(){
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlCine* icine = fab->getICtrlCine();
-  ICtrlUsuario* iuser = fab->getICtrlUsuario();
   string buff;
-  if (!iuser->checkSesion()){
+  if (comprobarSesion() < 1){
     cout << "Debe iniciar sesión primero. Ingrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
   }
-  else if (!iuser->checkSesionAdmin()){
+  else if (comprobarSesion() < 2){
     cout << "Debe ser administrador para poder realizar esta operación. Ingrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
@@ -238,7 +237,17 @@ void altaFuncion(){
     }
     cout << endl;
     cout << "Seleccione la película para la que desea crear una función: ";
-    cin >> pelicula;
+    getline(cin >> ws, pelicula);
+    try{
+      icine->seleccionarPelicula(pelicula);
+    }catch(int exc){
+      if (exc == 404){
+        cout<<"La película " << pelicula << " no existe." << endl; 
+        cout<<"Ingrese cualquier caracter para continuar...";
+        cin>>buff;
+        return;
+      } 
+    }
 
     cout << "\n-Listado de cines del sistema-" << endl;
     list<DtCine> cines = icine->listarIdCines();
@@ -252,7 +261,7 @@ void altaFuncion(){
     for(list<DtSala>::iterator it = salas.begin(); it!=salas.end(); ++it){
       cout << (*it) << endl;
     }
-    cout << "\nSeleccione la ID de la sala deseada: " << endl;
+    cout << "\nSeleccione la ID de la sala deseada: ";
     cin >> funcid;
     icine->seleccionarSalaFuncion(funcid);
     cout << "Ingrese la hora de inicio de la función.\n(Formato requerido: Horas:Minutos): ";
@@ -269,17 +278,17 @@ void altaFuncion(){
     Fecha fecha = Fecha(dia, mes, anio);
     icine->ingresarHorario(fecha, hora);
 
-    cout << "¿Desea confirmar el alta de la función? 1: Si, 0: No"<<endl;
+    cout << "¿Desea confirmar el alta de la función? 1: Si, 0: No: ";
     cin >> confirmacion;
     if (confirmacion){
       icine->altaFuncion();
       delete icine;
-      cout << "Función dada de alta. Ingrese cualquier caracter para continuar..."<<endl;
+      cout << "Función dada de alta. Ingrese cualquier caracter para continuar...";
       cin >> buff;
     }
     else{
       delete icine;
-      cout << "Se ha cancelado el alta de la función. Ingrese cualquier caracter para continuar..."<<endl;
+      cout << "Se ha cancelado el alta de la función. Ingrese cualquier caracter para continuar...";
       cin >> buff;
     }
   }
@@ -288,10 +297,9 @@ void altaFuncion(){
 void crearReserva(){
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlCine* icine = fab->getICtrlCine();
-  ICtrlUsuario* iuser = fab->getICtrlUsuario();
   string buff;
 
-  if (!iuser->checkSesion()){
+  if (comprobarSesion() < 1){
     cout << "Debe iniciar sesión primero. Ingrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
@@ -301,6 +309,7 @@ void crearReserva(){
     int cineid, funcid, cantAsientos, pago;
     TipoPago modopago;
     bool verprecio, confirmacion;
+    DtPelicula infopeli;
 
     list<string> titulos = icine->listarTitulosPeliculas();
     cout << "-Listado de películas del sistema-" << endl;
@@ -309,28 +318,55 @@ void crearReserva(){
     }
     cout << endl;
     cout << "Seleccione la película para la que desea crear una reserva: ";
-    cin >> pelicula;
+    getline(cin >> ws, pelicula);
+    try{
+      infopeli = icine->seleccionarPelicula(pelicula);
+    }catch(int exc){
+        if (exc == 404){
+          cout<<"La película " << pelicula << " no existe." << endl; 
+          cout<<"Ingrese cualquier caracter para continuar...";
+          cin>>buff;
+          return;
+        } 
+    }
     list<DtCine> cines = icine->listarCines();
     cout << "La película se proyecta en los siguientes cines:" << endl;
     for(list<DtCine>::iterator it=cines.begin(); it!=cines.end(); ++it){
       cout << "\t" << (*it) << endl;
     }
     cout << "Seleccione el cine en el que desea crear la reserva: ";
-    cin >> cineid;
+    while (!(cin >> cineid)){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese una opción válida: ";
+    }
     list<DtFuncion> funciones = icine->seleccionarCineReserva(cineid);
     for(list<DtFuncion>::iterator it=funciones.begin(); it!=funciones.end(); ++it){
       cout << "\t" << (*it) << endl;
     }
     cout << "Seleccione la función deseada: ";
-    cin >> funcid;
+    while (!(cin >> funcid)){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese una opción válida: ";
+    }
     icine->seleccionarFuncion(funcid);
 
     cout << "Ingrese la cantidad de entradas que desea reservar: ";
     cin >> cantAsientos;
+    while (!(cin >> cantAsientos)){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese una cantidad válida: ";
+    }
     icine->ingresarCantidadAsientos(cantAsientos);
 
     cout << "¿Qué metodo de pago desea utilizar? (1: Debito 2: Credito) ";
-    cin >> pago;
+    while (!(cin >> pago) || (pago < 1 || pago > 2)){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese una opción válida: ";
+    }
     if (pago == 1) modopago = Deb;
     else if (pago == 2) modopago = Cred;
 
@@ -348,20 +384,28 @@ void crearReserva(){
     }
 
     cout << "¿Desea ver el precio total de su reserva antes de confirmarla? 1: Si 0: No ";
-    cin >> verprecio;
+    while (!(cin >> verprecio) || verprecio != 1 || verprecio != 0){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese una opción válida: ";
+    }
     if (verprecio) cout << "El precio total de su reserva es de $" << icine->verPrecioTotal() << endl;
 
-    cout << "¿Desea confirmar su reserva? 1: Si, 0: No"<<endl;
-    cin >> confirmacion;
+    cout << "¿Desea confirmar su reserva? 1: Si, 0: No: ";
+    while (!(cin >> confirmacion) || confirmacion != 1 || confirmacion != 0){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese una opción válida: ";
+    }
     if (confirmacion){
       icine->confirmarReserva();
       delete icine;
-      cout << "Reserva realizada. Ingrese cualquier caracter para continuar..."<<endl;
+      cout << "Reserva realizada. Ingrese cualquier caracter para continuar...";
       cin >> buff;
     }
     else{
       delete icine;
-      cout << "Se ha cancelado la reserva. Ingrese cualquier caracter para continuar..."<<endl;
+      cout << "Se ha cancelado la reserva. Ingrese cualquier caracter para continuar...";
       cin >> buff;
     }
   }
@@ -370,13 +414,10 @@ void crearReserva(){
 void puntuarPelicula(){
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlResenia* irese = fab->getICtrlResenia();
-  ICtrlUsuario* iuser = fab->getICtrlUsuario();
-  ICtrlPelicula* ipeli = fab->getICtrlPelicula();
   int puntaje = 0;
   int opc = 0;
   string tituloPel, buff;
-  //ipeli->cargarPeliculas();
-  if (!iuser->checkSesion()){
+  if (comprobarSesion() < 1){
     cout << "Debe iniciar sesión primero. Ingrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
@@ -390,34 +431,51 @@ void puntuarPelicula(){
     cout << endl;
     cout << "Seleccione la pelicula que desea puntuar: ";
     getline(cin >> ws, tituloPel);
-    irese->seleccionarPelicula(tituloPel);
+    try{
+      irese->seleccionarPelicula(tituloPel);
+    }catch(int exc){
+        if (exc == 404){
+          cout<<"La película " << tituloPel << " no existe." << endl; 
+          cout<<"Ingrese cualquier caracter para continuar...";
+          cin>>buff;
+          delete irese;
+          return;
+        } 
+    }
     cout << "Ingrese 1 para ver su puntaje, o ingrese 2 para ingresar un puntaje: " << endl;
-    cin >> opc;
+    while (!(cin >> opc) || (opc > 2 || opc < 1)){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese una opción válida: ";
+    }
     switch(opc){
       case 1:
         puntaje = irese->verPuntaje();
         if (puntaje == 0){
           cout << "Aún no has puntuado la pelicula  " << tituloPel <<". ¿Qué estás esperando?"<<endl;
-          cout << "Presiona cualquier tecla para continuar...";
+          cout << "Ingrese cualquier caracter para continuar...";
           cin >> buff;
+          delete irese;
         }
         else{
-          cout <<"Tu puntaje para la pelicula " <<tituloPel << "es: " <<puntaje << endl;
+          cout <<"Tu puntaje para la pelicula " <<tituloPel << " es: " <<puntaje<<"/10" << endl;
+          cout <<"Ingrese cualquier caracter para continuar...";
           cin >> buff;
+          delete irese;
         }
         break;
       case 2:
         cout <<"Ingresa el puntaje del 1 al 10 para la pelicula "<<tituloPel << ": ";
-        cin >> puntaje;
-        while (puntaje < 1 || puntaje > 10){
-          cout << "Por favor ingrese un puntaje en el rango del 1 al 10: ";
-          cin >> puntaje;
+        while (!(cin >> puntaje) || (puntaje < 1 || puntaje > 10)){
+          cin.clear();
+          cin.ignore(numeric_limits<streamsize>::max(), '\n');
+          cout << "Por favor ingrese un puntaje válido: ";
         }
         irese->ingresarPuntaje(puntaje);
-        break;
-      default:
-        cout << "La opción ingresada no es correcta";
+        cout <<"Puntaje ingresado correctamente. Ingrese cualquier caracter para continuar...";
         cin >> buff;
+        delete irese;
+        break;
     }
   }
 }
@@ -425,12 +483,10 @@ void puntuarPelicula(){
 void comentarPelicula(){
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlResenia* irese = fab->getICtrlResenia();
-  ICtrlUsuario* iuser = fab->getICtrlUsuario();
-  ICtrlPelicula* ipeli = fab->getICtrlPelicula();
   float puntaje = 0;
   string titulo, texto, buff;
   int idcom;
-  //ipeli->cargarPeliculas();
+  ICtrlUsuario* iuser = fab->getICtrlUsuario();
   if (!iuser->checkSesion()){
     cout << "Debe iniciar sesión primero." << endl;
     return;
@@ -444,7 +500,18 @@ void comentarPelicula(){
     cout << endl;
     cout << "Seleccione la pelicula que desea comentar: ";
     getline(cin >> ws, titulo);
-    irese->seleccionarPelicula(titulo);
+    try{
+      irese->seleccionarPelicula(titulo);
+    }catch(int exc){
+        if (exc == 404){
+          cout<<"La película " << titulo << " no existe." << endl; 
+          cout<<"Ingrese cualquier caracter para continuar...";
+          cin>>buff;
+          delete irese;
+          delete iuser;
+          return;
+        } 
+    }
     bool ex;
     bool opt;
     do{
@@ -467,6 +534,8 @@ void comentarPelicula(){
         cin >> ex;
       }
     }while(ex);
+    delete irese;
+    delete iuser;
     cout << "Operación terminada. Ingrese cualquier caracter para continuar..." << endl;
     cin >> buff;
   }
@@ -477,3 +546,21 @@ void eliminarPelicula(){}
 void verInfoPelicula(){}
 
 void verComentariosPelicula(){}
+
+int comprobarSesion(){
+  Fabrica* fab = Fabrica::getInstancia(); 
+  ICtrlUsuario* iuser = fab->getICtrlUsuario();
+  if (iuser->checkSesion()){
+    if (iuser->checkSesionAdmin()) return 2;
+    else return 1;
+  }
+  else return 0;
+}
+
+/*
+while (!(cin >> input)){
+  cin.clear();
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  cout << "Por favor ingrese una opción válida: ";
+}
+*/

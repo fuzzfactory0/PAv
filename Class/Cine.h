@@ -23,7 +23,7 @@ class Cine{
     Direccion getDireccion();
     list<Sala*> getSalas();
     void addSala(Sala*);
-
+    bool hasPelicula(string);
     ~Cine();
 };
 

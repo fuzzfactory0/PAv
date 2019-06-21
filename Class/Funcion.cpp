@@ -3,11 +3,10 @@
 int Funcion::IDA = 0;
 
 Funcion::Funcion(){}
-Funcion::Funcion(int id, Fecha fecha, Horario horario, Pelicula* peli){
+Funcion::Funcion(int id, Fecha fecha, Horario horario){
   this->id = id;
   this->fecha = fecha;
   this->horario = horario;
-  this->pelicula = peli;
 }
 
 void Funcion::setId(int id){
@@ -33,7 +32,6 @@ void Funcion::setHorario(Horario horario){
 Horario Funcion::getHorario(){
   return this->horario;
 }
-
 void Funcion::setPelicula(Pelicula* pel){
   this->pelicula = pel;
 }
@@ -43,8 +41,8 @@ int Funcion::getIDA(){
   return IDA;
 }
 
-Pelicula* Funcion::getPelicula(){
-  return this->pelicula;
+string Funcion::getPelicula(){
+  return this->pelicula->getTitulo();
 }
 
 list<Reserva*> Funcion::getReservas(){

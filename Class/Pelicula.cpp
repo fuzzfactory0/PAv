@@ -13,6 +13,7 @@ Pelicula::Pelicula(string titulo, string sinopsis, string poster){
 void Pelicula::setTitulo(string titulo){
   this->titulo = titulo;
 }
+
 string Pelicula::getTitulo(){
   return this->titulo;
 }
@@ -40,9 +41,12 @@ Comentario* Pelicula::getComentarios(){
 
 float Pelicula::getPuntajePromedio(){
   int total;
-  for (list<Puntaje*>::iterator it=this->puntajes.begin(); it != this->puntajes.end(); ++it)
-    total += (*it)->getPuntos();
-  return total / this->puntajes.size();
+  if (this->puntajes.empty()) return 0;
+  else{
+    for (list<Puntaje*>::iterator it=this->puntajes.begin(); it != this->puntajes.end(); ++it)
+      total += (*it)->getPuntos();
+    return total / this->puntajes.size();
+  }
 }
 
 void Pelicula::setPoster(string poster){
@@ -52,8 +56,9 @@ string Pelicula::getPoster(){
   return this->poster;
 }
 
-DtPelicula* Pelicula::getInfoPelicula(){
-
+DtPelicula Pelicula::getInfoPelicula(){
+  DtPelicula peli = DtPelicula(this->getTitulo(), this->getSinopsis(), this->getPuntajePromedio(), this->getPoster());
+  return peli;
 }
 
 Pelicula::~Pelicula(){}

@@ -21,7 +21,7 @@ class Funcion{
     map<int,Reserva*> reservas;
   public:
     Funcion();
-    Funcion(int,Fecha,Horario,Pelicula*);
+    Funcion(int,Fecha,Horario);
     void setId(int);
     int getId();
     void setFecha(Fecha);
@@ -30,7 +30,7 @@ class Funcion{
     Horario getHorario();
     static int getIDA();
     void setPelicula(Pelicula*);
-    Pelicula* getPelicula();
+    string getPelicula();
     list<Reserva*> getReservas();
     void addReserva(Reserva*);
     ~Funcion();

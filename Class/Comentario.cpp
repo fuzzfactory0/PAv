@@ -80,12 +80,12 @@ Comentario* Comentario::buscarComentario(Comentario* raiz, int id){
   else if (!raiz->hasPh() && !raiz->hasSh()) return NULL;
   else
   {
-    Comentario* comm;
+    Comentario* comm = NULL;
     if (raiz->hasSh()){
       comm = buscarComentario(raiz->getSh(), id);
-      if (comm == NULL){
-        comm = buscarComentario(raiz->getPh(), id);
-      }
+    }
+    else if (comm == NULL && raiz->hasPh()){
+      comm = buscarComentario(raiz->getPh(), id);
     }
     return comm;
   } 

@@ -20,27 +20,24 @@ list<string> CtrlCine::listarTitulosPeliculas(){
 
 DtPelicula CtrlCine::seleccionarPelicula(string ttl){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
+  if (!hP->existePelicula(ttl)) throw 404;
   Pelicula* peli = hP->buscarPelicula(ttl);
   this->pelicula = peli->getTitulo();
   DtPelicula dtPelicula = DtPelicula(peli->getTitulo(), peli->getSinopsis(), peli->getPuntajePromedio(), peli->getPoster());
   return dtPelicula;
 }
 
+#include <iostream>
+
 list<DtCine> CtrlCine::listarCines(){
   HandlerCine* hC = HandlerCine::getInstancia();
   list<DtCine> cinesPelicula;
   list<Cine*> cines = hC->getCines();
   for (list<Cine*>::iterator itC=cines.begin(); itC!=cines.end(); ++itC){
-    list<Sala*> salas = (*itC)->getSalas();
-    for (list<Sala*>::iterator itS=salas.begin(); itS!=salas.end(); ++itS){
-      list<Funcion*> funciones = (*itS)->getFunciones();
-      for (list<Funcion*>::iterator itF=funciones.begin(); itF!=funciones.end(); ++itF){
-        Pelicula* peli = (*itF)->getPelicula();
-        if (this->pelicula == peli->getTitulo()){
-          DtCine dtcine = DtCine((*itC)->getId(), (*itC)->getDireccion());
-          cinesPelicula.push_back(dtcine);
-        }
-      }
+    cout << "cine iter"<<endl;
+    if ((*itC)->hasPelicula(this->pelicula)){
+      DtCine dtcine = DtCine((*itC)->getId(), (*itC)->getDireccion());
+      cinesPelicula.push_back(dtcine);
     }
   }
   return cinesPelicula;
@@ -54,7 +51,7 @@ list<DtFuncion> CtrlCine::seleccionarCineReserva(int idC){
   for (list<Sala*>::iterator itS=salas.begin(); itS!=salas.end(); ++itS){
     list<Funcion*> funciones = (*itS)->getFunciones();
     for (list<Funcion*>::iterator itF=funciones.begin(); itF!=funciones.end(); ++itF){
-      if ((*itF)->getPelicula()->getTitulo() == this->pelicula){
+      if ((*itF)->getPelicula() == this->pelicula){
         DtFuncion funcion = DtFuncion((*itF)->getId(), (*itF)->getFecha(), (*itF)->getHorario());
         funcionesPeli.push_back(funcion);
       }
@@ -85,7 +82,8 @@ float CtrlCine::ingresarFinanciera(string financiera){
 }
 
 float CtrlCine::verPrecioTotal(){
-  return PRECIO_ENTRADA * this->cantidadAsientos;
+  if (this->modoPago = Deb) return PRECIO_ENTRADA * this->cantidadAsientos;
+  else return ((PRECIO_ENTRADA*this->cantidadAsientos)-PRECIO_ENTRADA*this->cantidadAsientos*(PORCENTAJE_DESCUENTO/100));
 }
 
 void CtrlCine::confirmarReserva(){
@@ -155,7 +153,6 @@ list<DtCine> CtrlCine::listarIdCines(){
   for(list<Cine*>::iterator it = cines.begin(); it != cines.end(); ++it){
     DtCine dtc = DtCine((*it)->getId(), (*it)->getDireccion());
     dtcines.push_back(dtc);
-
   }
   return dtcines;
 }
@@ -190,7 +187,8 @@ void CtrlCine::altaFuncion(){
   list<Sala*> salasCine = c->getSalas();
   for(list<Sala*>::iterator it = salasCine.begin(); it != salasCine.end(); ++it){
     if ((*it)->getId() == this->idSala){
-      Funcion* func = new Funcion(Funcion::getIDA(),this->dia,this->hora,p);
+      Funcion* func = new Funcion(Funcion::getIDA(),this->dia,this->hora);
+      func->setPelicula(p);
       (*it)->addFuncion(func);
     }
   }

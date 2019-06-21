@@ -15,6 +15,9 @@ list<string> CtrlResenia::listarTitulosPeliculas(){
 }
 
 void CtrlResenia::seleccionarPelicula(string ttl){
+  HandlerPelicula* hP = HandlerPelicula::getInstancia();
+  if (!hP->existePelicula(ttl)) throw 404;
+  Pelicula* peli = hP->buscarPelicula(this->pelicula);
   this->pelicula = ttl;
 }
 
@@ -30,7 +33,9 @@ int CtrlResenia::verPuntaje(){
       return (*it)->getPuntos();
     }
   }
+  return 0;
 }
+
 void CtrlResenia::ingresarPuntaje(int puntaje){
   Sesion* s = Sesion::getInstancia();
   HandlerUsuario* hU = HandlerUsuario::getInstancia();
@@ -73,6 +78,10 @@ void CtrlResenia::agregarComentario(string texto){
   Comentario::addComentario(raiz, comm);
 }
 
-DtComentario* CtrlResenia::getArbolComentarios(string){}
+DtComentario* CtrlResenia::getArbolComentarios(string pelicula){
+  HandlerPelicula* hP = HandlerPelicula::getInstancia();
+  Pelicula* peli = hP->buscarPelicula(this->pelicula);
+  return NULL;//!COSAS COSAS COSAS
+}
 
 CtrlResenia::~CtrlResenia(){}

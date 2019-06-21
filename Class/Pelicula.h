@@ -29,7 +29,7 @@ class Pelicula{
     void addPuntaje(Puntaje*);
     list<Puntaje*> getPuntajes();
     Comentario* getComentarios();
-    DtPelicula* getInfoPelicula();
+    DtPelicula getInfoPelicula();
     ~Pelicula();
 };
 

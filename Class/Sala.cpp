@@ -29,17 +29,21 @@ void Sala::addFuncion(Funcion* func){
   this->funciones.insert(std::pair<int,Funcion*>(func->getId(), func));
 }
 
-DtFuncion* Sala::getFuncionesPelicula(){
-  return NULL;
-}
 list<Funcion*> Sala::getFunciones(){
   list<Funcion*> funciones;
   for (map<int,Funcion*>::iterator it = this->funciones.begin(); it != this->funciones.end(); ++it)
     funciones.push_back(it->second);
   return funciones;
 }
-
-void Sala::EliminarFuncion(int idF){
-
+bool Sala::hasPelicula(string ttl){
+  if (this->funciones.empty()) return false;
+  else{
+    bool has = false;
+    for (map<int,Funcion*>::iterator it = this->funciones.begin(); it != funciones.end(); ++it){
+      has = (has || (it->second->getPelicula() == ttl)); 
+    }
+    return has;
+  }
 }
+
 Sala::~Sala(){}

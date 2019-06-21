@@ -30,8 +30,7 @@ void HandlerPelicula::addPelicula(Pelicula* peli){
 }
 
 bool HandlerPelicula::existePelicula(string ttl){
-  map<string,Pelicula*>::iterator it = this->peliculas.find(ttl);
-  return (it != this->peliculas.end());
+  return this->peliculas.count(ttl);
 }
 
 void HandlerPelicula::eliminarPelicula(string ttl){

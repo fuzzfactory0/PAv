@@ -21,9 +21,8 @@ class Sala{
     int getCapacidad();
     static int getIDA();
     void addFuncion(Funcion*);
-    DtFuncion* getFuncionesPelicula();
     list<Funcion*> getFunciones();
-    void EliminarFuncion(int);
+    bool hasPelicula(string);
     ~Sala();
 };
 
