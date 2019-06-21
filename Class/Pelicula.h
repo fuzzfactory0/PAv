@@ -28,7 +28,6 @@ class Pelicula{
     string getPoster();
     void addPuntaje(Puntaje*);
     list<Puntaje*> getPuntajes();
-    void addComentario(Comentario*);
     Comentario* getComentarios();
     DtPelicula* getInfoPelicula();
     ~Pelicula();

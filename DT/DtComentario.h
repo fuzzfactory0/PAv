@@ -3,11 +3,13 @@
 
 #include <string>
 
-class Comentario{
+using namespace std;
+
+class DtComentario{
   private:
     int id;
     string texto;
-    string usr;
+    string usuario;
     DtComentario* padre;
     DtComentario* ph;
     DtComentario* sh;
@@ -18,7 +20,7 @@ class Comentario{
     int getId();
     void setTexto(string);
     string getTexto();
-    void setUsuario();
+    void setUsuario(string);
     string getUsuario();
     ~DtComentario();
     //arbol

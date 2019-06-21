@@ -11,10 +11,10 @@ class ICtrlResenia{
     virtual void seleccionarPelicula(string) = 0;
     virtual int verPuntaje() = 0;
     virtual void ingresarPuntaje(int) = 0;
-    void seleccionarComentario(int) = 0;
-    void responderComentario(int,string) = 0;
-    void agregarComentario(string) = 0;
-    DtComentario* getArbolComentarios(string = 0);
+    virtual void seleccionarComentario(int) = 0;
+    virtual void responderComentario(int,string) = 0;
+    virtual void agregarComentario(string) = 0;
+    virtual DtComentario* getArbolComentarios(string) = 0;
 };
 
 #endif

@@ -26,10 +26,6 @@ void Pelicula::addPuntaje(Puntaje* pnt){
   this->puntajes.push_back(pnt);
 }
 
-void Pelicula::addComentario(Comentario* cmt){
-  this->comentarios.push_back(cmt);
-}
-
 list<Puntaje*> Pelicula::getPuntajes(){
   list<Puntaje*> puntajes;
   for(list<Puntaje*>::iterator it =this->puntajes.begin(); it != this->puntajes.end(); ++it){
@@ -37,10 +33,10 @@ list<Puntaje*> Pelicula::getPuntajes(){
   }
   return puntajes;
 }
-/*
-list<Comentario*> getComentarios(){
+
+Comentario* Pelicula::getComentarios(){
   return this->comentarios;
-}*/
+}
 
 float Pelicula::getPuntajePromedio(){
   int total;

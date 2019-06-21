@@ -41,14 +41,14 @@ string DtComentario::getUsuario(){
 
 DtComentario::~DtComentario(){}
 
-DtComentario* getPadre(){
+DtComentario* DtComentario::getPadre(){
   return this->padre;
 }
 
-DtComentario* getPh(){
+DtComentario* DtComentario::getPh(){
   return this->ph;
 }
 
-DtComentario* getSh(){
+DtComentario* DtComentario::getSh(){
   return this->sh;
 }

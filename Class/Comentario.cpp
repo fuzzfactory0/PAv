@@ -60,11 +60,11 @@ Comentario* Comentario::getSh(){
 }
 
 void Comentario::setPh(Comentario* com){
-  this->ph = comm;
+  this->ph = com;
 }
 
-void Comentario::setsh(Comentario* com){
-  this->sh = comm;
+void Comentario::setSh(Comentario* com){
+  this->sh = com;
 }
 
 bool Comentario::hasPh(){

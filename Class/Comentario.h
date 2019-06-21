@@ -29,7 +29,7 @@ class Comentario{
     Comentario* getPadre();
     Comentario* getPh();
     void setPh(Comentario*);
-    comentario* getSh();
+    Comentario* getSh();
     void setSh(Comentario*);
     bool hasPh();
     bool hasSh();

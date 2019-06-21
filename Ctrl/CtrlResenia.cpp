@@ -46,7 +46,7 @@ void CtrlResenia::seleccionarComentario(int id){
 }
 
 void CtrlResenia::responderComentario(int idcom, string texto){
-  HandlerPelicula hP = HandlerPelicula::getInstancia();
+  HandlerPelicula* hP = HandlerPelicula::getInstancia();
   Pelicula* peli = hP->buscarPelicula(this->pelicula);
   Comentario* respond = Comentario::buscarComentario(peli->getComentarios(), idcom);
 
@@ -60,7 +60,7 @@ void CtrlResenia::responderComentario(int idcom, string texto){
 }
 
 void CtrlResenia::agregarComentario(string texto){
-  HandlerPelicula hP = HandlerPelicula::getInstancia();
+  HandlerPelicula* hP = HandlerPelicula::getInstancia();
   Pelicula* peli = hP->buscarPelicula(this->pelicula);
   Comentario* raiz = peli->getComentarios();
 
@@ -73,6 +73,6 @@ void CtrlResenia::agregarComentario(string texto){
   Comentario::addComentario(raiz, comm);
 }
 
-DtComentario* getArbolComentarios(string){}
+DtComentario* CtrlResenia::getArbolComentarios(string){}
 
 CtrlResenia::~CtrlResenia(){}
