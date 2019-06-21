@@ -145,7 +145,7 @@ void iniciarSesion(){
   cin >> password;
   if(iuser->verificarPassword(password)){
     if (iuser->checkSesion()){
-      cout << "Esto cerrará la sesión del usuario " << iuser->getUsuarioSesion() << " e iniciará una sesión para el usuario " << nickname << ". ¿Continuar?\n 1: Si 0: No ";
+      cout << "Esto cerrará la sesión del usuario " << iuser->getUsuarioSesion() << " e iniciará una\nsesión para el usuario " << nickname << ". ¿Continuar?\n 1: Si 0: No ";
       cin >> confirmacion;
     }
     if (confirmacion){
@@ -166,12 +166,12 @@ void altaCine(){
 
   string buff;
   if (comprobarSesion() < 1){
-    cout << "Debe iniciar sesión primero. Ingrese cualquier caracter para continuar..." << endl;
+    cout << "Debe iniciar sesión primero.\nIngrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
   }
   else if (comprobarSesion() < 2){
-    cout << "Debe ser administrador para poder realizar esta operación. Ingrese cualquier caracter para continuar..." << endl;
+    cout << "Debe ser administrador para poder realizar esta operación.\nIngrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
   }
@@ -193,18 +193,18 @@ void altaCine(){
       icine->ingresarCapacidad(capac);
       if (capac!=0) cout << "Sala registrada." << endl;
     }
-    cout << "¿Desea confirmar el alta del cine? 1: Si, 0: No"<<endl;
+    cout << "¿Desea confirmar el alta del cine? 1: Si, 0: No";
     cin >> confirmacion;
     if (confirmacion){
       icine->altaCine();
       delete icine;
-      cout << "Cine dado de alta. Ingrese cualquier caracter para continuar..."<<endl;
+      cout << "Cine dado de alta.\nIngrese cualquier caracter para continuar..."<<endl;
       cin >> buff;
       return;
     }
     else{
       delete icine;
-      cout << "Se ha cancelado el alta del cine. Ingrese cualquier caracter para continuar..."<<endl;
+      cout << "Se ha cancelado el alta del cine.\nIngrese cualquier caracter para continuar..."<<endl;
       cin >> buff;
       return;
     }
@@ -216,12 +216,12 @@ void altaFuncion(){
   ICtrlCine* icine = fab->getICtrlCine();
   string buff;
   if (comprobarSesion() < 1){
-    cout << "Debe iniciar sesión primero. Ingrese cualquier caracter para continuar..." << endl;
+    cout << "Debe iniciar sesión primero.\nIngrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
   }
   else if (comprobarSesion() < 2){
-    cout << "Debe ser administrador para poder realizar esta operación. Ingrese cualquier caracter para continuar..." << endl;
+    cout << "Debe ser administrador para poder realizar esta operación.\nIngrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
   }
@@ -248,7 +248,6 @@ void altaFuncion(){
         return;
       } 
     }
-
     cout << "\n-Listado de cines del sistema-" << endl;
     list<DtCine> cines = icine->listarIdCines();
     for(list<DtCine>::iterator it = cines.begin(); it != cines.end(); ++it){
@@ -256,6 +255,16 @@ void altaFuncion(){
     }
     cout << "\nIngrese la ID del cine deseado: ";
     cin >> cineid;
+    bool existe = false;
+    for(list<DtCine>::iterator it = cines.begin(); it != cines.end(); ++it){
+      existe = (existe || (*it).getId() == cineid);
+    }
+    if (!existe){
+      cout << "El cine seleccionado no existe en el sistema.\nIngrese cualquier caracter para continuar..." <<endl;
+      cin >> buff;
+      delete icine;
+      return;
+    }
     cout << "\n-Listado de salas del cine seleccionado-" << endl;
     list<DtSala> salas = icine->seleccionarCineFuncion(cineid);
     for(list<DtSala>::iterator it = salas.begin(); it!=salas.end(); ++it){
@@ -263,6 +272,16 @@ void altaFuncion(){
     }
     cout << "\nSeleccione la ID de la sala deseada: ";
     cin >> funcid;
+    existe = false;
+    for(list<DtSala>::iterator it = salas.begin(); it != salas.end(); ++it){
+      existe = (existe || (*it).getId() == funcid);
+    }
+    if (!existe){
+      cout << "La sala seleccionada no existe en el cine.\nIngrese cualquier caracter para continuar..." <<endl;
+      cin >> buff;
+      delete icine;
+      return;
+    }
     icine->seleccionarSalaFuncion(funcid);
     cout << "Ingrese la hora de inicio de la función.\n(Formato requerido: Horas:Minutos): ";
     cin >> horainicio;
@@ -283,12 +302,12 @@ void altaFuncion(){
     if (confirmacion){
       icine->altaFuncion();
       delete icine;
-      cout << "Función dada de alta. Ingrese cualquier caracter para continuar...";
+      cout << "Función dada de alta.\nIngrese cualquier caracter para continuar...";
       cin >> buff;
     }
     else{
       delete icine;
-      cout << "Se ha cancelado el alta de la función. Ingrese cualquier caracter para continuar...";
+      cout << "Se ha cancelado el alta de la función.\nIngrese cualquier caracter para continuar...";
       cin >> buff;
     }
   }
@@ -300,7 +319,7 @@ void crearReserva(){
   string buff;
 
   if (comprobarSesion() < 1){
-    cout << "Debe iniciar sesión primero. Ingrese cualquier caracter para continuar..." << endl;
+    cout << "Debe iniciar sesión primero.\nIngrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
   }
