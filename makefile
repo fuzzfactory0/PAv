@@ -1,4 +1,4 @@
-OBJ=main.o Class/Cine.o Class/Comentario.o Class/Credito.o Class/Debito.o Class/Funcion.o Class/Pelicula.o Class/Puntaje.o Class/Reserva.o Class/Sala.o Class/Sesion.o Class/Usuario.o Ctrl/CtrlCine.o Ctrl/CtrlResenia.o Ctrl/CtrlPelicula.o Ctrl/CtrlUsuario.o DT/Direccion.o DT/DtCine.o DT/DtSala.o DT/DtFuncion.o DT/DtPelicula.o DT/Fecha.o DT/Horario.o Handler/HandlerCine.o Handler/HandlerPelicula.o Handler/HandlerUsuario.o Fabrica.o
+OBJ=main.o Class/Cine.o Class/Comentario.o Class/Credito.o Class/Debito.o Class/Funcion.o Class/Pelicula.o Class/Puntaje.o Class/Reserva.o Class/Sala.o Class/Sesion.o Class/Usuario.o Ctrl/CtrlCine.o Ctrl/CtrlResenia.o Ctrl/CtrlPelicula.o Ctrl/CtrlUsuario.o DT/Direccion.o DT/DtCine.o DT/DtComentario.o DT/DtSala.o DT/DtFuncion.o DT/DtPelicula.o DT/Fecha.o DT/Horario.o Handler/HandlerCine.o Handler/HandlerPelicula.o Handler/HandlerUsuario.o Fabrica.o
 EXEC=c
 
 main: $(OBJ)
@@ -22,6 +22,7 @@ Ctrl/CtrlResenia.o: Ctrl/CtrlResenia.cpp
 Ctrl/CtrlPelicula.o: Ctrl/CtrlPelicula.cpp
 Ctrl/CtrlUsuario.o: Ctrl/CtrlUsuario.cpp
 DT/Direccion.o: DT/Direccion.cpp
+DT/DtComentario.o: DT/DtComentario.cpp
 DT/DtCine.o: DT/DtCine.cpp
 DT/DtSala.o: DT/DtSala.cpp
 DT/DtFuncion.o: DT/DtFuncion.cpp

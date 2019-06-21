@@ -1,11 +1,14 @@
 #include "Pelicula.h"
 
-Pelicula::Pelicula(){}
+Pelicula::Pelicula(){
+  this->comentarios = new Comentario(0, "Raiz de comentarios");
+}
 
 Pelicula::Pelicula(string titulo, string sinopsis, string poster){
   this->titulo = titulo;
   this->sinopsis = sinopsis;
   this->poster = poster;
+  this->comentarios = new Comentario(0, "Raiz de comentarios");
 }
 void Pelicula::setTitulo(string titulo){
   this->titulo = titulo;

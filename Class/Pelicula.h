@@ -15,7 +15,7 @@ class Pelicula{
     string sinopsis;
     string poster;
     list<Puntaje*> puntajes;
-    list<Comentario*> comentarios;
+    Comentario* comentarios;
   public:
     Pelicula();
     Pelicula(string,string,string);
@@ -29,7 +29,7 @@ class Pelicula{
     void addPuntaje(Puntaje*);
     list<Puntaje*> getPuntajes();
     void addComentario(Comentario*);
-    list<Comentario*> getComentarios();
+    Comentario* getComentarios();
     DtPelicula* getInfoPelicula();
     ~Pelicula();
 };

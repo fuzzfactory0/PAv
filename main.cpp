@@ -355,18 +355,18 @@ void crearReserva(){
 }
 
 void puntuarPelicula(){
-  float puntaje = 0;
-  int opc = 0;
-  string tituloPel, buff;
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlResenia* irese = fab->getICtrlResenia();
   ICtrlUsuario* iuser = fab->getICtrlUsuario();
   ICtrlPelicula* ipeli = fab->getICtrlPelicula();
-  ipeli->cargarPeliculas();
-  /*if (!iuser->checkSesion()){
+  int puntaje = 0;
+  int opc = 0;
+  string tituloPel, buff;
+  //ipeli->cargarPeliculas();
+  if (!iuser->checkSesion()){
     cout << "Debe iniciar sesión primero." << endl;
     return;
-  }*/
+  }
   list<string> peliculas = irese->listarTitulosPeliculas();
   cout << "-Listado de películas del sistema-"<<endl;
   for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
@@ -406,7 +406,54 @@ void puntuarPelicula(){
   }
 }
 
-void comentarPelicula(){}
+void comentarPelicula(){
+  Fabrica* fab = Fabrica::getInstancia();
+  ICtrlResenia* irese = fab->getICtrlResenia();
+  ICtrlUsuario* iuser = fab->getICtrlUsuario();
+  ICtrlPelicula* ipeli = fab->getICtrlPelicula();
+  float puntaje = 0;
+  string titulo, texto, buff;
+  int idcom;
+  //ipeli->cargarPeliculas();
+  if (!iuser->checkSesion()){
+    cout << "Debe iniciar sesión primero." << endl;
+    return;
+  }
+  else{
+    list<string> peliculas = irese->listarTitulosPeliculas();
+    cout << "-Listado de películas del sistema-"<<endl;
+    for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
+      cout << (*it) << endl;
+    }
+    cout << endl;
+    cout << "Seleccione la pelicula que desea comentar: ";
+    getline(cin >> ws, titulo);
+    irese->seleccionarPelicula(titulo);
+    bool ex = false;
+    bool opt;
+    do{
+      cout << "Ingrese 0 si desea agregar un nuevo comentario, o 1 si desea responder a un comentario existente: ";
+      cin >> opt;
+      if (!opt){
+        cout << "Ingrese su comentario: ";
+        getline(cin >> ws, texto);
+        irese->agregarComentario(texto);
+        cout << "Su comentario se ha agregado correctamente.\n ¿Desea seguir comentando? 1: Si, 0: No: ";
+        cin >> ex;
+      }
+      else{
+        cout << "Ingrese la ID del comentario que desea responder: ";
+        cin >> idcom;
+        cout << "Ingrese su comentario: ";
+        getline(cin >> ws, texto);
+        irese->responderComentario(idcom, texto);
+        cout << "Su comentario se ha agregado correctamente.\n ¿Desea seguir comentando? 1: Si, 0: No: ";
+        cin >> ex;
+      }
+    }while(!ex)
+    cout << "Operación terminada. Ingrese cualquier caracter para continuar..." << endl;
+  }
+}
 
 void eliminarPelicula(){}
 

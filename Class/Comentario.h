@@ -11,6 +11,9 @@ class Comentario{
     int id;
     string texto;
     Usuario* usr;
+    Comentario* padre;
+    Comentario* ph;
+    Comentario* sh;
   public:
     Comentario();
     Comentario(int,string);
@@ -19,7 +22,19 @@ class Comentario{
     static int getIDA();
     void setTexto(string);
     string getTexto();
+    void setUsuario(Usuario*);
+    string getUsuario();
     ~Comentario();
+    //arbol
+    Comentario* getPadre();
+    Comentario* getPh();
+    void setPh(Comentario*);
+    comentario* getSh();
+    void setSh(Comentario*);
+    bool hasPh();
+    bool hasSh();
+    static Comentario* buscarComentario(Comentario*, int);
+    static void addComentario(Comentario*, Comentario*);
 };
 
 #endif

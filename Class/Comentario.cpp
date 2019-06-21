@@ -2,11 +2,18 @@
 
 int Comentario::IDA = 0;
 
-Comentario::Comentario(){}
+Comentario::Comentario(){
+  this->padre = NULL;
+  this->ph = NULL;
+  this->sh = NULL;
+}
 
 Comentario::Comentario(int id, string texto){
   this->texto = texto;
   this->id = id;
+  this->padre = NULL;
+  this->ph = NULL;
+  this->sh = NULL;
 }
 
 void Comentario::setTexto(string texto){
@@ -30,4 +37,65 @@ int Comentario::getIDA(){
   return IDA;
 }
 
+void Comentario::setUsuario(Usuario* user){
+  this->usr = user;
+}
+
+string Comentario::getUsuario(){
+  return this->usr->getNickname();
+}
+
 Comentario::~Comentario(){}
+
+Comentario* Comentario::getPadre(){
+  return this->padre;
+}
+
+Comentario* Comentario::getPh(){
+  return this->ph;
+}
+
+Comentario* Comentario::getSh(){
+  return this->sh;
+}
+
+void Comentario::setPh(Comentario* com){
+  this->ph = comm;
+}
+
+void Comentario::setsh(Comentario* com){
+  this->sh = comm;
+}
+
+bool Comentario::hasPh(){
+  return this->ph != NULL;
+}
+
+bool Comentario::hasSh(){
+  return this->sh != NULL;
+}
+
+Comentario* Comentario::buscarComentario(Comentario* raiz, int id){
+  if (raiz->id == id) return raiz;
+  else if (!raiz->hasPh() && !raiz->hasSh()) return NULL;
+  else
+  {
+    Comentario* comm;
+    if (raiz->hasSh()){
+      comm = buscarComentario(raiz->getSh(), id);
+      if (comm == NULL){
+        comm = buscarComentario(raiz->getPh(), id);
+      }
+    }
+    return comm;
+  } 
+}
+
+void Comentario::addComentario(Comentario* padre, Comentario* comm){
+  if (!padre->hasPh()) padre->ph = comm;
+  else{
+    Comentario* aux = padre->getPh();
+    while (aux->hasSh()) aux = aux->getSh();
+    aux->sh = comm;
+  }
+}
