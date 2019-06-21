@@ -11,8 +11,9 @@ CtrlCine::CtrlCine(){}
 
 list<string> CtrlCine::listarTitulosPeliculas(){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
+  list<Pelicula*> peliculas = hP->getPeliculas();
   list<string> titulos;
-  for (list<Pelicula*>::iterator it=hP->getPeliculas().begin(); it!=hP->getPeliculas().end(); ++it)
+  for (list<Pelicula*>::iterator it=peliculas.begin(); it!=peliculas.end(); ++it)
     titulos.push_back((*it)->getTitulo());
   return titulos;
 }
@@ -80,6 +81,7 @@ void CtrlCine::ingresarNombreBanco(string banco){
 
 float CtrlCine::ingresarFinanciera(string financiera){
   this->entePago = financiera;
+  return PORCENTAJE_DESCUENTO;
 }
 
 float CtrlCine::verPrecioTotal(){

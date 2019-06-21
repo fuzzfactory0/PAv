@@ -30,7 +30,7 @@ void Sala::addFuncion(Funcion* func){
 }
 
 DtFuncion* Sala::getFuncionesPelicula(){
-
+  return NULL;
 }
 list<Funcion*> Sala::getFunciones(){
   list<Funcion*> funciones;

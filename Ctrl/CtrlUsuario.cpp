@@ -3,6 +3,7 @@
 #include "../Class/Pelicula.h"
 #include "../Handler/HandlerUsuario.h"
 #include "../Handler/HandlerPelicula.h"
+#include <iostream>
 
 CtrlUsuario::CtrlUsuario(){}
 
@@ -17,9 +18,9 @@ string CtrlUsuario::getUsuarioSesion(){
 
 bool CtrlUsuario::checkSesionAdmin(){
   Sesion* ses = Sesion::getInstancia();
-  string usuario = ses->getUsuario();
+  if (!Sesion::checkIniciada()) return true;
   HandlerUsuario* hU = HandlerUsuario::getInstancia();
-  Usuario* usr = hU->buscarUsuario(usuario);
+  Usuario* usr = hU->buscarUsuario(ses->getUsuario());
   return usr->getAdmin();
 }
 

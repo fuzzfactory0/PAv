@@ -30,11 +30,14 @@ int main(){
   ICtrlPelicula* ipeli = fab->getICtrlPelicula();
   //Cargar usuarios al sistema
   iuser->cargarUsuarios();
+  cout << "Usuarios cargados"<<endl;
   ipeli->cargarPeliculas();
+  cout << "Peliculas cargadas"<<endl;
 
   int opcion;
   while(1){
     menu();
+    cout << "Menu impreso(?)"<<endl;
     cin >> opcion;
     switch(opcion){
       case 1:
@@ -65,8 +68,8 @@ int main(){
         verComentariosPelicula();
         break;
       case 0:
-        system("make clean"); //!Por conveniencia
-        system("clear");
+        //system("make clean"); //!Por conveniencia
+        //system("clear");
         exit(0);
         break;
       default:
@@ -83,7 +86,7 @@ void menu(){
     user = iuser->getUsuarioSesion();
   }
   else user = "ANONIMO.";
-  system("clear");
+  //system("clear");
   Color::Modifier r(Color::FG_RED);
   Color::Modifier b(Color::FG_BLUE);
   Color::Modifier y(Color::FG_YELLOW);
@@ -161,17 +164,19 @@ void altaCine(){
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlCine* icine = fab->getICtrlCine();
   ICtrlUsuario* iuser = fab->getICtrlUsuario();
-
+  string buff;
   if (!iuser->checkSesion()){
-    cout << "Debe iniciar sesión primero." << endl;
+    cout << "Debe iniciar sesión primero. Ingrese cualquier caracter para continuar..." << endl;
+    cin >> buff;
     return;
   }
   else if (!iuser->checkSesionAdmin()){
-    cout << "Debe ser administrador para poder realizar esta operación." << endl;
+    cout << "Debe ser administrador para poder realizar esta operación. Ingrese cualquier caracter para continuar..." << endl;
+    cin >> buff;
     return;
   }
   else{
-    string buff, calle;
+    string calle;
     int numero;
     bool confirmacion;
     cout << "Ingrese la calle: ";
@@ -210,21 +215,24 @@ void altaFuncion(){
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlCine* icine = fab->getICtrlCine();
   ICtrlUsuario* iuser = fab->getICtrlUsuario();
+  string buff;
   if (!iuser->checkSesion()){
-    cout << "Debe iniciar sesión primero." << endl;
+    cout << "Debe iniciar sesión primero. Ingrese cualquier caracter para continuar..." << endl;
+    cin >> buff;
     return;
   }
   else if (!iuser->checkSesionAdmin()){
-    cout << "Debe ser administrador para poder realizar esta operación." << endl;
+    cout << "Debe ser administrador para poder realizar esta operación. Ingrese cualquier caracter para continuar..." << endl;
+    cin >> buff;
     return;
   }
   else{
     int cineid, funcid, dia, mes, anio;
-    string pelicula, horainicio, horafin, buff;
+    string pelicula, horainicio, horafin;
     bool confirmacion;
 
     list<string> titulos = icine->listarTitulosPeliculas();
-    cout << "-Listado de películas del sistema-";
+    cout << "-Listado de películas del sistema-" << endl;
     for(list<string>::iterator it = titulos.begin(); it!=titulos.end(); ++it){
       cout << (*it) << endl;
     }
@@ -232,17 +240,19 @@ void altaFuncion(){
     cout << "Seleccione la película para la que desea crear una función: ";
     cin >> pelicula;
 
+    cout << "\n-Listado de cines del sistema-" << endl;
     list<DtCine> cines = icine->listarIdCines();
     for(list<DtCine>::iterator it = cines.begin(); it != cines.end(); ++it){
       cout << (*it) << endl;
     }
-    cout << "Ingrese la ID del cine deseado: ";
+    cout << "\nIngrese la ID del cine deseado: ";
     cin >> cineid;
+    cout << "\n-Listado de salas del cine seleccionado-" << endl;
     list<DtSala> salas = icine->seleccionarCineFuncion(cineid);
     for(list<DtSala>::iterator it = salas.begin(); it!=salas.end(); ++it){
       cout << (*it) << endl;
     }
-    cout << "Seleccione la función deseada" << endl;
+    cout << "\nSeleccione la ID de la sala deseada: " << endl;
     cin >> funcid;
     icine->seleccionarSalaFuncion(funcid);
     cout << "Ingrese la hora de inicio de la función.\n(Formato requerido: Horas:Minutos): ";
@@ -279,18 +289,21 @@ void crearReserva(){
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlCine* icine = fab->getICtrlCine();
   ICtrlUsuario* iuser = fab->getICtrlUsuario();
+  string buff;
+
   if (!iuser->checkSesion()){
-    cout << "Debe iniciar sesión primero." << endl;
+    cout << "Debe iniciar sesión primero. Ingrese cualquier caracter para continuar..." << endl;
+    cin >> buff;
     return;
   }
   else{
-    string pelicula, buff, entepago;
+    string pelicula, entepago;
     int cineid, funcid, cantAsientos, pago;
     TipoPago modopago;
     bool verprecio, confirmacion;
 
     list<string> titulos = icine->listarTitulosPeliculas();
-    cout << "-Listado de películas del sistema-";
+    cout << "-Listado de películas del sistema-" << endl;
     for(list<string>::iterator it = titulos.begin(); it!=titulos.end(); ++it){
       cout << (*it) << endl;
     }
@@ -364,45 +377,48 @@ void puntuarPelicula(){
   string tituloPel, buff;
   //ipeli->cargarPeliculas();
   if (!iuser->checkSesion()){
-    cout << "Debe iniciar sesión primero." << endl;
+    cout << "Debe iniciar sesión primero. Ingrese cualquier caracter para continuar..." << endl;
+    cin >> buff;
     return;
   }
-  list<string> peliculas = irese->listarTitulosPeliculas();
-  cout << "-Listado de películas del sistema-"<<endl;
-  for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
-    cout << (*it) << endl;
-  }
-  cout << endl;
-  cout << "Seleccione la pelicula que desea puntuar: ";
-  getline(cin >> ws, tituloPel);
-  irese->seleccionarPelicula(tituloPel);
-  cout << "Ingrese 1 para ver su puntaje, o ingrese 2 para ingresar un puntaje: " << endl;
-  cin >> opc;
-  switch(opc){
-    case 1:
-      puntaje = irese->verPuntaje();
-      if (puntaje == 0){
-        cout << "Aún no has puntuado la pelicula  " << tituloPel <<". ¿Qué estás esperando?"<<endl;
-        cout << "Presiona cualquier tecla para continuar...";
-        cin >> buff;
-      }
-      else{
-        cout <<"Tu puntaje para la pelicula " <<tituloPel << "es: " <<puntaje << endl;
-        cin >> buff;
-      }
-      break;
-    case 2:
-      cout <<"Ingresa el puntaje del 1 al 10 para la pelicula "<<tituloPel << ": ";
-      cin >> puntaje;
-      while (puntaje < 1 || puntaje > 10){
-        cout << "Por favor ingrese un puntaje en el rango del 1 al 10: ";
+  else{
+    list<string> peliculas = irese->listarTitulosPeliculas();
+    cout << "-Listado de películas del sistema-"<<endl;
+    for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
+      cout << (*it) << endl;
+    }
+    cout << endl;
+    cout << "Seleccione la pelicula que desea puntuar: ";
+    getline(cin >> ws, tituloPel);
+    irese->seleccionarPelicula(tituloPel);
+    cout << "Ingrese 1 para ver su puntaje, o ingrese 2 para ingresar un puntaje: " << endl;
+    cin >> opc;
+    switch(opc){
+      case 1:
+        puntaje = irese->verPuntaje();
+        if (puntaje == 0){
+          cout << "Aún no has puntuado la pelicula  " << tituloPel <<". ¿Qué estás esperando?"<<endl;
+          cout << "Presiona cualquier tecla para continuar...";
+          cin >> buff;
+        }
+        else{
+          cout <<"Tu puntaje para la pelicula " <<tituloPel << "es: " <<puntaje << endl;
+          cin >> buff;
+        }
+        break;
+      case 2:
+        cout <<"Ingresa el puntaje del 1 al 10 para la pelicula "<<tituloPel << ": ";
         cin >> puntaje;
-      }
-      irese->ingresarPuntaje(puntaje);
-      break;
-    default:
-      cout << "La opción ingresada no es correcta";
-      cin >> buff;
+        while (puntaje < 1 || puntaje > 10){
+          cout << "Por favor ingrese un puntaje en el rango del 1 al 10: ";
+          cin >> puntaje;
+        }
+        irese->ingresarPuntaje(puntaje);
+        break;
+      default:
+        cout << "La opción ingresada no es correcta";
+        cin >> buff;
+    }
   }
 }
 
@@ -429,7 +445,7 @@ void comentarPelicula(){
     cout << "Seleccione la pelicula que desea comentar: ";
     getline(cin >> ws, titulo);
     irese->seleccionarPelicula(titulo);
-    bool ex = false;
+    bool ex;
     bool opt;
     do{
       cout << "Ingrese 0 si desea agregar un nuevo comentario, o 1 si desea responder a un comentario existente: ";
@@ -450,8 +466,9 @@ void comentarPelicula(){
         cout << "Su comentario se ha agregado correctamente.\n ¿Desea seguir comentando? 1: Si, 0: No: ";
         cin >> ex;
       }
-    }while(!ex);
+    }while(ex);
     cout << "Operación terminada. Ingrese cualquier caracter para continuar..." << endl;
+    cin >> buff;
   }
 }
 

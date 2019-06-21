@@ -3,6 +3,7 @@
 
 #include <string>
 #include "../DT/DtPelicula.h"
+#include "../DT/DtComentario.h"
 using namespace std;
 
 class ICtrlResenia{
