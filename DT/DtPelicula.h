@@ -2,6 +2,7 @@
 #define DTPELICULA
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -23,6 +24,7 @@ public:
   void setPoster(string);
   string getPoster();
   ~DtPelicula();
+  friend ostream& operator <<(ostream&, const DtPelicula&);
 };
 
 #endif

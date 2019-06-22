@@ -11,22 +11,22 @@
 CtrlPelicula::CtrlPelicula(){}
 
 list<string> CtrlPelicula::listarTitulosPeliculas(){
-	 HandlerPelicula* hP = HandlerPelicula::getInstancia();
-	  list<Pelicula*> peliculas = hP->getPeliculas();
-	  list<string> titulos;
-	  for (list<Pelicula*>::iterator it=peliculas.begin(); it!=peliculas.end(); ++it)
-	    titulos.push_back((*it)->getTitulo());
-	  return titulos;
+  HandlerPelicula* hP = HandlerPelicula::getInstancia();
+  list<Pelicula*> peliculas = hP->getPeliculas();
+  list<string> titulos;
+  for (list<Pelicula*>::iterator it=peliculas.begin(); it!=peliculas.end(); ++it)
+    titulos.push_back((*it)->getTitulo());
+  return titulos;
 }
 
-DtPelicula* CtrlPelicula::seleccionarPelicula(string titulo){
-
-	 HandlerPelicula* hP = HandlerPelicula::getInstancia();
-	  if (!hP->existePelicula(titulo)) throw 404;
-
-	  this->pelicula = titulo;
+DtPelicula CtrlPelicula::seleccionarPelicula(string ttl){
+  HandlerPelicula* hP = HandlerPelicula::getInstancia();
+  if (!hP->existePelicula(ttl)) throw 404;
+  Pelicula* peli = hP->buscarPelicula(ttl);
+  this->pelicula = peli->getTitulo();
+  DtPelicula dtPelicula = DtPelicula(peli->getTitulo(), peli->getSinopsis(), peli->getPuntajePromedio(), peli->getPoster());
+  return dtPelicula;
 }
-
 void CtrlPelicula::eliminarPelicula(){
 	 HandlerCine* hC = HandlerCine::getInstancia();
 	  map<int,DtCine*> cinesPelicula;
@@ -56,10 +56,6 @@ void CtrlPelicula::eliminarPelicula(){
 	  pelicula->getPuntajes().clear();
 	  hP->eliminarPelicula(this->pelicula);
 }
-
-list<DtCine*> CtrlPelicula::listarCines(){}
-
-DtFuncion* CtrlPelicula::seleccionarCine(string idCine){}
 
 void CtrlPelicula::cargarPeliculas(){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();

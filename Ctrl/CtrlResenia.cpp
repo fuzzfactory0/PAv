@@ -37,13 +37,29 @@ int CtrlResenia::verPuntaje(){
 }
 
 void CtrlResenia::ingresarPuntaje(int puntaje){
+  Puntaje* p;
   Sesion* s = Sesion::getInstancia();
   HandlerUsuario* hU = HandlerUsuario::getInstancia();
   Usuario* u = hU->buscarUsuario(s->getUsuario());
-  Puntaje* p = new Puntaje(Puntaje::getIDA(),puntaje,u);
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
   Pelicula* peli = hP->buscarPelicula(this->pelicula);
-  peli->addPuntaje(p);
+  list<Puntaje*> punts = peli->getPuntajes();
+  bool existe = false;
+
+  for (list<Puntaje*>::iterator it = punts.begin(); it!=punts.end(); ++it){
+    if ((*it)->getUsuario() == u->getNickname()){
+      existe = true;
+      p = (*it);
+      break;
+    } 
+  }
+  if (existe){
+    p->setPuntos(puntaje);
+  }
+  else{
+    p = new Puntaje(Puntaje::getIDA(),puntaje,u);
+    peli->addPuntaje(p);
+  }
 }
 
 void CtrlResenia::seleccionarComentario(int id){
@@ -60,7 +76,6 @@ void CtrlResenia::responderComentario(int idcom, string texto){
   HandlerUsuario* hU = HandlerUsuario::getInstancia();
   Usuario* u = hU->buscarUsuario(s->getUsuario());
   comm->setUsuario(u);
-
   Comentario::addComentario(respond, comm);
 }
 
@@ -81,7 +96,31 @@ void CtrlResenia::agregarComentario(string texto){
 DtComentario* CtrlResenia::getArbolComentarios(string pelicula){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
   Pelicula* peli = hP->buscarPelicula(this->pelicula);
-  return NULL;//!COSAS COSAS COSAS
+  Comentario* arbol = peli->getComentarios();
+  DtComentario* dtc = copiarArbol(arbol);
+  return dtc;
+}
+
+DtComentario* CtrlResenia::copiarArbol(Comentario* raiz){
+  if (raiz == NULL) return NULL;
+  DtComentario* dtc;
+  if (raiz->getId() == 0) dtc = new DtComentario(raiz->getId(), raiz->getTexto(), "ROOT");
+  else dtc = new DtComentario(raiz->getId(), raiz->getTexto(), raiz->getUsuario());
+  dtc->setPh(copiarArbol(raiz->getPh()));
+  dtc->setSh(copiarArbol(raiz->getSh()));
+  return dtc;
+}
+
+int CtrlResenia::getPuntajeUsuario(string user, string peli){
+  HandlerPelicula* hP = HandlerPelicula::getInstancia();
+  Pelicula* pelicula = hP->buscarPelicula(peli);
+  list<Puntaje*> punts = pelicula->getPuntajes();
+  for (list<Puntaje*>::iterator it = punts.begin(); it!=punts.end(); ++it){
+    if ((*it)->getUsuario() == user){
+      return (*it)->getPuntos();
+    }
+  }
+  return 0;
 }
 
 CtrlResenia::~CtrlResenia(){}

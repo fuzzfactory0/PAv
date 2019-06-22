@@ -21,6 +21,7 @@ public:
   int getAnio();
   ~Fecha();
   friend ostream& operator <<(ostream&, const Fecha&);
+  friend bool operator <(const Fecha&, const Fecha&);
 };
 
 #endif

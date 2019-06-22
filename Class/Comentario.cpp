@@ -78,13 +78,12 @@ bool Comentario::hasSh(){
 Comentario* Comentario::buscarComentario(Comentario* raiz, int id){
   if (raiz->id == id) return raiz;
   else if (!raiz->hasPh() && !raiz->hasSh()) return NULL;
-  else
-  {
+  else{
     Comentario* comm = NULL;
     if (raiz->hasSh()){
       comm = buscarComentario(raiz->getSh(), id);
     }
-    else if (comm == NULL && raiz->hasPh()){
+    if (comm == NULL && raiz->hasPh()){
       comm = buscarComentario(raiz->getPh(), id);
     }
     return comm;

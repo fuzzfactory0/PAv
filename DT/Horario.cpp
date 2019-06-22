@@ -41,4 +41,11 @@ ostream& operator <<(ostream& salida,const Horario& hor){
   salida << hor.finmin;
 	return salida;
 }
+
+bool operator <(const Horario& hor1, const Horario& hor2){
+  if (hor1.inihora < hor2.inihora) return true;
+  else if ((hor1.inihora == hor2.inihora)&&(hor1.inimin < hor2.inimin)) return true;
+  else return false;
+}
+
 Horario::~Horario(){}

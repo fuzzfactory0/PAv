@@ -3,4 +3,5 @@
 .git/
 *.o
 c
-c.exe
+*.exe
+*.zip

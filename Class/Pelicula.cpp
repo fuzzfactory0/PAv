@@ -1,7 +1,7 @@
 #include "Pelicula.h"
 
 Pelicula::Pelicula(){
-  this->comentarios = new Comentario(0, "Raiz de comentarios");
+  this->comentarios = new Comentario(0, "Lista de comentarios");
 }
 
 Pelicula::Pelicula(string titulo, string sinopsis, string poster){
@@ -40,7 +40,7 @@ Comentario* Pelicula::getComentarios(){
 }
 
 float Pelicula::getPuntajePromedio(){
-  int total;
+  int total = 0;
   if (this->puntajes.empty()) return 0;
   else{
     for (list<Puntaje*>::iterator it=this->puntajes.begin(); it != this->puntajes.end(); ++it)
