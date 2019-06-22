@@ -96,6 +96,7 @@ void CtrlCine::confirmarReserva(){
       for (list<Funcion*>::iterator itF=funciones.begin(); itF!=funciones.end(); ++itF){
         if ((*itF)->getId() == this->idFuncion){
           func = (*itF);
+          if(func->getPelicula() != this->pelicula) throw 99;
           found = true;
           break;
         }
@@ -105,6 +106,7 @@ void CtrlCine::confirmarReserva(){
     }
     if (found) break;
   }
+  if (!found) throw 404;
   if (this->modoPago == Deb){
     Debito* deb = new Debito(Reserva::getIDA(), PRECIO_ENTRADA*this->cantidadAsientos, this->cantidadAsientos, this->entePago);
     Sesion* ses = Sesion::getInstancia();

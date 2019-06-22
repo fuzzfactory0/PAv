@@ -4,13 +4,23 @@
 
 CtrlPelicula::CtrlPelicula(){}
 
-string CtrlPelicula::listarTitulosPeliculas(){}
+list<string> CtrlPelicula::listarTitulosPeliculas(){
+  HandlerPelicula* hP = HandlerPelicula::getInstancia();
+  list<Pelicula*> peliculas = hP->getPeliculas();
+  list<string> titulos;
+  for (list<Pelicula*>::iterator it=peliculas.begin(); it!=peliculas.end(); ++it)
+    titulos.push_back((*it)->getTitulo());
+  return titulos;
+}
 
-DtPelicula* CtrlPelicula::seleccionarPelicula(string titulo){}
-
-list<DtCine*> CtrlPelicula::listarCines(){}
-
-DtFuncion* CtrlPelicula::seleccionarCine(string idCine){}
+DtPelicula CtrlPelicula::seleccionarPelicula(string ttl){
+  HandlerPelicula* hP = HandlerPelicula::getInstancia();
+  if (!hP->existePelicula(ttl)) throw 404;
+  Pelicula* peli = hP->buscarPelicula(ttl);
+  this->pelicula = peli->getTitulo();
+  DtPelicula dtPelicula = DtPelicula(peli->getTitulo(), peli->getSinopsis(), peli->getPuntajePromedio(), peli->getPoster());
+  return dtPelicula;
+}
 
 void CtrlPelicula::cargarPeliculas(){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();

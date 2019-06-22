@@ -22,5 +22,6 @@ public:
   int getMinFin();
   ~Horario();
   friend ostream& operator <<(ostream&, const Horario&);
+  friend bool operator <(const Horario&, const Horario&);
 };
 #endif

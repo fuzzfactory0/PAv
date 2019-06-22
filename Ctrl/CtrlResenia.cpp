@@ -37,13 +37,29 @@ int CtrlResenia::verPuntaje(){
 }
 
 void CtrlResenia::ingresarPuntaje(int puntaje){
+  Puntaje* p;
   Sesion* s = Sesion::getInstancia();
   HandlerUsuario* hU = HandlerUsuario::getInstancia();
   Usuario* u = hU->buscarUsuario(s->getUsuario());
-  Puntaje* p = new Puntaje(Puntaje::getIDA(),puntaje,u);
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
   Pelicula* peli = hP->buscarPelicula(this->pelicula);
-  peli->addPuntaje(p);
+  list<Puntaje*> punts = peli->getPuntajes();
+  bool existe = false;
+
+  for (list<Puntaje*>::iterator it = punts.begin(); it!=punts.end(); ++it){
+    if ((*it)->getUsuario() == u->getNickname()){
+      existe = true;
+      p = (*it);
+      break;
+    } 
+  }
+  if (existe){
+    p->setPuntos(puntaje);
+  }
+  else{
+    p = new Puntaje(Puntaje::getIDA(),puntaje,u);
+    peli->addPuntaje(p);
+  }
 }
 
 void CtrlResenia::seleccionarComentario(int id){

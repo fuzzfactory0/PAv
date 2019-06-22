@@ -40,7 +40,7 @@ Comentario* Pelicula::getComentarios(){
 }
 
 float Pelicula::getPuntajePromedio(){
-  int total;
+  int total = 0;
   if (this->puntajes.empty()) return 0;
   else{
     for (list<Puntaje*>::iterator it=this->puntajes.begin(); it != this->puntajes.end(); ++it)
