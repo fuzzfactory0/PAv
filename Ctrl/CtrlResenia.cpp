@@ -76,7 +76,6 @@ void CtrlResenia::responderComentario(int idcom, string texto){
   HandlerUsuario* hU = HandlerUsuario::getInstancia();
   Usuario* u = hU->buscarUsuario(s->getUsuario());
   comm->setUsuario(u);
-
   Comentario::addComentario(respond, comm);
 }
 
@@ -97,7 +96,19 @@ void CtrlResenia::agregarComentario(string texto){
 DtComentario* CtrlResenia::getArbolComentarios(string pelicula){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
   Pelicula* peli = hP->buscarPelicula(this->pelicula);
-  return NULL;//!COSAS COSAS COSAS
+  Comentario* arbol = peli->getComentarios();
+  DtComentario* dtc = copiarArbol(arbol);
+  return dtc;
+}
+
+DtComentario* CtrlResenia::copiarArbol(Comentario* raiz){
+  if (raiz == NULL) return NULL;
+  DtComentario* dtc;
+  if (raiz->getId() == 0) dtc = new DtComentario(raiz->getId(), raiz->getTexto(), "ROOT");
+  else dtc = new DtComentario(raiz->getId(), raiz->getTexto(), raiz->getUsuario());
+  dtc->setPh(copiarArbol(raiz->getPh()));
+  dtc->setSh(copiarArbol(raiz->getSh()));
+  return dtc;
 }
 
 CtrlResenia::~CtrlResenia(){}

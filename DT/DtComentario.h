@@ -27,7 +27,8 @@ class DtComentario{
     DtComentario* getPadre();
     DtComentario* getPh();
     DtComentario* getSh();
-    bool isLastSibling();
-    bool isNotParent();
+    void setPh(DtComentario*);
+    void setSh(DtComentario*);
+    bool hasPh();
 };
 #endif

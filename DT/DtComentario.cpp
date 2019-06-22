@@ -5,8 +5,7 @@ DtComentario::DtComentario(){
   this->ph = NULL;
   this->sh = NULL;
 }
-
-DtComentario::DtComentario(int id, string texto, string user){
+DtComentario::DtComentario(int id, string texto, string user){  
   this->texto = texto;
   this->id = id;
   this->usuario = user;
@@ -39,8 +38,6 @@ string DtComentario::getUsuario(){
   return this->usuario;
 }
 
-DtComentario::~DtComentario(){}
-
 DtComentario* DtComentario::getPadre(){
   return this->padre;
 }
@@ -52,3 +49,17 @@ DtComentario* DtComentario::getPh(){
 DtComentario* DtComentario::getSh(){
   return this->sh;
 }
+
+void DtComentario::setPh(DtComentario* ph){
+  this->ph = ph;
+}
+
+void DtComentario::setSh(DtComentario* sh){
+  this->sh = sh;
+}
+
+bool DtComentario::hasPh(){
+  return this->ph == NULL;
+}
+
+DtComentario::~DtComentario(){}

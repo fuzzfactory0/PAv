@@ -1,7 +1,7 @@
 #include "Pelicula.h"
 
 Pelicula::Pelicula(){
-  this->comentarios = new Comentario(0, "Raiz de comentarios");
+  this->comentarios = new Comentario(0, "Lista de comentarios");
 }
 
 Pelicula::Pelicula(string titulo, string sinopsis, string poster){

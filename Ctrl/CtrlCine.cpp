@@ -6,6 +6,7 @@
 #include "../Class/Credito.h"
 #include "../Class/Sesion.h"
 #include "CtrlCine.h"
+#include "../Clock.h"
 
 CtrlCine::CtrlCine(){}
 
@@ -79,7 +80,7 @@ float CtrlCine::ingresarFinanciera(string financiera){
 }
 
 float CtrlCine::verPrecioTotal(){
-  if (this->modoPago = Deb) return PRECIO_ENTRADA * this->cantidadAsientos;
+  if (this->modoPago == Deb) return PRECIO_ENTRADA * this->cantidadAsientos;
   else return ((PRECIO_ENTRADA*this->cantidadAsientos)-PRECIO_ENTRADA*this->cantidadAsientos*(PORCENTAJE_DESCUENTO/100));
 }
 
@@ -107,6 +108,16 @@ void CtrlCine::confirmarReserva(){
     if (found) break;
   }
   if (!found) throw 404;
+  Clock* reloj = Clock::getInstancia();
+
+  if (func->getFecha() < reloj->getFecha()){
+    throw 5100;
+  }
+  if (func->getHorario() < reloj->getHorario()){
+    if (!(reloj->getFecha() < func->getFecha())){
+      throw 5100;
+    }
+  }
   if (this->modoPago == Deb){
     Debito* deb = new Debito(Reserva::getIDA(), PRECIO_ENTRADA*this->cantidadAsientos, this->cantidadAsientos, this->entePago);
     Sesion* ses = Sesion::getInstancia();
@@ -115,7 +126,7 @@ void CtrlCine::confirmarReserva(){
     func->addReserva(deb);
   }
   else if (this->modoPago == Cred){
-    Credito* cred = new Credito(Reserva::getIDA(), (PRECIO_ENTRADA*this->cantidadAsientos)-PRECIO_ENTRADA*this->cantidadAsientos*(PORCENTAJE_DESCUENTO/100), this->cantidadAsientos, PORCENTAJE_DESCUENTO, this->entePago);
+    Credito* cred = new Credito(Reserva::getIDA(), ((PRECIO_ENTRADA*this->cantidadAsientos)-PRECIO_ENTRADA*this->cantidadAsientos*(PORCENTAJE_DESCUENTO/100)), this->cantidadAsientos, PORCENTAJE_DESCUENTO, this->entePago);
     Sesion* ses = Sesion::getInstancia();
     HandlerUsuario* hU = HandlerUsuario::getInstancia();
     cred->setUsuario(hU->buscarUsuario(ses->getUsuario()));
