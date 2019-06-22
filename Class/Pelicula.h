@@ -30,6 +30,7 @@ class Pelicula{
     list<Puntaje*> getPuntajes();
     Comentario* getComentarios();
     DtPelicula getInfoPelicula();
+    void eliminarComentarios(Comentario* comentario);
     ~Pelicula();
 };
 

@@ -532,6 +532,15 @@ void puntuarPelicula(){
   }
 }
 
+void listarPeliculas(list<string> peliculas){
+	   cout << "-Listado de películas del sistema-"<<endl;
+	    for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
+	      cout << (*it) << endl;
+	    }
+	    cout << endl;
+}
+
+
 void comentarPelicula(){
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlResenia* irese = fab->getICtrlResenia();
@@ -545,11 +554,7 @@ void comentarPelicula(){
   }
   else{
     list<string> peliculas = irese->listarTitulosPeliculas();
-    cout << "-Listado de películas del sistema-"<<endl;
-    for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
-      cout << (*it) << endl;
-    }
-    cout << endl;
+    listarPeliculas(peliculas);
     cout << "Seleccione la pelicula que desea comentar: ";
     getline(cin >> ws, titulo);
     try{
@@ -593,7 +598,26 @@ void comentarPelicula(){
   }
 }
 
-void eliminarPelicula(){}
+void eliminarPelicula(){
+
+	  Fabrica* fab = Fabrica::getInstancia();
+	  ICtrlPelicula* controladorPelicula = fab->getICtrlPelicula();
+	 list<string> peliculas = controladorPelicula->listarTitulosPeliculas();
+	    listarPeliculas(peliculas);
+	    cout << "Seleccione la pelicula que desea eliminar: ";
+	    string peli;
+	    cin >> peli;
+	    controladorPelicula->seleccionarPelicula(peli);
+	    controladorPelicula->eliminarPelicula();
+	    cout << "Pelicula eliminada con exito ";
+
+
+
+
+
+
+
+}
 
 void verInfoPelicula(){}
 

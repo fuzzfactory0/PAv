@@ -1,12 +1,61 @@
 #include "CtrlPelicula.h"
-#include "../Handler/HandlerPelicula.h"
-#include "../Class/Pelicula.h"
+
+#include <map>
+
+#include "../Class/Cine.h"
+#include "../Class/Funcion.h"
+#include "../Class/Sala.h"
+#include "../DT/DtCine.h"
+#include "../Handler/HandlerCine.h"
 
 CtrlPelicula::CtrlPelicula(){}
 
-string CtrlPelicula::listarTitulosPeliculas(){}
+list<string> CtrlPelicula::listarTitulosPeliculas(){
+	 HandlerPelicula* hP = HandlerPelicula::getInstancia();
+	  list<Pelicula*> peliculas = hP->getPeliculas();
+	  list<string> titulos;
+	  for (list<Pelicula*>::iterator it=peliculas.begin(); it!=peliculas.end(); ++it)
+	    titulos.push_back((*it)->getTitulo());
+	  return titulos;
+}
 
-DtPelicula* CtrlPelicula::seleccionarPelicula(string titulo){}
+DtPelicula* CtrlPelicula::seleccionarPelicula(string titulo){
+
+	 HandlerPelicula* hP = HandlerPelicula::getInstancia();
+	  if (!hP->existePelicula(titulo)) throw 404;
+
+	  this->pelicula = titulo;
+}
+
+void CtrlPelicula::eliminarPelicula(){
+	 HandlerCine* hC = HandlerCine::getInstancia();
+	  map<int,DtCine*> cinesPelicula;
+	  list<Cine*> cines = hC->getCines();
+	  Funcion* func;
+	  for (list<Cine*>::iterator itC=cines.begin(); itC!=cines.end(); ++itC){
+	    list<Sala*> salas = (*itC)->getSalas();
+	    for (list<Sala*>::iterator itS=salas.begin(); itS!=salas.end(); ++itS){
+	      list<Funcion*> funciones = (*itS)->getFunciones();
+	      for (list<Funcion*>::iterator itF=funciones.begin(); itF!=funciones.end(); ++itF){
+	        if ((*itF)->getPelicula() == this->pelicula){
+	        	list<Reserva*> reservas = (*itF)->getReservas();
+	        	for (list<Reserva*>::iterator itR=reservas.begin(); itR!=reservas.end(); ++itR){
+	        		(*itR)->setUsuario(NULL);
+	        		(*itR)->~Reserva();
+	        	}
+	        	reservas.clear();
+	        	itF=funciones.erase(itF);
+	        }
+
+	      }
+	    }
+	  }
+	  HandlerPelicula* hP = HandlerPelicula::getInstancia();
+	  Pelicula* pelicula = hP->buscarPelicula(this->pelicula);
+	  pelicula->eliminarComentarios(pelicula->getComentarios());
+	  pelicula->getPuntajes().clear();
+	  hP->eliminarPelicula(this->pelicula);
+}
 
 list<DtCine*> CtrlPelicula::listarCines(){}
 

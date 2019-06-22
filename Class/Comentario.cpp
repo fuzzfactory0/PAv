@@ -99,3 +99,5 @@ void Comentario::addComentario(Comentario* padre, Comentario* comm){
     aux->sh = comm;
   }
 }
+
+

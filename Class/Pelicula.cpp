@@ -61,4 +61,14 @@ DtPelicula Pelicula::getInfoPelicula(){
   return peli;
 }
 
+void Pelicula::eliminarComentarios(Comentario* comentario){
+	if(comentario->hasSh()){
+		eliminarComentarios(comentario->getSh());
+	}
+	if(comentario->hasPh()){
+		eliminarComentarios(comentario->getPh());
+	}
+	comentario->~Comentario();
+}
+
 Pelicula::~Pelicula(){}
