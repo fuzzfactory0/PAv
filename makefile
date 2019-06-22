@@ -1,5 +1,10 @@
-OBJ=main.o Class/Cine.o Class/Comentario.o Class/Credito.o Class/Debito.o Class/Funcion.o Class/Pelicula.o Class/Puntaje.o Class/Reserva.o Class/Sala.o Class/Sesion.o Class/Usuario.o Ctrl/CtrlCine.o Ctrl/CtrlResenia.o Ctrl/CtrlPelicula.o Ctrl/CtrlUsuario.o DT/Direccion.o DT/DtCine.o DT/DtComentario.o DT/DtSala.o DT/DtFuncion.o DT/DtPelicula.o DT/Fecha.o DT/Horario.o Handler/HandlerCine.o Handler/HandlerPelicula.o Handler/HandlerUsuario.o Fabrica.o
+OTH=main.o Fabrica.o Clock.o
+CLASS=Class/Cine.o Class/Comentario.o Class/Credito.o Class/Debito.o Class/Funcion.o Class/Pelicula.o Class/Puntaje.o Class/Reserva.o Class/Sala.o Class/Sesion.o Class/Usuario.o
+DT=DT/Direccion.o DT/DtCine.o DT/DtComentario.o DT/DtSala.o DT/DtFuncion.o DT/DtPelicula.o DT/Fecha.o DT/Horario.o
+HANDLER=Handler/HandlerCine.o Handler/HandlerPelicula.o Handler/HandlerUsuario.o
+CTRL=Ctrl/CtrlCine.o Ctrl/CtrlResenia.o Ctrl/CtrlPelicula.o Ctrl/CtrlUsuario.o
 EXEC=c
+OBJ=$(OTH) $(CLASS) $(DT) $(CTRL) $(HANDLER)
 
 main: $(OBJ)
 	g++ $(OBJ) -o $(EXEC)
@@ -33,6 +38,7 @@ Handler/HandlerCine.o: Handler/HandlerCine.cpp
 Handler/HandlerPelicula.o: Handler/HandlerPelicula.cpp
 Handler/HandlerUsuario.o: Handler/HandlerUsuario.cpp
 Fabrica.o: Fabrica.cpp
+Clock.o: Clock.cpp
 main.o: main.cpp
 
 clean:
