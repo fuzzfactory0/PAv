@@ -111,4 +111,16 @@ DtComentario* CtrlResenia::copiarArbol(Comentario* raiz){
   return dtc;
 }
 
+int CtrlResenia::getPuntajeUsuario(string user, string peli){
+  HandlerPelicula* hP = HandlerPelicula::getInstancia();
+  Pelicula* pelicula = hP->buscarPelicula(peli);
+  list<Puntaje*> punts = pelicula->getPuntajes();
+  for (list<Puntaje*>::iterator it = punts.begin(); it!=punts.end(); ++it){
+    if ((*it)->getUsuario() == user){
+      return (*it)->getPuntos();
+    }
+  }
+  return 0;
+}
+
 CtrlResenia::~CtrlResenia(){}

@@ -28,5 +28,6 @@ class CtrlResenia: public ICtrlResenia{
     //imprimir comentarios
     static DtComentario* copiarArbol(Comentario*);
     DtComentario* getArbolComentarios(string);
+    int getPuntajeUsuario(string, string);
 };
 #endif

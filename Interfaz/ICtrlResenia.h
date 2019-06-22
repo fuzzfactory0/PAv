@@ -16,6 +16,7 @@ class ICtrlResenia{
     virtual void responderComentario(int,string) = 0;
     virtual void agregarComentario(string) = 0;
     virtual DtComentario* getArbolComentarios(string) = 0;
+    virtual int getPuntajeUsuario(string, string) = 0;
 };
 
 #endif

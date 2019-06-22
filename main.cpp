@@ -30,7 +30,7 @@ void verInfoPelicula();
 void verComentariosPelicula();
 int comprobarSesion();
 void setReloj();
-void printTree(DtComentario*, int);
+void printTree(DtComentario*, int, string);
 
 int main(){
   //creación de fabrica e icontroladores
@@ -750,7 +750,7 @@ void verComentariosPelicula(){
     }
     DtComentario* arb = irese->getArbolComentarios(titulo);
     cout<<"\n"<<endl;
-    printTree(arb, 0);
+    printTree(arb, 0, titulo);
     cout << "\n\nIngrese cuaquier caracter para continuar...";
     cin >> buff;
   }
@@ -782,16 +782,21 @@ void setReloj(){
   reloj->setFecha(fec);
 }
 
-void printTree(DtComentario* cms, int nivel){
+void printTree(DtComentario* cms, int nivel, string peli){
   if (cms != NULL){
     if (cms->getId() == 0){
-      printTree(cms->getPh(), nivel + 1);
-      printTree(cms->getSh(), nivel);
+      printTree(cms->getPh(), nivel + 1, peli);
+      printTree(cms->getSh(), nivel, peli);
     }
     else{
+      Fabrica* fab = Fabrica::getInstancia();
+      ICtrlResenia* irese = fab->getICtrlResenia();
+      int punt = irese->getPuntajeUsuario(cms->getUsuario(), peli);
+
       for (int i = 0; i < nivel; i++)
         cout << "  |";
-      cout << "(ID: " <<cms->getId() << ") " <<cms->getUsuario() << " dijo:" << endl;
+      if (punt == 0) cout <<cms->getUsuario()<< "(?/10)" << " dijo:" << endl;
+      else cout <<cms->getUsuario()<< "("<<punt<<"/10)" << " dijo:" << endl;
       for (int i = 0; i < nivel; i++)
         cout << "  |";
       cout << cms->getTexto() << endl;
@@ -803,8 +808,8 @@ void printTree(DtComentario* cms, int nivel){
         //for (int i = 0; i < nivel; i++)
           //cout << "  |";
       cout<<endl;
-      printTree(cms->getPh(), nivel + 1);
-      printTree(cms->getSh(), nivel);
+      printTree(cms->getPh(), nivel + 1, peli);
+      printTree(cms->getSh(), nivel, peli);
     }
 	}
 }
