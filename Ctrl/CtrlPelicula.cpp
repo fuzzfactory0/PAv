@@ -3,10 +3,15 @@
 #include "../Class/Pelicula.h"
 
 CtrlPelicula::CtrlPelicula(){}
-string  CtrlPelicula::listarTitulosPeliculas(){}
+
+string CtrlPelicula::listarTitulosPeliculas(){}
+
 DtPelicula* CtrlPelicula::seleccionarPelicula(string titulo){}
+
 list<DtCine*> CtrlPelicula::listarCines(){}
+
 DtFuncion* CtrlPelicula::seleccionarCine(string idCine){}
+
 void CtrlPelicula::cargarPeliculas(){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
   Pelicula* p1 = new Pelicula("Fight Club","Primera regla del club de la pelea: Nunca hablar del club de la pelea","https://pics.filmaffinity.com/fight_club-320750671-large.jpg");

@@ -77,9 +77,9 @@ DtPelicula* CtrlUsuario::seleccionarPelicula(string ttl){
 //Pruebas
 void CtrlUsuario::cargarUsuarios(){
   HandlerUsuario* hU = HandlerUsuario::getInstancia();
-  Usuario* u1 = new Usuario("bukowski","imgur.com/e4i5n3.png","password", false);
+  Usuario* u1 = new Usuario("bukowski","imgur.com/e4i5n3.png","password", true);
   hU-> addUsuario(u1);
-  Usuario* u2 = new Usuario("fuzzfact","imgur.com/e4i5n3.png","fuzzword", false);
+  Usuario* u2 = new Usuario("fuzzfact","imgur.com/e4i5n3.png","fuzzpass", false);
   hU-> addUsuario(u2);
   Usuario* u3 = new Usuario("lancelot","imgur.com/e4i5n3.png","lancepass", true);
   hU-> addUsuario(u3);

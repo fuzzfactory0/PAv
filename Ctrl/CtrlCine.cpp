@@ -27,14 +27,11 @@ DtPelicula CtrlCine::seleccionarPelicula(string ttl){
   return dtPelicula;
 }
 
-#include <iostream>
-
 list<DtCine> CtrlCine::listarCines(){
   HandlerCine* hC = HandlerCine::getInstancia();
   list<DtCine> cinesPelicula;
   list<Cine*> cines = hC->getCines();
   for (list<Cine*>::iterator itC=cines.begin(); itC!=cines.end(); ++itC){
-    cout << "cine iter"<<endl;
     if ((*itC)->hasPelicula(this->pelicula)){
       DtCine dtcine = DtCine((*itC)->getId(), (*itC)->getDireccion());
       cinesPelicula.push_back(dtcine);

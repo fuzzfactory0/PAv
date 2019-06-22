@@ -2,24 +2,43 @@
 
 Horario::Horario(){}
 
-Horario::Horario(string horaComienzo, string horaFin){
-  this->horaComienzo = horaComienzo;
-  this->horaFin = horaFin;
+Horario::Horario(int horai, int mini, int horaf, int minf){
+  this->inihora = horai;
+  this->inimin = mini;
+  this->finhora = horaf;
+  this->finmin = minf;
 }
-void Horario::setHoraComienzo(string horaComienzo){
-  this->horaComienzo = horaComienzo;
+void Horario::setHoraComienzo(int hora, int min){
+  this->inihora = hora;
+  this->inimin = min;
 }
-string Horario::getHoraComienzo(){
-  return this->horaComienzo;
+
+int Horario::getHoraComienzo(){
+  return this->inihora;
 }
-void Horario::setHoraFin(string horaFin){
-  this->horaFin = horaFin;
+int Horario::getMinComienzo(){
+  return this->inimin;
 }
-string Horario::getHoraFin(){
-  return this->horaFin;
+void Horario::setHoraFin(int hora, int min){
+  this->finhora = hora;
+  this->finmin = min;
 }
+int Horario::getHoraFin(){
+  return this->finhora;
+}
+int Horario::getMinFin(){
+  return this->finmin;
+}
+
 ostream& operator <<(ostream& salida,const Horario& hor){
-	salida << "Hora inicio: " << hor.horaComienzo << "| Hora fin: " << hor.horaFin;
+  if(hor.inihora<10) salida << "0";
+  salida << hor.inihora<<":";
+  if(hor.inimin<10) salida << "0";
+  salida << hor.inimin<<" - ";
+  if(hor.finhora<10) salida << "0";
+  salida << hor.finhora<<":";
+  if(hor.finmin<10) salida << "0";
+  salida << hor.finmin;
 	return salida;
 }
 Horario::~Horario(){}

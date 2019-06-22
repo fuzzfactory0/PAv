@@ -18,6 +18,8 @@
 #include "../DT/DtSala.h"
 #include "../DT/TipoPago.h"
 #include "../DT/DtPelicula.h"
+#include "../DT/Horario.h"
+#include "../DT/Fecha.h"
 
 using namespace std;
 

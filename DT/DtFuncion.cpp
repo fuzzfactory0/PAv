@@ -26,7 +26,7 @@ Horario DtFuncion::getHorario(){
 }
 
 ostream& operator <<(ostream& salida,const DtFuncion& dtf){
-	salida << "ID: " << dtf.id << "| Fecha: " << dtf.fecha  << "| Horario: " << dtf.horario;
+	salida << "ID: " << dtf.id << "\t| Fecha: " << dtf.fecha  << "\t| Horario: " << dtf.horario;
 	return salida;
 }
 

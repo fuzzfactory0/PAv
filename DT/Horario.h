@@ -2,21 +2,24 @@
 #define HORARIO
 
 #include <iostream>
-#include <string>
 
 using namespace std;
 
 class Horario{
 private:
-  string horaComienzo;
-  string horaFin;
+  int inihora;
+  int inimin;
+  int finhora;
+  int finmin;
 public:
   Horario();
-  Horario(string, string);
-  void setHoraComienzo(string);
-  string getHoraComienzo();
-  void setHoraFin(string);
-  string getHoraFin();
+  Horario(int,int,int,int);
+  void setHoraComienzo(int,int);
+  int getHoraComienzo();
+  int getMinComienzo();
+  void setHoraFin(int,int);
+  int getHoraFin();
+  int getMinFin();
   ~Horario();
   friend ostream& operator <<(ostream&, const Horario&);
 };

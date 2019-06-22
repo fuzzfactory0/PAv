@@ -6,6 +6,8 @@
 #include <string>
 #include "../DT/Direccion.h"
 #include "../DT/DtCine.h"
+#include "../DT/Fecha.h"
+#include "../DT/Horario.h"
 #include "../DT/TipoPago.h"
 #include "../DT/DtFuncion.h"
 #include "../DT/DtPelicula.h"

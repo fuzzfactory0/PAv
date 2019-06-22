@@ -5,6 +5,8 @@
 #include "DT/DtFuncion.h"
 #include "DT/DtSala.h"
 #include "DT/TipoPago.h"
+#include "DT/Horario.h"
+#include "DT/Fecha.h"
 #include <iostream>
 #include <list>
 #include <string>
@@ -226,8 +228,8 @@ void altaFuncion(){
     return;
   }
   else{
-    int cineid, funcid, dia, mes, anio;
-    string pelicula, horainicio, horafin;
+    int cineid, funcid, dia, mes, anio, horai, horaf, mini, minf;
+    string pelicula;
     bool confirmacion;
 
     list<string> titulos = icine->listarTitulosPeliculas();
@@ -283,17 +285,49 @@ void altaFuncion(){
       return;
     }
     icine->seleccionarSalaFuncion(funcid);
-    cout << "Ingrese la hora de inicio de la función.\n(Formato requerido: Horas:Minutos): ";
-    cin >> horainicio;
-    cout << "Ingrese la hora de fin de la función.\n(Formato requerido: Horas:Minutos): ";
-    cin >> horafin;
+    cout << "Ingrese la hora de inicio de la función: ";
+    while (!(cin >> horai) || horai > 23 || horai < 0){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese una hora válida: ";
+    }
+    cout << "Ingrese el minuto de inicio de la función: ";
+    while (!(cin >> mini) || mini > 59 || mini < 0){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese un minuto válido: ";
+    }
+    cout << "Ingrese la hora de fin de la función: ";
+    while (!(cin >> horaf) || horaf > 23 || horaf < 0){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese una hora válida: ";
+    }
+    cout << "Ingrese el minuto de fin de la función: ";
+    while (!(cin >> minf) || minf > 59 || minf < 0){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese un minuto válido: ";
+    }
     cout << "Ingrese el año de la función: ";
-    cin >> anio;
+    while (!(cin >> anio)){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese un año válido: ";
+    }
     cout << "Ingrese el mes de la función: ";
-    cin >> mes;
+    while (!(cin >> mes) || mes > 12 || mes < 1){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese un mes válido: ";
+    }
     cout << "Ingrese el día de la función: ";
-    cin >> dia;
-    Horario hora = Horario(horainicio, horafin);
+    while (!(cin >> dia) || dia > 31 || dia < 1){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese un día válido: ";
+    }
+    Horario hora = Horario(horai, mini, horaf, minf);
     Fecha fecha = Fecha(dia, mes, anio);
     icine->ingresarHorario(fecha, hora);
 
@@ -372,7 +406,6 @@ void crearReserva(){
     icine->seleccionarFuncion(funcid);
 
     cout << "Ingrese la cantidad de entradas que desea reservar: ";
-    cin >> cantAsientos;
     while (!(cin >> cantAsientos)){
       cin.clear();
       cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -403,7 +436,7 @@ void crearReserva(){
     }
 
     cout << "¿Desea ver el precio total de su reserva antes de confirmarla? 1: Si 0: No ";
-    while (!(cin >> verprecio) || verprecio != 1 || verprecio != 0){
+    while (!(cin >> verprecio) || !(verprecio != 1 || verprecio != 0)){
       cin.clear();
       cin.ignore(numeric_limits<streamsize>::max(), '\n');
       cout << "Por favor ingrese una opción válida: ";
@@ -411,7 +444,7 @@ void crearReserva(){
     if (verprecio) cout << "El precio total de su reserva es de $" << icine->verPrecioTotal() << endl;
 
     cout << "¿Desea confirmar su reserva? 1: Si, 0: No: ";
-    while (!(cin >> confirmacion) || confirmacion != 1 || confirmacion != 0){
+    while (!(cin >> confirmacion) || !(confirmacion != 1 || confirmacion != 0)){
       cin.clear();
       cin.ignore(numeric_limits<streamsize>::max(), '\n');
       cout << "Por favor ingrese una opción válida: ";
