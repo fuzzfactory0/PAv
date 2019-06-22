@@ -42,8 +42,10 @@ int main(){
   cout << "Usuarios cargados"<<endl;
   ipeli->cargarPeliculas();
   cout << "Peliculas cargadas"<<endl;
-  cout << "\nAntes de comenzar, por favor inicialice el reloj del sistema." << endl;
-  cout << "Durante la ejecución del programa, podrá usar la opción oculta '99' para modificar el reloj." << endl;
+	Color::Modifier r(Color::FG_RED);
+	Color::Modifier d(Color::FG_DEFAULT);
+  cout << "\nAntes de comenzar,"<<r<<" por favor inicialice el reloj del sistema." <<d<<endl;
+  cout << "Durante la ejecución del programa, podrá usar"<<r<<" la opción oculta '99'"<<d<<" para modificar el reloj." << endl;
   setReloj();
 
   int opcion;
@@ -86,8 +88,8 @@ int main(){
         setReloj();
         break;
       case 0:
-        //system("make clean"); //!Por conveniencia
-        //system("clear");
+        system("make clean"); //!Por conveniencia
+        system("clear");
         exit(0);
         break;
       default:
@@ -104,7 +106,7 @@ void menu(){
     user = iuser->getUsuarioSesion();
   }
   else user = "ANONIMO.";
-  //system("clear");
+  system("clear");
   Color::Modifier r(Color::FG_RED);
   Color::Modifier b(Color::FG_BLUE);
   Color::Modifier y(Color::FG_YELLOW);
@@ -749,7 +751,9 @@ void verComentariosPelicula(){
         } 
     }
     DtComentario* arb = irese->getArbolComentarios(titulo);
-    cout<<"\n"<<endl;
+    system("clear");
+		cout << "-Comentarios de la película " << titulo << "-"<<endl; 
+		cout <<"\n" << endl;
     printTree(arb, 0, titulo);
     cout << "\n\nIngrese cuaquier caracter para continuar...";
     cin >> buff;
@@ -791,23 +795,22 @@ void printTree(DtComentario* cms, int nivel, string peli){
     else{
       Fabrica* fab = Fabrica::getInstancia();
       ICtrlResenia* irese = fab->getICtrlResenia();
+			Color::Modifier g(Color::FG_LIGHT_GREEN);
+			Color::Modifier b(Color::FG_BLUE);
+			Color::Modifier d(Color::FG_DEFAULT);
       int punt = irese->getPuntajeUsuario(cms->getUsuario(), peli);
 
       for (int i = 0; i < nivel; i++)
-        cout << "  |";
-      if (punt == 0) cout <<cms->getUsuario()<< "(?/10)" << " dijo:" << endl;
-      else cout <<cms->getUsuario()<< "("<<punt<<"/10)" << " dijo:" << endl;
-      for (int i = 0; i < nivel; i++)
-        cout << "  |";
-      cout << cms->getTexto() << endl;
-
-      //if (!cms->hasPh())
-        for (int i = 0; i < nivel; i++)
-          cout << "  |";
-      //else
-        //for (int i = 0; i < nivel; i++)
-          //cout << "  |";
-      cout<<endl;
+        cout <<b<< "  ║";
+      if (punt == 0) cout <<g<<cms->getUsuario()<<d<< " (?/10)" <<g<< " dijo:" << endl;
+      else cout <<g<<cms->getUsuario()<<d<< " ("<<punt<<"/10)" <<g<< " dijo:" << endl;
+      for (int i = 0; i < nivel-1; i++)
+        cout <<b<< "  ║";
+				cout <<b<< "  ╠═ ";
+      cout <<d<< cms->getTexto() << endl;
+			for (int i = 0; i < nivel; i++)
+				cout <<b<< "  ║";
+      cout<<d<<endl;
       printTree(cms->getPh(), nivel + 1, peli);
       printTree(cms->getSh(), nivel, peli);
     }
