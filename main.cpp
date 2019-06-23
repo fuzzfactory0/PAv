@@ -1,20 +1,25 @@
-#include "Interfaz/ICtrlUsuario.h"
-#include "Fabrica.h"
-#include "DT/Direccion.h"
-#include "DT/DtPelicula.h"
-#include "DT/DtCine.h"
-#include "DT/DtFuncion.h"
-#include "DT/DtSala.h"
-#include "DT/TipoPago.h"
-#include "DT/Horario.h"
-#include "DT/Fecha.h"
+#include <cstdlib>
 #include <iostream>
+#include <limits>
 #include <list>
 #include <string>
-#include <bits/stdc++.h>
-#include <limits>
+
 #include "colormod.h"
 #include "Clock.h"
+#include "DT/Direccion.h"
+#include "DT/DtCine.h"
+#include "DT/DtComentario.h"
+#include "DT/DtFuncion.h"
+#include "DT/DtPelicula.h"
+#include "DT/DtSala.h"
+#include "DT/Fecha.h"
+#include "DT/Horario.h"
+#include "DT/TipoPago.h"
+#include "Fabrica.h"
+#include "Interfaz/ICtrlCine.h"
+#include "Interfaz/ICtrlPelicula.h"
+#include "Interfaz/ICtrlResenia.h"
+#include "Interfaz/ICtrlUsuario.h"
 
 using namespace std;
 
@@ -649,7 +654,6 @@ void comentarPelicula(){
           cout<<"Ingrese cualquier caracter para continuar...";
           cin>>buff;
           delete irese;
-          delete iuser;
           return;
         } 
     }
@@ -676,7 +680,6 @@ void comentarPelicula(){
       }
     }while(ex);
     delete irese;
-    delete iuser;
     cout << "Operación terminada. Ingrese cualquier caracter para continuar..." << endl;
     cin >> buff;
   }
@@ -692,8 +695,7 @@ void eliminarPelicula() {
 	string peli = "";
 	cin.ignore();
 	getline(cin, peli, '\n');
-	    string peli;
-	    cin >> peli;
+
 	    controladorPelicula->seleccionarPelicula(peli);
 	    controladorPelicula->eliminarPelicula();
 	    cout << "Pelicula eliminada con exito ";

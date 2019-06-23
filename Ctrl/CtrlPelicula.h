@@ -19,7 +19,7 @@ private:
   public:
     CtrlPelicula();
     list<string> listarTitulosPeliculas();
-    DtPelicula* seleccionarPelicula(string);
+    DtPelicula seleccionarPelicula(string ttl);
     list<DtCine*> listarCines();
     DtFuncion* seleccionarCine(string);
     void cargarPeliculas();

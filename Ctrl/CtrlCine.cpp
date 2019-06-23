@@ -1,12 +1,12 @@
-#include "../Handler/HandlerPelicula.h"
-#include "../Handler/HandlerCine.h"
-#include "../Handler/HandlerUsuario.h"
-#include "../Class/Reserva.h"
-#include "../Class/Debito.h"
-#include "../Class/Credito.h"
-#include "../Class/Sesion.h"
 #include "CtrlCine.h"
+
+#include "../Class/Credito.h"
+#include "../Class/Debito.h"
+#include "../Class/Sesion.h"
 #include "../Clock.h"
+#include "../DT/Direccion.h"
+#include "../DT/DtFuncion.h"
+#include "../Handler/HandlerUsuario.h"
 
 CtrlCine::CtrlCine(){}
 
