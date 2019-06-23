@@ -64,10 +64,6 @@ void CtrlPelicula::eliminarPelicula() {
 	hP->eliminarPelicula(this->pelicula);
 }
 
-list<DtCine*> CtrlPelicula::listarCines(){}
-
-DtFuncion* CtrlPelicula::seleccionarCine(string idCine){}
-
 void CtrlPelicula::cargarPeliculas(){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
   Pelicula* p1 = new Pelicula("Fight Club","Primera regla del club de la pelea: Nunca hablar del club de la pelea","https://pics.filmaffinity.com/fight_club-320750671-large.jpg");
@@ -84,5 +80,7 @@ void CtrlPelicula::cargarPeliculas(){
   hP-> addPelicula(p6);
   Pelicula* p7 = new Pelicula("The Shining","All work and no play makes...","https://images-na.ssl-images-amazon.com/images/I/51g-8R5FOhL.jpg");
   hP-> addPelicula(p7);
+  Pelicula* p8 = new Pelicula("Godzilla: King of the monsters", "Godzilla se da de hostias con Ghidorah como siempre","https://i.imgur.com/tP4yc06.png");
+  hP-> addPelicula(p8);
 }
 CtrlPelicula::~CtrlPelicula(){}

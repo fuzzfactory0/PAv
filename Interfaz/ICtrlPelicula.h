@@ -13,8 +13,6 @@ class ICtrlPelicula{
   public:
     virtual list<string> listarTitulosPeliculas() = 0;
     virtual DtPelicula seleccionarPelicula(string) = 0;
-    virtual list<DtCine*> listarCines() = 0;
-    virtual DtFuncion* seleccionarCine(string) = 0;
     virtual void cargarPeliculas() = 0; 
     virtual void eliminarPelicula()=0;
 
