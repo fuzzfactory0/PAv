@@ -709,7 +709,7 @@ void eliminarPelicula() {
           } 
       }
     cout << "¿Está seguro? Esta acción eliminará la pelicula " << peli << " del sistema\n y es irreversible ¿Continuar? 1: Si 0: No ";
-    bool conf
+    bool conf;
     cin  >> conf;
     if (conf){
       controladorPelicula->eliminarPelicula();
