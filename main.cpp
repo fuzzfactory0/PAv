@@ -52,7 +52,10 @@ int main(){
   cout << "Peliculas cargadas"<<endl;
 	Color::Modifier r(Color::FG_RED);
 	Color::Modifier d(Color::FG_DEFAULT);
-  cout << "Durante la ejecución del programa, podrá usar"<<r<<" la opción oculta '99'"<<d<<" para modificar el reloj." << endl;
+  cout << "Durante la ejecución del programa, podrá usar"<<r<<" la opción oculta '99'"<<d<<"\npara modificar el reloj." << endl;
+  cout << "Ingrese cualquier caracter para continuar."<<endl;
+  string buff;
+  cin >> buff;
 
   int opcion;
   while(1){
