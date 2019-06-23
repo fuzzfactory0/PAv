@@ -1,4 +1,5 @@
 #include "DtSala.h"
+#include "../colormod.h"
 
 DtSala::DtSala(){}
 
@@ -20,7 +21,9 @@ int DtSala::getCapacidad(){
 }
 
 ostream& operator <<(ostream& salida,const DtSala& dts){
-	salida << "ID: " << dts.id << "| Capacidad: " << dts.capacidad;
+  Color::Modifier g(Color::FG_LIGHT_GREEN);
+  Color::Modifier d(Color::FG_DEFAULT);
+	salida <<g<< "ID: " <<d<< dts.id <<g<< "| Capacidad: " <<d<< dts.capacidad;
 	return salida;
 }
 

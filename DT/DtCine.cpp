@@ -1,4 +1,5 @@
 #include "DtCine.h"
+#include "../colormod.h"
 
 DtCine::DtCine(){}
 
@@ -24,7 +25,9 @@ Direccion DtCine::getDireccion(){
 }
 
 ostream& operator <<(ostream& salida,const DtCine& dtc){
-	salida << "ID: " << dtc.id << "\t| Direccion: " << dtc.direccion;
+  Color::Modifier g(Color::FG_LIGHT_GREEN);
+  Color::Modifier d(Color::FG_DEFAULT);
+	salida <<g<< "ID: " <<d<< dtc.id <<g<<"\t| Direccion: " <<d<< dtc.direccion;
 	return salida;
 }
 

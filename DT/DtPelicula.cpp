@@ -1,4 +1,5 @@
 #include "DtPelicula.h"
+#include "../colormod.h"
 
 DtPelicula::DtPelicula(){}
 DtPelicula::DtPelicula(string titulo,string sinopsis,float puntajePromedio,string poster){
@@ -33,11 +34,14 @@ string DtPelicula::getPoster(){
 }
 
 ostream& operator <<(ostream& salida, const DtPelicula& dtp){
-	salida << "\tTitulo: \t" << dtp.titulo;
-  salida << "\n\tSinopsis: \t" << dtp.sinopsis;
-  salida << "\n\tPoster: \t" << dtp.poster;
-  salida << "\n\tRating: \t";
-  if (dtp.puntajePromedio == 0) salida << "?/10";
+  Color::Modifier y(Color::FG_YELLOW);
+  Color::Modifier g(Color::FG_LIGHT_GREEN);
+  Color::Modifier d(Color::FG_DEFAULT);
+	salida <<g<< "\tTitulo: \t" <<d<< dtp.titulo;
+  salida <<g<< "\n\tSinopsis: \t" <<d<< dtp.sinopsis;
+  salida <<g<< "\n\tPoster: \t" <<d<< dtp.poster;
+  salida <<g<< "\n\tRating: \t"<<d;
+  if (dtp.puntajePromedio == 0) salida << "?/10"<<y;
   else{
     salida << dtp.puntajePromedio << "/10";
     if (dtp.puntajePromedio > 8) salida << " ★★★★★";
@@ -46,6 +50,7 @@ ostream& operator <<(ostream& salida, const DtPelicula& dtp){
     else if (dtp.puntajePromedio > 2) salida << " ★★☆☆☆";
     else salida << " ★☆☆☆☆";
   }
+  salida <<d;
 	return salida;
 }
 

@@ -1,4 +1,5 @@
 #include "DtFuncion.h"
+#include "../colormod.h"
 
 DtFuncion::DtFuncion(){}
 DtFuncion::DtFuncion(int id,Fecha fecha,Horario horario){
@@ -26,7 +27,9 @@ Horario DtFuncion::getHorario(){
 }
 
 ostream& operator <<(ostream& salida,const DtFuncion& dtf){
-	salida << "ID: " << dtf.id << "\t| Fecha: " << dtf.fecha  << "\t| Horario: " << dtf.horario;
+  Color::Modifier g(Color::FG_LIGHT_GREEN);
+  Color::Modifier d(Color::FG_DEFAULT);
+	salida <<g<< "ID: " <<d<< dtf.id <<g<< "\t| Fecha: " <<d<< dtf.fecha  <<g<< "\t| Horario: " <<d<< dtf.horario;
 	return salida;
 }
 
