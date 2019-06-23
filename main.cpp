@@ -408,7 +408,6 @@ void crearReserva(){
     list<string> titulos = icine->listarTitulosPeliculas();
     salir = false;  
     do{
-      cout << "-Listado de películas del sistema-" << endl;
       listarPeliculas(titulos);
       cout << "Seleccione la película para la que desea crear una reserva: ";
       getline(cin >> ws, pelicula);
@@ -708,12 +707,12 @@ void eliminarPelicula() {
             return;
           } 
       }
-    cout << "¿Está seguro? Esta acción eliminará la pelicula " << peli << " del sistema\n y es irreversible ¿Continuar? 1: Si 0: No ";
+    cout << "¿Está seguro? Esta acción eliminará la pelicula " << peli << " del sistema\n y es irreversible .¿Continuar? 1: Si 0: No ";
     bool conf;
     cin  >> conf;
     if (conf){
       controladorPelicula->eliminarPelicula();
-      cout << "Pelicula eliminada con exito ";
+      cout << "Pelicula eliminada con exito" << endl;
       cout<<"Ingrese cualquier caracter para continuar...";
       cin>>buff;
     }
