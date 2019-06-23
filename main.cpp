@@ -53,7 +53,7 @@ int main(){
 	Color::Modifier r(Color::FG_RED);
 	Color::Modifier d(Color::FG_DEFAULT);
   cout << "Durante la ejecución del programa, podrá usar"<<r<<" la opción oculta '99'"<<d<<" para modificar el reloj." << endl;
-  
+
   int opcion;
   while(1){
     menu();
@@ -126,9 +126,11 @@ void menu(){
   Color::Modifier g(Color::FG_LIGHT_GREEN);
   bool admin = iuser->checkSesionAdmin();
   Clock* reloj = Clock::getInstancia();
-  
+ 
   cout <<b<<"    ╔═════════════════════════════════════════════════════╗"<<endl;
   cout <<"    ║"<<y<<"    ▂▂▃▃▅▅▇▇██▓▓▒▒░░  MENU CINE  ░░▒▒▓▓██▇▇▅▅▃▃▂▂    "<<b<<"║    "<<endl;
+cout <<"    ╠═════════════════════════════════════════════════════╣    "<<endl;
+cout <<"    ║"<<d<<"                  "<< reloj->getFecha() <<" " << reloj->getHorario().getHoraComienzo() << ":"; if (reloj->getHorario().getMinComienzo()<10){cout << "0";}; cout << reloj->getHorario().getMinComienzo() <<"\t"<<"                  "<<b<<"║    "<<endl;
   if (iuser->checkSesion()){
   cout <<"╔═══╩═════════════════════════════════════════════════════╩═══╗"<<endl;
   cout <<"║"<<d<<"      Sesion inciada como:    "<<b<<" "<<d<<"\t"<<user<<" "<<"\t      "<<b<<"║"<<endl;
@@ -152,11 +154,11 @@ void menu(){
   cout <<"║"<<r<<"      7. Eliminar Película    "<<b<<"║"<<d<<"    8. Ver Info de Película   "<<b<<"║"<<endl;}
   cout <<"╠══════════════════════════════╩══════════════════════════════╣"<<endl;
   cout <<"║"<<d<<"           9. Ver Comentarios y Puntajes de Película         "<<b<<"║"<<endl;
-  cout <<"╠═════════════════════════════════════════════════════════════╣"<<endl;
+  cout <<"╠══════════════════════════════╦══════════════════════════════╣"<<endl;
+  cout <<"║"<<d<<"        10: Avanzar hora      "<<b<<"║"<<d<<"        11: Avanzar día       "<<b<<"║"<<endl;
+  cout <<"╠══════════════════════════════╩══════════════════════════════╣"<<endl;
   cout <<"║"<<y<<"█▄█▀█▄█▀█▄█▀█▄█▀█▄█▀█▄    0. Salir     ▄█▀█▄█▀█▄█▀█▄█▀█▄█▀█▄█"<<b<<"║"<<endl;
   cout <<"╚═════════════════════════════════════════════════════════════╝"<<d<<endl;
-  cout << "10 avanzar hora, 11 avanzar dia" << endl;
-  cout << reloj->getFecha().getDia() << "/" << reloj->getFecha().getMes() << "/" << reloj->getFecha().getAnio() <<" " << reloj->getHorario().getHoraComienzo() << ":"; if (reloj->getHorario().getMinComienzo()<10){cout << "0";}; cout << reloj->getHorario().getMinComienzo() << endl;
   cout <<"Seleccione una opcion: ";
 }
 
