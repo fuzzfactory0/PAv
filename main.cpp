@@ -52,10 +52,8 @@ int main(){
   cout << "Peliculas cargadas"<<endl;
 	Color::Modifier r(Color::FG_RED);
 	Color::Modifier d(Color::FG_DEFAULT);
-  cout << "\nAntes de comenzar,"<<r<<" por favor inicialice el reloj del sistema." <<d<<endl;
   cout << "Durante la ejecución del programa, podrá usar"<<r<<" la opción oculta '99'"<<d<<" para modificar el reloj." << endl;
-  setReloj();
-
+  
   int opcion;
   while(1){
     menu();

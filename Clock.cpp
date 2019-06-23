@@ -2,7 +2,10 @@
 
 Clock* Clock::instancia = NULL;
 
-Clock::Clock(){}
+Clock::Clock(){
+	this->horario = new Horario(12,00,00,00);
+	this->fecha = new Fecha(24,06,2019);
+}
 
 Clock* Clock::getInstancia(){
   if(instancia == NULL){
