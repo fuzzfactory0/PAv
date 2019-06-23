@@ -27,35 +27,46 @@ DtPelicula CtrlPelicula::seleccionarPelicula(string ttl){
   DtPelicula dtPelicula = DtPelicula(peli->getTitulo(), peli->getSinopsis(), peli->getPuntajePromedio(), peli->getPoster());
   return dtPelicula;
 }
-void CtrlPelicula::eliminarPelicula(){
-	 HandlerCine* hC = HandlerCine::getInstancia();
-	  map<int,DtCine*> cinesPelicula;
-	  list<Cine*> cines = hC->getCines();
-	  Funcion* func;
-	  for (list<Cine*>::iterator itC=cines.begin(); itC!=cines.end(); ++itC){
-	    list<Sala*> salas = (*itC)->getSalas();
-	    for (list<Sala*>::iterator itS=salas.begin(); itS!=salas.end(); ++itS){
-	      list<Funcion*> funciones = (*itS)->getFunciones();
-	      for (list<Funcion*>::iterator itF=funciones.begin(); itF!=funciones.end(); ++itF){
-	        if ((*itF)->getPelicula() == this->pelicula){
-	        	list<Reserva*> reservas = (*itF)->getReservas();
-	        	for (list<Reserva*>::iterator itR=reservas.begin(); itR!=reservas.end(); ++itR){
-	        		(*itR)->setUsuario(NULL);
-	        		(*itR)->~Reserva();
-	        	}
-	        	reservas.clear();
-	        	itF=funciones.erase(itF);
-	        }
 
-	      }
-	    }
-	  }
-	  HandlerPelicula* hP = HandlerPelicula::getInstancia();
-	  Pelicula* pelicula = hP->buscarPelicula(this->pelicula);
-	  pelicula->eliminarComentarios(pelicula->getComentarios());
-	  pelicula->getPuntajes().clear();
-	  hP->eliminarPelicula(this->pelicula);
+void CtrlPelicula::eliminarPelicula() {
+	HandlerCine* hC = HandlerCine::getInstancia();
+	map<int, DtCine*> cinesPelicula;
+	list<Cine*> cines = hC->getCines();
+	Funcion* func;
+	for (list<Cine*>::iterator itC = cines.begin(); itC != cines.end(); itC++) {
+		list<Sala*> salas = (*itC)->getSalas();
+		for (list<Sala*>::iterator itS = salas.begin(); itS != salas.end();
+				itS++) {
+			list<Funcion*> funciones = (*itS)->getFunciones();
+			for (list<Funcion*>::iterator itF = funciones.begin();
+					itF != funciones.end(); itF++) {
+
+				if ((*itF)->getPelicula() == this->pelicula) {
+
+					list<Reserva*> reservas = (*itF)->getReservas();
+					for (list<Reserva*>::iterator itR = reservas.begin();
+							itR != reservas.end(); ++itR) {
+
+						(*itR)->setUsuario(NULL);
+						delete *itR;
+
+					}
+					(*itF)->getReservas().clear();
+					(*itS)->eliminarFuncion((*itF)->getId());
+				}
+			}
+		}
+	}
+	HandlerPelicula* hP = HandlerPelicula::getInstancia();
+	Pelicula* pelicula = hP->buscarPelicula(this->pelicula);
+	pelicula->eliminarComentarios(pelicula->getComentarios());
+	pelicula->getPuntajes().clear();
+	hP->eliminarPelicula(this->pelicula);
 }
+
+list<DtCine*> CtrlPelicula::listarCines(){}
+
+DtFuncion* CtrlPelicula::seleccionarCine(string idCine){}
 
 void CtrlPelicula::cargarPeliculas(){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();

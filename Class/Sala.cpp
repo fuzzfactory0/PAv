@@ -46,4 +46,10 @@ bool Sala::hasPelicula(string ttl){
   }
 }
 
+void Sala::eliminarFuncion(int idFuncion){
+map<int,Funcion*>::iterator it = this->funciones.find(idFuncion);
+  this->funciones.erase(it);
+}
+
+
 Sala::~Sala(){}

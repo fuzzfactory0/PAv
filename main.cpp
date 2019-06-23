@@ -649,6 +649,7 @@ void comentarPelicula(){
           cout<<"Ingrese cualquier caracter para continuar...";
           cin>>buff;
           delete irese;
+          delete iuser;
           return;
         } 
     }
@@ -675,18 +676,22 @@ void comentarPelicula(){
       }
     }while(ex);
     delete irese;
+    delete iuser;
     cout << "Operación terminada. Ingrese cualquier caracter para continuar..." << endl;
     cin >> buff;
   }
 }
 
-void eliminarPelicula(){
+void eliminarPelicula() {
 
 	  Fabrica* fab = Fabrica::getInstancia();
 	  ICtrlPelicula* controladorPelicula = fab->getICtrlPelicula();
 	 list<string> peliculas = controladorPelicula->listarTitulosPeliculas();
 	    listarPeliculas(peliculas);
 	    cout << "Seleccione la pelicula que desea eliminar: ";
+	string peli = "";
+	cin.ignore();
+	getline(cin, peli, '\n');
 	    string peli;
 	    cin >> peli;
 	    controladorPelicula->seleccionarPelicula(peli);

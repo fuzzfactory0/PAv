@@ -23,6 +23,7 @@ class Sala{
     void addFuncion(Funcion*);
     list<Funcion*> getFunciones();
     bool hasPelicula(string);
+    void eliminarFuncion(int idFuncion);
     ~Sala();
 };
 

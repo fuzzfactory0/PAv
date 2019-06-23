@@ -13,13 +13,15 @@
 using namespace std;
 
 class CtrlPelicula: public ICtrlPelicula{
-  private:
-    string pelicula;
+private:
+   string pelicula;
 
   public:
     CtrlPelicula();
     list<string> listarTitulosPeliculas();
-    DtPelicula seleccionarPelicula(string);
+    DtPelicula* seleccionarPelicula(string);
+    list<DtCine*> listarCines();
+    DtFuncion* seleccionarCine(string);
     void cargarPeliculas();
     void eliminarPelicula();
     ~CtrlPelicula();
