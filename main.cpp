@@ -34,6 +34,8 @@ void eliminarPelicula();
 void verInfoPelicula();
 void verComentariosPelicula();
 int comprobarSesion();
+void avanzarHora();
+void avanzarDia();
 void setReloj();
 void printTree(DtComentario*, int, string);
 
@@ -89,6 +91,12 @@ int main(){
       case 9:
         verComentariosPelicula();
         break;
+      case 10:
+    	  avanzarHora();
+          break;
+      case 11:
+          avanzarDia();
+          break;
       case 99:
         setReloj();
         break;
@@ -118,6 +126,7 @@ void menu(){
   Color::Modifier d(Color::FG_DEFAULT);
   Color::Modifier g(Color::FG_LIGHT_GREEN);
   bool admin = iuser->checkSesionAdmin();
+  Clock* reloj = Clock::getInstancia();
   
   cout <<b<<"    ╔═════════════════════════════════════════════════════╗"<<endl;
   cout <<"    ║"<<y<<"    ▂▂▃▃▅▅▇▇██▓▓▒▒░░  MENU CINE  ░░▒▒▓▓██▇▇▅▅▃▃▂▂    "<<b<<"║    "<<endl;
@@ -147,6 +156,8 @@ void menu(){
   cout <<"╠═════════════════════════════════════════════════════════════╣"<<endl;
   cout <<"║"<<y<<"█▄█▀█▄█▀█▄█▀█▄█▀█▄█▀█▄    0. Salir     ▄█▀█▄█▀█▄█▀█▄█▀█▄█▀█▄█"<<b<<"║"<<endl;
   cout <<"╚═════════════════════════════════════════════════════════════╝"<<d<<endl;
+  cout << "10 avanzar hora, 11 avanzar dia" << endl;
+  cout << reloj->getFecha().getDia() << "/" << reloj->getFecha().getMes() << "/" << reloj->getFecha().getAnio() <<" " << reloj->getHorario().getHoraComienzo() << ":"; if (reloj->getHorario().getMinComienzo()<10){cout << "0";}; cout << reloj->getHorario().getMinComienzo() << endl;
   cout <<"Seleccione una opcion: ";
 }
 
@@ -450,14 +461,18 @@ void crearReserva(){
       for(list<DtFuncion>::iterator it=funciones.begin(); it!=funciones.end(); ++it){
         cout << "\t" << (*it) << endl;
       }
+      cout << "Seleccione la función deseada: ";
+        while (!(cin >> funcid)){
+          cin.clear();
+          cin.ignore(numeric_limits<streamsize>::max(), '\n');
+          cout << "Por favor ingrese una opción válida: ";
+        }
+        icine->seleccionarFuncion(funcid);
+
+    }else{
+
+
     }
-    cout << "Seleccione la función deseada: ";
-    while (!(cin >> funcid)){
-      cin.clear();
-      cin.ignore(numeric_limits<streamsize>::max(), '\n');
-      cout << "Por favor ingrese una opción válida: ";
-    }
-    icine->seleccionarFuncion(funcid);
 
     cout << "Ingrese la cantidad de entradas que desea reservar: ";
     while (!(cin >> cantAsientos)){
@@ -686,7 +701,17 @@ void comentarPelicula(){
 }
 
 void eliminarPelicula() {
+	 if (comprobarSesion() < 1){
+	    cout << "Debe iniciar sesión primero.\nIngrese cualquier caracter para continuar..." << endl;
 
+	    return;
+	  }
+	  else if (comprobarSesion() < 2){
+	    cout << "Debe ser administrador para poder realizar esta operación.\nIngrese cualquier caracter para continuar..." << endl;
+
+	    return;
+	  }
+	  else{
 	  Fabrica* fab = Fabrica::getInstancia();
 	  ICtrlPelicula* controladorPelicula = fab->getICtrlPelicula();
 	 list<string> peliculas = controladorPelicula->listarTitulosPeliculas();
@@ -700,7 +725,7 @@ void eliminarPelicula() {
 	    controladorPelicula->eliminarPelicula();
 	    cout << "Pelicula eliminada con exito ";
 
-
+	  }
 
 
 
@@ -801,7 +826,14 @@ int comprobarSesion(){
   }
   else return 0;
 }
-
+void avanzarHora(){
+	Clock* reloj = Clock::getInstancia();
+	reloj->avanzarHora();
+}
+void avanzarDia(){
+	Clock* reloj = Clock::getInstancia();
+	reloj->avanzarDia();
+}
 void setReloj(){
   Clock* reloj = Clock::getInstancia();
   int hora, minuto, dia, mes, anio;

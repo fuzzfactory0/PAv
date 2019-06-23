@@ -12,6 +12,8 @@ class Clock{
     Clock();
   public:
     static Clock* getInstancia();
+    void avanzarDia();
+    void avanzarHora();
     void setHorario(Horario);
     Horario getHorario();
     void setFecha(Fecha);
