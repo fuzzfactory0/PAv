@@ -33,6 +33,7 @@ void comentarPelicula();
 void eliminarPelicula();
 void verInfoPelicula();
 void verComentariosPelicula();
+void listarPeliculas(list<string>);
 int comprobarSesion();
 void avanzarHora();
 void avanzarDia();
@@ -263,10 +264,7 @@ void altaFuncion(){
 
     list<string> titulos = icine->listarTitulosPeliculas();
     cout << "-Listado de películas del sistema-" << endl;
-    for(list<string>::iterator it = titulos.begin(); it!=titulos.end(); ++it){
-      cout << (*it) << endl;
-    }
-    cout << endl;
+    listarPeliculas(titulos);
     cout << "Seleccione la película para la que desea crear una función: ";
     getline(cin >> ws, pelicula);
     try{
@@ -411,10 +409,7 @@ void crearReserva(){
     salir = false;  
     do{
       cout << "-Listado de películas del sistema-" << endl;
-      for(list<string>::iterator it = titulos.begin(); it!=titulos.end(); ++it){
-        cout << (*it) << endl;
-      }
-      cout << endl;
+      listarPeliculas(titulos);
       cout << "Seleccione la película para la que desea crear una reserva: ";
       getline(cin >> ws, pelicula);
       try{
@@ -461,19 +456,14 @@ void crearReserva(){
       for(list<DtFuncion>::iterator it=funciones.begin(); it!=funciones.end(); ++it){
         cout << "\t" << (*it) << endl;
       }
-      cout << "Seleccione la función deseada: ";
-        while (!(cin >> funcid)){
-          cin.clear();
-          cin.ignore(numeric_limits<streamsize>::max(), '\n');
-          cout << "Por favor ingrese una opción válida: ";
-        }
-        icine->seleccionarFuncion(funcid);
-
-    }else{
-
-
     }
-
+    cout << "Seleccione la función deseada: ";
+    while (!(cin >> funcid)){
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Por favor ingrese una opción válida: ";
+    }
+    icine->seleccionarFuncion(funcid);
     cout << "Ingrese la cantidad de entradas que desea reservar: ";
     while (!(cin >> cantAsientos)){
       cin.clear();
@@ -561,11 +551,7 @@ void puntuarPelicula(){
   }
   else{
     list<string> peliculas = irese->listarTitulosPeliculas();
-    cout << "-Listado de películas del sistema-"<<endl;
-    for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
-      cout << (*it) << endl;
-    }
-    cout << endl;
+    listarPeliculas(peliculas);
     cout << "Seleccione la pelicula que desea puntuar: ";
     getline(cin >> ws, tituloPel);
     try{
@@ -635,28 +621,19 @@ void puntuarPelicula(){
   }
 }
 
-void listarPeliculas(list<string> peliculas){
-	   cout << "-Listado de películas del sistema-"<<endl;
-	    for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
-	      cout << (*it) << endl;
-	    }
-	    cout << endl;
-}
-
-
 void comentarPelicula(){
-  Fabrica* fab = Fabrica::getInstancia();
-  ICtrlResenia* irese = fab->getICtrlResenia();
-  float puntaje = 0;
-  string titulo, texto, buff;
-  int idcom;
-
+  string buff;
   if (comprobarSesion() < 1){
     cout << "Debe iniciar sesión primero.\nIngrese cualquier caracter para continuar..." << endl;
     cin >> buff;
     return;
   }
   else{
+    Fabrica* fab = Fabrica::getInstancia();
+    ICtrlResenia* irese = fab->getICtrlResenia();
+    float puntaje = 0;
+    string titulo, texto;
+    int idcom;
     list<string> peliculas = irese->listarTitulosPeliculas();
     listarPeliculas(peliculas);
     cout << "Seleccione la pelicula que desea comentar: ";
@@ -701,36 +678,46 @@ void comentarPelicula(){
 }
 
 void eliminarPelicula() {
-	 if (comprobarSesion() < 1){
-	    cout << "Debe iniciar sesión primero.\nIngrese cualquier caracter para continuar..." << endl;
-
-	    return;
-	  }
-	  else if (comprobarSesion() < 2){
-	    cout << "Debe ser administrador para poder realizar esta operación.\nIngrese cualquier caracter para continuar..." << endl;
-
-	    return;
-	  }
-	  else{
-	  Fabrica* fab = Fabrica::getInstancia();
-	  ICtrlPelicula* controladorPelicula = fab->getICtrlPelicula();
-	 list<string> peliculas = controladorPelicula->listarTitulosPeliculas();
-	    listarPeliculas(peliculas);
-	    cout << "Seleccione la pelicula que desea eliminar: ";
-	string peli = "";
-	cin.ignore();
-	getline(cin, peli, '\n');
-
-	    controladorPelicula->seleccionarPelicula(peli);
-	    controladorPelicula->eliminarPelicula();
-	    cout << "Pelicula eliminada con exito ";
-
-	  }
-
-
-
-
-
+  string buff;
+  if (comprobarSesion() < 1){
+    cout << "Debe iniciar sesión primero.\nIngrese cualquier caracter para continuar..." << endl;
+    cin>>buff;
+    return;
+  }
+  else if (comprobarSesion() < 2){
+    cout << "Debe ser administrador para poder realizar esta operación.\nIngrese cualquier caracter para continuar..." << endl;
+    cin>>buff;
+    return;
+  }
+  else{
+    string peli;
+    Fabrica* fab = Fabrica::getInstancia();
+    ICtrlPelicula* controladorPelicula = fab->getICtrlPelicula();
+    list<string> peliculas = controladorPelicula->listarTitulosPeliculas();
+    listarPeliculas(peliculas);
+      cout << endl;
+      cout << "Seleccione la pelicula que desea eliminar: ";
+      getline(cin >> ws, peli);
+      try{
+        controladorPelicula->seleccionarPelicula(peli);
+      }catch(int exc){
+          if (exc == 404){
+            cout<<"La película " << peli << " no existe." << endl; 
+            cout<<"Ingrese cualquier caracter para continuar...";
+            cin>>buff;
+            return;
+          } 
+      }
+    cout << "¿Está seguro? Esta acción eliminará la pelicula " << peli << " del sistema\n y es irreversible ¿Continuar? 1: Si 0: No ";
+    bool conf
+    cin  >> conf;
+    if (conf){
+      controladorPelicula->eliminarPelicula();
+      cout << "Pelicula eliminada con exito ";
+      cout<<"Ingrese cualquier caracter para continuar...";
+      cin>>buff;
+    }
+  }
 }
 
 void verInfoPelicula(){
@@ -747,11 +734,7 @@ void verInfoPelicula(){
     list<string> titulos = ipeli->listarTitulosPeliculas();
     bool seguir = true;  
     do{
-      cout << "-Listado de películas del sistema-" << endl;
-      for(list<string>::iterator it = titulos.begin(); it!=titulos.end(); ++it){
-        cout << "\t" << (*it) << endl;
-      }
-      cout << endl;
+      listarPeliculas(titulos);
       cout << "Seleccione la película para la que desea crear una reserva: ";
       getline(cin >> ws, pelicula);
       try{
@@ -788,10 +771,7 @@ void verComentariosPelicula(){
   }
   else{
     list<string> peliculas = irese->listarTitulosPeliculas();
-    cout << "-Listado de películas del sistema-"<<endl;
-    for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
-      cout << (*it) << endl;
-    }
+    listarPeliculas(peliculas);
     cout << endl;
     cout << "Seleccione la pelicula para la que desea ver comentarios: ";
     getline(cin >> ws, titulo);
@@ -817,6 +797,15 @@ void verComentariosPelicula(){
 }
 
 //Aux
+
+void listarPeliculas(list<string> peliculas){
+  cout << "-Listado de películas del sistema-"<<endl;
+  for(list<string>::iterator it = peliculas.begin(); it!=peliculas.end(); ++it){
+    cout << (*it) << endl;
+  }
+  cout << endl;
+}
+
 int comprobarSesion(){
   Fabrica* fab = Fabrica::getInstancia(); 
   ICtrlUsuario* iuser = fab->getICtrlUsuario();
@@ -826,14 +815,17 @@ int comprobarSesion(){
   }
   else return 0;
 }
+
 void avanzarHora(){
 	Clock* reloj = Clock::getInstancia();
 	reloj->avanzarHora();
 }
+
 void avanzarDia(){
 	Clock* reloj = Clock::getInstancia();
 	reloj->avanzarDia();
 }
+
 void setReloj(){
   Clock* reloj = Clock::getInstancia();
   int hora, minuto, dia, mes, anio;
@@ -879,4 +871,3 @@ void printTree(DtComentario* cms, int nivel, string peli){
     }
 	}
 }
-
