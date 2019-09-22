@@ -77,16 +77,16 @@ DtPelicula* CtrlUsuario::seleccionarPelicula(string ttl){
 //Pruebas
 void CtrlUsuario::cargarUsuarios(){
   HandlerUsuario* hU = HandlerUsuario::getInstancia();
-  Usuario* u1 = new Usuario("bukowski","imgur.com/e4i5n3.png","password", true);
+  Usuario* u1 = new Usuario("admin1","imgur.com/e4i5n3.png","passa1", true);
   hU-> addUsuario(u1);
-  Usuario* u2 = new Usuario("fuzzfact","imgur.com/e4i5n3.png","fuzzpass", false);
+  Usuario* u2 = new Usuario("user1","imgur.com/e4i5n3.png","passu1", false);
   hU-> addUsuario(u2);
-  Usuario* u3 = new Usuario("lancelot","imgur.com/e4i5n3.png","lancepass", true);
+  Usuario* u3 = new Usuario("admin2","imgur.com/e4i5n3.png","passa2", true);
   hU-> addUsuario(u3);
-  Usuario* u4 = new Usuario("fliteless","imgur.com/e4i5n3.png","flitepass", false);
+  Usuario* u4 = new Usuario("user2","imgur.com/e4i5n3.png","passu2", false);
   hU-> addUsuario(u4);
-  Usuario* u5 = new Usuario("nith_HG","imgur.com/e4i5n3.png","nithpass", false);
+  Usuario* u5 = new Usuario("user3","imgur.com/e4i5n3.png","passu3", false);
   hU-> addUsuario(u5);
-  Usuario* u6 = new Usuario("hashime","imgur.com/e4i5n3.png","hashpass", false);
+  Usuario* u6 = new Usuario("user4","imgur.com/e4i5n3.png","passu4", false);
   hU-> addUsuario(u6);
 }
