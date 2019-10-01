@@ -3,7 +3,6 @@
 #include "../Class/Pelicula.h"
 #include "../Handler/HandlerUsuario.h"
 #include "../Handler/HandlerPelicula.h"
-#include <iostream>
 
 CtrlUsuario::CtrlUsuario(){}
 
@@ -23,8 +22,6 @@ bool CtrlUsuario::checkSesionAdmin(){
   Usuario* usr = hU->buscarUsuario(ses->getUsuario());
   return usr->getAdmin();
 }
-
-//Iniciar Sesión
 
 void CtrlUsuario::ingresarNickname(string nickname){
   this->nickname = nickname;
@@ -52,8 +49,6 @@ void CtrlUsuario::iniciarSesion(){
   Sesion::setLogin();
 }
 
-//Puntuar Película
-
 list<string> CtrlUsuario::listarTitulosPeliculas(){
   HandlerPelicula* hP = HandlerPelicula::getInstancia();
   list<string> titulos;
@@ -70,11 +65,6 @@ DtPelicula* CtrlUsuario::seleccionarPelicula(string ttl){
   return dtPelicula;
 }
 
-//! ////////////////////////////////////////////////////
-//! /////////////FALTA TERMINAR PUNTUAR/////////////////
-//! ////////////////////////////////////////////////////
-
-//Pruebas
 void CtrlUsuario::cargarUsuarios(){
   HandlerUsuario* hU = HandlerUsuario::getInstancia();
   Usuario* u1 = new Usuario("admin1","imgur.com/e4i5n3.png","passa1", true);
