@@ -41,11 +41,9 @@ void setReloj();
 void printTree(DtComentario*, int, string);
  
 int main(){
-  //creación de fabrica e icontroladores
   Fabrica* fab = Fabrica::getInstancia();
   ICtrlUsuario* iuser = fab->getICtrlUsuario();
   ICtrlPelicula* ipeli = fab->getICtrlPelicula();
-  //Cargar usuarios al sistema
   iuser->cargarUsuarios();
   cout << "Usuarios cargados"<<endl;
   ipeli->cargarPeliculas();
@@ -100,7 +98,7 @@ int main(){
         setReloj();
         break;
       case 0:
-        system("make clean"); //!Por conveniencia
+        system("make clean");
         system("clear");
         exit(0);
         break;
@@ -128,7 +126,7 @@ void menu(){
   Clock* reloj = Clock::getInstancia();
  
   cout <<b<<"    ╔═════════════════════════════════════════════════════╗"<<endl;
-  cout <<"    ║"<<y<<"    ▂▂▃▃▅▅▇▇██▓▓▒▒░░  MENU CINE  ░░▒▒▓▓██▇▇▅▅▃▃▂▂    "<<b<<"║    "<<endl;
+  cout <<"    ║"<<y<<"    ▂▂▃▃▅▅▇▇██▓▓▒▒░░   CINEMAN   ░░▒▒▓▓██▇▇▅▅▃▃▂▂    "<<b<<"║    "<<endl;
 cout <<"    ╠═════════════════════════════════════════════════════╣    "<<endl;
 cout <<"    ║"<<d<<"                  "<< reloj->getFecha() <<" " << reloj->getHorario().getHoraComienzo() << ":"; if (reloj->getHorario().getMinComienzo()<10){cout << "0";}; cout << reloj->getHorario().getMinComienzo() <<"\t"<<"                  "<<b<<"║    "<<endl;
   if (iuser->checkSesion()){
